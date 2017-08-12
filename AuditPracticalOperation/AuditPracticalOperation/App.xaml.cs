@@ -8,7 +8,7 @@ using System.Windows;
 namespace AuditPracticalOperation
 {
     /// <summary>
-    /// App.xaml 的交互OK   
+    /// App.xaml 的交互逻辑
     /// </summary>
     public partial class App : Application
     {
