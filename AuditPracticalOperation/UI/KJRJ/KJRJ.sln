@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KJRJ", "KJRJ\KJRJ.csproj", "{b9443707-bdf9-4924-839d-d5c7756795dc}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KJRJScreens", "KJRJ\KJRJScreens\KJRJScreens.csproj", "{6edaaad4-742f-46a1-97f3-45f732ce7fdf}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EDAAAD4-742F-46A1-97F3-45F732CE7FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EDAAAD4-742F-46A1-97F3-45F732CE7FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDAAAD4-742F-46A1-97F3-45F732CE7FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EDAAAD4-742F-46A1-97F3-45F732CE7FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9443707-BDF9-4924-839D-D5C7756795DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9443707-BDF9-4924-839D-D5C7756795DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9443707-BDF9-4924-839D-D5C7756795DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9443707-BDF9-4924-839D-D5C7756795DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

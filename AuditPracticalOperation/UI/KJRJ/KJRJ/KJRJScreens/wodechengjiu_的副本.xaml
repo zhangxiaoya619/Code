@@ -1,0 +1,1682 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Name="KJRJScreens_屏幕_1_Name"
+	mc:Ignorable="d"
+	x:Class="KJRJScreens.wodechengjiu_的副本"
+	Width="1920" Height="1080">
+
+	<UserControl.Resources>
+		<LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+			<GradientStop Color="#ABADB3" Offset="0.05"/>
+			<GradientStop Color="#E2E3EA" Offset="0.07"/>
+			<GradientStop Color="#E3E9EF" Offset="1"/>
+		</LinearGradientBrush>
+		<Style x:Key="TextBoxStyle1" BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="AllowDrop" Value="true"/>
+			<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+			<Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+			<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type TextBox}">
+						<Themes:ListBoxChrome x:Name="Bd" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" RenderMouseOver="{TemplateBinding IsMouseOver}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" SnapsToDevicePixels="true">
+							<ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Template="{DynamicResource ScrollViewerControlTemplate1}"/>
+						</Themes:ListBoxChrome>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<MultiTrigger>
+					<MultiTrigger.Conditions>
+						<Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+						<Condition Property="IsSelectionActive" Value="false"/>
+					</MultiTrigger.Conditions>
+					<Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+				</MultiTrigger>
+			</Style.Triggers>
+		</Style>
+		<ControlTemplate x:Key="ScrollViewerControlTemplate1" TargetType="{x:Type ScrollViewer}">
+			<Grid x:Name="Grid" Background="{TemplateBinding Background}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Rectangle x:Name="Corner" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Row="1"/>
+				<ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+				<ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+				<ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}"/>
+			</Grid>
+		</ControlTemplate>
+		<Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+												<EasingColorKeyFrame KeyTime="0" Value="#FFE07CDB"/>
+											</ColorAnimationUsingKeyFrames>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+												<EasingColorKeyFrame KeyTime="0" Value="#FF1AA5EE"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+												<EasingColorKeyFrame KeyTime="0" Value="#FFCF76CA"/>
+											</ColorAnimationUsingKeyFrames>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+												<EasingColorKeyFrame KeyTime="0" Value="#FF1282BF"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Rectangle x:Name="rectangle" Width="460" VerticalAlignment="Top" Height="76" HorizontalAlignment="Left">
+								<Rectangle.Stroke>
+									<LinearGradientBrush EndPoint="1.002,0.025" StartPoint="0.004,0.001">
+										<GradientStop Color="#FFE185DA" Offset="0"/>
+										<GradientStop Color="#FF058ED9" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Stroke>
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.989,0.046" StartPoint="0.001,0.007">
+										<GradientStop Color="#FFE18EDD"/>
+										<GradientStop Color="#FF219BDD" Offset="1"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="Auto" Margin="206,22.161,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="登录" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="24" Foreground="White"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="24"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle1" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="260" VerticalAlignment="Top" Height="90" HorizontalAlignment="Left" Fill="#FF404040"/>
+							<Rectangle Width="260" VerticalAlignment="Bottom" Margin="0,78,0,0" Height="2" HorizontalAlignment="Left" Fill="#FF5E5E5E"/>
+							<Path x:Name="path" Width="26" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Margin="40,32.681,0,31.318" Height="26" HorizontalAlignment="Left" Fill="#FFFFFFFF" Data="M4.0236244,39.052L40.165103,39.052C40.450301,39.052 40.681998,39.283888 40.681998,39.569201 40.681998,39.853109 40.450301,40.084997 40.165103,40.084997L4.0236244,40.084997C3.7397775,40.084997 3.5079999,39.853109 3.508,39.569201 3.5079999,39.283888 3.7397775,39.052 4.0236244,39.052z M1.4660637,29.870001L4.6666819,32.565367 7.862,35.26193 3.9297002,36.685066 0,38.107 0.72917366,33.9897z M18.590957,6.6210001L27.38,14.024666 12.187496,32.056002 3.4010005,24.651047z M27.067681,0.0002617836C28.355897,0.012507915 29.647309,0.45489883 30.707934,1.3482051 33.134921,3.3910286 33.444808,7.0237912 31.400603,9.4456298L29.49709,11.706 20.711001,4.302387 22.612012,2.0420456C23.760415,0.67982674,25.411407,-0.015483379,27.067681,0.0002617836z"/>
+							<Rectangle x:Name="rectangle1" Width="10" VerticalAlignment="Top" Height="88" HorizontalAlignment="Left" Fill="#FF329CD7" Visibility="Hidden"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="实操中心" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFFEFEFE"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FFFEFEFE"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle2" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="260" VerticalAlignment="Top" Height="90" HorizontalAlignment="Left" Fill="#FF404040"/>
+							<Rectangle Width="260" VerticalAlignment="Bottom" Margin="0,78,0,0" Height="2" HorizontalAlignment="Left" Fill="#FF5E5E5E"/>
+							<Path x:Name="path" Width="26" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Margin="40,32.681,0,31.318" Height="26" HorizontalAlignment="Left" Fill="#FFFFFFFF" Data="M14.294287,65.444999L65.098709,65.444999C65.835602,65.444999,66.431999,66.041496,66.431999,66.77851L66.431999,67.329391C66.431999,68.066406,65.835602,68.662994,65.098709,68.662994L14.294287,68.662994C13.557394,68.662994,12.960999,68.066406,12.960999,67.329391L12.960999,66.77851C12.960999,66.041496,13.557394,65.444999,14.294287,65.444999z M14.251292,59.451L65.05571,59.451C65.792809,59.451,66.389,60.047325,66.389,60.784233L66.389,61.334964C66.389,62.071773,65.792809,62.667999,65.05571,62.667999L14.251292,62.667999C13.514397,62.667999,12.918,62.071773,12.918,61.334964L12.918,60.784233C12.918,60.047325,13.514397,59.451,14.251292,59.451z M14.238308,52.194L29.170593,52.194C29.907597,52.194,30.504,52.790225,30.504,53.527133L30.504,54.077865C30.504,54.814674,29.907597,55.410999,29.170593,55.410999L14.238308,55.410999C13.501204,55.410999,12.905,54.814674,12.905,54.077865L12.905,53.527133C12.905,52.790225,13.501204,52.194,14.238308,52.194z M7.7329998,32.768241C6.8502436,32.768241,6.1329064,33.485744,6.132906,34.368545L6.132906,71.701888C6.1329064,72.584793,6.8502436,73.3022,7.7329998,73.3022L71.732727,73.3022C72.615723,73.3022,73.333015,72.584793,73.333015,71.701888L73.333015,34.368545C73.333015,33.485744,72.615723,32.768241,71.732727,32.768241L52.757698,32.768241 58.583076,44.140655C58.676975,44.372455 58.650875,44.654956 58.501076,44.880256 58.349979,45.108261 58.097477,45.24356 57.827877,45.24356 57.71468,45.24356 57.606579,45.220062 57.495884,45.171962L50.173008,41.941554 47.184719,49.217464C47.057121,49.525966 46.757721,49.725364 46.423023,49.725364 46.088326,49.725364 45.791523,49.525966 45.663925,49.218864L39.743446,37.80215 33.910172,49.013065C33.771969,49.341266 33.472473,49.539165 33.140575,49.539165 32.805874,49.539165 32.507774,49.339866 32.380077,49.031166L29.380087,41.736953 22.063717,44.988357C21.955616,45.033855 21.847616,45.057357 21.735619,45.057357 21.464817,45.057357 21.212219,44.921958 21.061119,44.694057 20.91132,44.470058 20.884119,44.186355 20.988319,43.934955L26.7225,32.768241z M39.733723,10.427C39.887894,10.426999,40.041916,10.515549,40.099262,10.692647L41.65522,15.475204C41.764515,15.8104,42.079605,16.038898,42.432495,16.038898L47.459751,16.038898C47.832142,16.038898,47.986938,16.517394,47.686146,16.738092L43.618561,19.695066C43.33337,19.902164,43.214973,20.271961,43.324371,20.607856L44.877625,25.388414C44.990925,25.74201,44.587334,26.037406,44.285244,25.819509L40.215061,22.865537C39.928467,22.656738,39.539177,22.656738,39.251488,22.865537L35.185204,25.819509C34.883213,26.037406,34.478123,25.74201,34.594219,25.388414L36.146175,20.607856C36.254272,20.271961,36.135777,19.902164,35.851883,19.695066L31.780399,16.738092C31.479609,16.517394,31.635904,16.038898,32.008293,16.038898L37.036751,16.038898C37.390942,16.038898,37.70483,15.8104,37.81403,15.475204L39.367283,10.692647C39.425232,10.515549,39.579552,10.426999,39.733723,10.427z M39.791546,5.2486066C32.355278,5.2486061 26.305899,11.299415 26.305899,18.736925 26.305899,26.173234 32.355278,32.223941 39.791546,32.223941 47.229019,32.223941 53.281097,26.173234 53.281097,18.736925 53.281097,11.299415 47.229019,5.2486061 39.791546,5.2486066z M39.792946,1.6484591E-12C40.162647,-5.5937454E-07,40.511543,0.14453063,40.774643,0.40624968L42.812336,2.4453134 45.469929,1.2825314C45.650925,1.201781 45.839725,1.161441 46.035023,1.1614416 46.584522,1.161441 47.083122,1.4868813 47.30582,1.9908423L48.660114,5.0428557 52.0546,5.0794162C52.8228,5.0794162,53.446499,5.7031969,53.446499,6.4699782L53.446499,9.3529228 56.149487,10.407514C56.495888,10.540313 56.769382,10.802114 56.921581,11.142014 57.070183,11.480515 57.080582,11.859314 56.947784,12.207016L55.743385,15.322919 58.120979,17.750022C58.385281,18.015623 58.529774,18.367225 58.529774,18.739623 58.528477,19.109325 58.38398,19.457025 58.120979,19.718826L56.080585,21.756528 57.244583,24.414133C57.395683,24.753831 57.406082,25.131431 57.273281,25.479133 57.171581,25.742134 56.973782,25.964734 56.685982,26.140634L55.878788,26.635435 77.066101,26.635435C78.389,26.635435,79.465996,27.712236,79.465996,29.035238L79.465996,77.035201C79.465996,78.3582,78.389,79.435005,77.066101,79.435005L2.3996911,79.435005C1.076896,79.435005,0,78.3582,0,77.035201L0,29.035238C0,27.712236,1.076896,26.635435,2.3996911,26.635435L22.798113,26.635435 22.653614,26.270833C22.561113,26.033834,22.481714,25.668033,22.636715,25.264232L23.838408,22.147228 21.464817,19.720025C21.20182,19.457025 21.05722,19.109325 21.05592,18.738325 21.05592,18.365825 21.20042,18.015623 21.462217,17.753822L23.50251,15.713621 22.339813,13.056016C22.187515,12.716115 22.177116,12.339816 22.311113,11.992114 22.445314,11.644514 22.705614,11.371115 23.045513,11.221314L26.101501,9.8658528 26.138,6.4726686C26.138,5.7031969,26.761597,5.0794162,27.527395,5.0794162L30.408783,5.0794162 31.464779,2.3789131C31.670481,1.8450318 32.192577,1.4882814 32.762974,1.488282 32.934772,1.4882814 33.102776,1.5195915 33.261574,1.5808115L36.382763,2.7825328 38.805851,0.40875176C39.071552,0.14453063,39.420452,-5.5937454E-07,39.792946,1.6484591E-12z"/>
+							<Rectangle x:Name="rectangle1" Width="10" VerticalAlignment="Top" Height="88" HorizontalAlignment="Left" Fill="#FF329CD7" Visibility="Hidden"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="证据展示" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFFEFEFE"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FFFEFEFE"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle3" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="260" VerticalAlignment="Top" Height="90" HorizontalAlignment="Left" Fill="#FF404040"/>
+							<Rectangle Width="260" VerticalAlignment="Bottom" Margin="0,78,0,0" Height="2" HorizontalAlignment="Left" Fill="#FF5E5E5E"/>
+							<Path x:Name="path" Width="26" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Margin="40,32.681,0,31.318" Height="26" HorizontalAlignment="Left" Fill="#FFFFFFFF" Data="M45.963548,8.269645L62.665147,25.065546 45.963548,39.871244 45.963548,31.963644C45.963548,31.963644 17.120617,24.075571 9.909945,39.871244 9.9099454,35.922571 12.530199,16.167482 45.963548,16.167483z M0,0L41.778571,0 41.778571,4.1795139 41.778571,8.3590277 37.598714,8.3590277 37.598714,4.1795139 4.1798577,4.1795139 4.1798577,45.954649 37.598714,45.954649 37.598714,41.775137 41.778571,41.775137 41.778571,45.954649 41.778571,50.134165 37.598714,50.134165 0,50.134165 0,45.954649 0,4.1795139z"/>
+							<Rectangle x:Name="rectangle1" Width="10" VerticalAlignment="Top" Height="88" HorizontalAlignment="Left" Fill="#FF329CD7" Visibility="Hidden"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="成果导出" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFFEFEFE"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FFFEFEFE"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle4" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="260" VerticalAlignment="Top" Height="90" HorizontalAlignment="Left" Fill="#FF404040"/>
+							<Rectangle Width="260" VerticalAlignment="Bottom" Margin="0,78,0,0" Height="2" HorizontalAlignment="Left" Fill="#FF5E5E5E"/>
+							<Path x:Name="path" Width="26" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Margin="40,32.681,0,31.318" Height="26" HorizontalAlignment="Left" Fill="#FFFFFFFF" Data="M32.556919,7.5459137C32.388317,13.155273 31.348522,16.927387 30.031527,19.709999 34.058911,16.967789 37.8205,13.806376 38.374001,7.5459137z M3.3650003,7.5459137C3.9177938,13.806376 7.6801546,16.967789 11.706803,19.709999 10.389719,16.927387 9.349994,13.155274 9.1814569,7.5459137z M20.868891,2.8440046C14.533635,2.8401542 12.059054,5.4313951 12.062254,6.3923125 12.062254,7.3584399 14.532935,9.9443407 20.868891,9.9508705 27.205345,9.9443407 29.676028,7.3584399 29.676028,6.3923125 29.679327,5.4313951 27.204745,2.8401542 20.868891,2.8440046z M20.8699,0C27.67,0,31.0189,2.2226601,32.145199,4.2994399L40.0984,4.2994399C41.004502,4.2994399 41.739601,5.0272799 41.739601,5.9231601 41.739601,15.8814 35.4063,20.076799 30.3177,23.4492 26.156901,26.204399 23.6068,28.0651 23.6068,31.429701L23.6068,34.4688C27.9765,34.954399 31.1875,36.571602 31.1875,38.493401 31.1875,40.7981 26.5684,42.666698 20.8699,42.666698 15.1719,42.666698 10.5528,40.7981 10.5528,38.493401 10.5528,36.571602 13.7637,34.954399 18.133499,34.4688L18.133499,31.429701C18.133499,28.0651 15.5833,26.204399 11.4225,23.4492 6.3339804,20.076799 2.9041269E-07,15.8814 0,5.9231601 2.9041269E-07,5.0272799 0.73506629,4.2994399 1.6413205,4.2994399L9.5957206,4.2994399C10.7213,2.2226601,14.070401,0,20.8699,0z"/>
+							<Rectangle x:Name="rectangle1" Width="10" VerticalAlignment="Top" Height="88" HorizontalAlignment="Left" Fill="#FF329CD7" Visibility="Hidden"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="我的成就" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFFEFEFE"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FFFEFEFE"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle5" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="260" VerticalAlignment="Top" Height="90" HorizontalAlignment="Left" Fill="#FF404040"/>
+							<Rectangle Width="260" VerticalAlignment="Bottom" Margin="0,78,0,0" Height="2" HorizontalAlignment="Left" Fill="#FF5E5E5E"/>
+							<Path x:Name="path" Width="26" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Margin="40,32.681,0,31.318" Height="26" HorizontalAlignment="Left" Fill="#FFFFFFFF" Data="M22.094,49.556999L35.284,49.556999C34.110203,52.0233 31.602402,53.733001 28.688902,53.733001 25.7749,53.733001 23.267,52.0233 22.094,49.556999z M38.607349,29.720001C40.432911,29.720001 41.913002,31.200433 41.913002,33.025749 41.913002,34.852565 40.432911,36.333 38.607349,36.333 36.781387,36.333 35.300999,34.852565 35.300999,33.025749 35.300999,31.200433 36.781387,29.720001 38.607349,29.720001z M18.76935,29.720001C20.596344,29.720001 22.077,31.200433 22.077,33.025749 22.077,34.852565 20.596344,36.333 18.76935,36.333 16.943756,36.333 15.463,34.852565 15.463,33.025749 15.463,31.200433 16.943756,29.720001 18.76935,29.720001z M38.085606,20.672001C38.085606,20.672001 27.819424,29.197817 10.418456,27.805931 10.418456,27.805931 15.290747,26.413845 16.682745,24.67436L9.0264586,23.977867C9.0264586,23.977867 2.7621898,43.988174 18.422041,55.995655 18.422041,55.995655 29.73332,65.043869 41.565498,53.559581 41.565498,53.559581 50.439884,45.903454 49.569984,28.675623 49.569984,28.675623 38.433506,22.76058 38.085606,20.672001z M25.239731,0.0012301539C31.151585,0.052733463 35.996803,1.7043651 35.996803,1.7043657 46.785431,1.7043651 51.310085,8.6652963 51.310085,8.6652963 50.614178,8.3176963 46.437729,7.0988962 46.437729,7.0988958 55.138378,15.527884 55.9795,24.912008 55.931148,28.614223L55.92839,28.76596 56.12809,29.12367C56.927032,30.673988 57.400001,32.596241 57.400001,34.678947 57.400001,39.177097 55.193008,42.930732 52.259582,43.798858L52.068817,43.848129 52.05249,43.904777C48.539371,55.631462 39.326839,64 28.514934,64 17.797714,64 8.6519526,55.777271 5.0710324,44.21183L4.9841117,43.920818 4.8286942,43.868942C2.0522324,42.835846 -2.2569759E-07,39.190986 7.8159701E-14,34.852459 -2.2569759E-07,32.770466 0.4729438,30.848644 1.2718945,29.298549L1.388525,29.089664 1.1949997,28.502502C1.5426639,11.275898 15.290158,4.3149655 15.290158,4.3149659 14.419047,4.3149655 11.28751,4.3149655 11.28751,4.3149659 15.398265,0.88909032 20.641622,-0.038829352 25.239731,0.0012301539z"/>
+							<Rectangle x:Name="rectangle1" Width="10" VerticalAlignment="Top" Height="88" HorizontalAlignment="Left" Fill="#FF329CD7" Visibility="Hidden"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="用户中心" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFFEFEFE"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+								<Setter Property="Visibility" TargetName="rectangle1" Value="Visible"/>
+								<Setter Property="Margin" TargetName="path" Value="50,32.681,0,31.318"/>
+								<Setter Property="Margin" TargetName="textBlock" Value="102.666,32.681,82.666,32.681"/>
+								<Setter Property="Fill" TargetName="path" Value="#FF319AD5"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="#FF319AD5"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF262626"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FFFEFEFE"/>
+		</Style>
+		<Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textBlock">
+												<EasingColorKeyFrame KeyTime="0" Value="#FFFEFEFE"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textBlock">
+												<EasingColorKeyFrame KeyTime="0" Value="#FF1685C3"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Rectangle Width="260" VerticalAlignment="Top" Height="60" HorizontalAlignment="Left" Fill="#FF404040"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="退出登录" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF299BDA"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF299BDA"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle6" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Visible" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="货币资金" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle7" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Visible" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="应收账款" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle8" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Visible" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="预付款项" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle9" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Visible" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="其他应收款" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle10" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Visible" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="存货" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle11" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Visible" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="固定资产" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle12" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Visible" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="在建工程" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle13" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="无形资产" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle14" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="长期待摊费用" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle15" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="短期借款" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle16" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="应付账款" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle17" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="预收款项" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle18" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="应付职工薪酬" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle19" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="应交税费" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle20" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="其他应付款" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle21" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="长期借款" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle22" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="实收资本" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle23" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="营业收入" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle24" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="税金及附加" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle25" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="销售费用" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle26" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="管理费用" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle27" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="财务费用" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle28" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="营业外收入" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="RadioButtonStyle29" TargetType="{x:Type RadioButton}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type RadioButton}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="330" VerticalAlignment="Top" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Height="50" HorizontalAlignment="Left" Fill="White"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="yiwancheng.png" Margin="307,27,5,5"/>
+							<Image Visibility="Hidden" Stretch="Fill" Source="zhengzaijingxing.png" Margin="307,27,5,5"/>
+							<TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="营业外支出" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsChecked" Value="True"/>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+								<Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="18.667"/>
+			<Setter Property="Foreground" Value="#FF319CD8"/>
+		</Style>
+		<Style x:Key="ButtonStyle3" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+												<EasingColorKeyFrame KeyTime="0" Value="#FF68C2F3"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+												<EasingColorKeyFrame KeyTime="0" Value="#FF1687C5"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Rectangle x:Name="rectangle" Width="110" VerticalAlignment="Top" StrokeThickness="0" RadiusX="4" RadiusY="4" Height="40" HorizontalAlignment="Left" Fill="#FF299BDA"/>
+							<TextBlock HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="全选" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="21.333"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style x:Key="ButtonStyle4" TargetType="{x:Type Button}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+												<EasingColorKeyFrame KeyTime="0" Value="#FF68C2F3"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+												<EasingColorKeyFrame KeyTime="0" Value="#FF1687C5"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Rectangle x:Name="rectangle" Width="110" VerticalAlignment="Top" StrokeThickness="0" RadiusX="4" RadiusY="4" Height="40" HorizontalAlignment="Left" Fill="#FF299BDA"/>
+							<TextBlock HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="导出" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsFocused" Value="True"/>
+							<Trigger Property="IsDefaulted" Value="True"/>
+							<Trigger Property="IsMouseOver" Value="True"/>
+							<Trigger Property="IsPressed" Value="True"/>
+							<Trigger Property="IsEnabled" Value="False"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="21.333"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style x:Key="CheckBoxStyle1" TargetType="{x:Type CheckBox}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type CheckBox}">
+						<Grid>
+							<Rectangle x:Name="rectangle" Width="130" VerticalAlignment="Top" StrokeThickness="2" RadiusX="4" RadiusY="4" Height="130" HorizontalAlignment="Left" Fill="White"/>
+							<Path Width="90" VerticalAlignment="Center" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Margin="20,20,20,53.157" Height="90" HorizontalAlignment="Center" Fill="#FF546973" Data="M154.46533,137.481L154.46533,157.481 187.3549,157.481 187.3549,137.481z M154.46533,111.481L154.46533,131.481 187.3549,131.481 187.3549,111.481z M154.46533,85.481003L154.46533,105.481 187.3549,105.481 187.3549,85.481003z M67.577698,60.258995L57.577702,85.148185 49.133602,62.481582 35.577702,62.481582 49.3563,95.14814 34.023003,127.593 47.3563,127.593 57.3563,104.4811 67.3563,129.81398 82.023003,129.81398 65.133598,94.037147 80.911003,60.258995z M154.46533,59.4813L154.46533,79.4813 187.3549,79.4813 187.3549,59.4813z M154.46533,33.4813L154.46533,53.4813 187.3549,53.4813 187.3549,33.4813z M119.021,22.147997L197.68828,22.147997C199.161,22.147999,200.355,23.341999,200.355,24.814699L200.355,167.481C200.355,168.955,199.161,170.147,197.68828,170.147L119.021,170.147 119.021,157.481 148.35458,157.481 148.35458,137.481 119.021,137.481 119.021,131.481 148.35458,131.481 148.35458,111.481 119.021,111.481 119.021,105.481 148.35458,105.481 148.35458,85.481003 119.021,85.481003 119.021,79.4813 148.35458,79.4813 148.35458,59.4813 119.021,59.4813 119.021,53.4813 148.35458,53.4813 148.35458,33.4813 119.021,33.4813z M115.333,0L115.333,193.99899 0,173.99902 0,19.99996z"/>
+							<TextBlock HorizontalAlignment="Left" Height="Auto" Margin="0,135,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="学习成果名字" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="Black"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Fill" TargetName="rectangle" Value="#33299BDA"/>
+							</Trigger>
+							<Trigger Property="IsChecked" Value="True">
+								<Setter Property="Stroke" TargetName="rectangle" Value="#FF299BDA"/>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33299BDA"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="True"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Stroke" TargetName="rectangle" Value="#FF299BDA"/>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33299BDA"/>
+							</MultiTrigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsChecked" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter Property="Fill" TargetName="rectangle" Value="#33299BDA"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="FontFamily" Value="Microsoft YaHei"/>
+			<Setter Property="FontSize" Value="21.333"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		<LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
+			<GradientStop Color="#BABABA" Offset="0"/>
+			<GradientStop Color="#C7C7C7" Offset="0.5"/>
+			<GradientStop Color="#BABABA" Offset="1"/>
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="ProgressBarBorderBrush" EndPoint="0,1" StartPoint="0,0">
+			<GradientStop Color="#B2B2B2" Offset="0"/>
+			<GradientStop Color="#8C8C8C" Offset="1"/>
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" EndPoint="1,0" StartPoint="0,0">
+			<GradientStop Color="#00FFFFFF" Offset="0"/>
+			<GradientStop Color="#60FFFFFF" Offset="0.4"/>
+			<GradientStop Color="#60FFFFFF" Offset="0.6"/>
+			<GradientStop Color="#00FFFFFF" Offset="1"/>
+		</LinearGradientBrush>
+		<Style x:Key="ProgressBarStyle1" TargetType="{x:Type ProgressBar}">
+			<Setter Property="Foreground" Value="#01D328"/>
+			<Setter Property="Background" Value="{StaticResource ProgressBarBackground}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ProgressBarBorderBrush}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ProgressBar}">
+						<Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
+							<Rectangle RadiusY="2" RadiusX="2" Fill="#FFEBEBEB"/>
+							<Rectangle x:Name="PART_Track" Margin="1"/>
+							<Decorator x:Name="PART_Indicator" HorizontalAlignment="Left" Margin="1">
+								<Grid x:Name="Foreground">
+									<Rectangle x:Name="Indicator" Fill="#FF329CD7"/>
+									<Grid x:Name="Animation" ClipToBounds="true">
+										<Rectangle x:Name="PART_GlowRect" Fill="{StaticResource ProgressBarIndicatorAnimatedFill}" HorizontalAlignment="Left" Margin="-100,0,0,0" Width="100"/>
+									</Grid>
+								</Grid>
+							</Decorator>
+							<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="Orientation" Value="Vertical">
+								<Setter Property="LayoutTransform" TargetName="TemplateRoot">
+									<Setter.Value>
+										<RotateTransform Angle="-90"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+							<Trigger Property="IsIndeterminate" Value="true">
+								<Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+							</Trigger>
+							<Trigger Property="IsIndeterminate" Value="false"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="ProgressBarStyle2" TargetType="{x:Type ProgressBar}">
+			<Setter Property="Foreground" Value="#01D328"/>
+			<Setter Property="Background" Value="{StaticResource ProgressBarBackground}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource ProgressBarBorderBrush}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ProgressBar}">
+						<Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
+							<Rectangle RadiusY="2" RadiusX="2" Fill="#FFEBEBEB"/>
+							<Rectangle x:Name="PART_Track" Margin="1"/>
+							<Decorator x:Name="PART_Indicator" HorizontalAlignment="Left" Margin="1">
+								<Grid x:Name="Foreground">
+									<Rectangle x:Name="Indicator" Fill="#FF329CD7"/>
+								</Grid>
+							</Decorator>
+							<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="Orientation" Value="Vertical">
+								<Setter Property="LayoutTransform" TargetName="TemplateRoot">
+									<Setter.Value>
+										<RotateTransform Angle="-90"/>
+									</Setter.Value>
+								</Setter>
+							</Trigger>
+							<Trigger Property="IsIndeterminate" Value="true">
+								<Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+							</Trigger>
+							<Trigger Property="IsIndeterminate" Value="false"/>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot" Background="#FFEDEDED">
+		<Grid x:Name="top">
+			<Rectangle Fill="#FF299BDA" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="1920"/>
+			<Image Margin="10,5,1830,995" Source="nav_01.png" Stretch="Fill"/>
+			<Rectangle Fill="#FFFCFDFE" HorizontalAlignment="Left" Height="40" Margin="100,25,0,0" VerticalAlignment="Top" Width="2"/>
+			<TextBlock HorizontalAlignment="Left" Margin="125,25,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="注册会计师行业后备人才实训基地" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="29.333" Foreground="White" Height="40"/>
+			<Grid x:Name="student_name" Margin="1790.5,25,25,1025">
+				<Image Margin="0,0,74.5,0" Source="raw_1501471037.png" Stretch="Fill" Width="30" Height="30"/>
+				<TextBlock HorizontalAlignment="Left" Margin="40.5,8.883,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="学员姓名" VerticalAlignment="Top" FontFamily="Microsoft YaHei" Foreground="#FFFEFEFE"/>
+			</Grid>
+		</Grid>
+		<Grid x:Name="main_nav" Margin="0,90,1660,0">
+			<Rectangle Fill="#FF404040" HorizontalAlignment="Left" Height="990" VerticalAlignment="Top" Width="260"/>
+			<RadioButton Content=" 实操中心" Margin="0,0,0,900" Style="{DynamicResource RadioButtonStyle1}" GroupName="main-nav" IsChecked="True"/>
+			<RadioButton Content="证据展示" Margin="0,90,0,810" Style="{DynamicResource RadioButtonStyle2}" GroupName="main-nav"/>
+			<RadioButton Content="成果导出" Margin="0,180,0,720" Style="{DynamicResource RadioButtonStyle3}" GroupName="main-nav" IsChecked="True"/>
+			<RadioButton Content="我的成就" Margin="0,270,0,630" Style="{DynamicResource RadioButtonStyle4}" GroupName="main-nav" IsChecked="True"/>
+			<RadioButton Content=" 用户中心" Margin="0,360,0,540" Style="{DynamicResource RadioButtonStyle5}" GroupName="main-nav" IsChecked="True"/>
+			<Button Content="退出登录" Margin="0,930,0,0" Style="{DynamicResource ButtonStyle2}"/>
+		</Grid>
+		<Rectangle Fill="#FFEDEDED" HorizontalAlignment="Left" Height="950" Margin="280,110,0,0" VerticalAlignment="Top" Width="1620"/>
+		<Grid Margin="280,110,20,820">
+			<Rectangle Fill="White" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="1620"/>
+			<Rectangle Fill="#FFEDEDED" HorizontalAlignment="Left" Height="150" Margin="160,0,0,0" VerticalAlignment="Top" Width="2"/>
+			<Image Margin="50,20,1510,70" Source="xianshangkefu.png" Stretch="Fill"/>
+			<TextBlock HorizontalAlignment="Left" Margin="177,20,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="线上客服" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
+			<Image Source="QQ.png" Stretch="Fill" Width="36" Height="36" Margin="207,71.07,1377,42.93"/>
+			<Image Source="wechat.png" Stretch="Fill" Width="36" Height="36" Margin="423.5,71.07,1160.5,42.93"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="3430513578" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black" Margin="258,76.07,0,0"/>
+			<Image Source="erweima.png" Stretch="Fill" Width="90" Height="90" Margin="474.5,45,1055.5,15"/>
+		</Grid>
+		<Grid Margin="280,275,20,595">
+			<Rectangle Fill="White" HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="1620"/>
+			<Rectangle Fill="#FFEDEDED" HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="2" Margin="160,0,0,0"/>
+			<Image Margin="50,20,1510,130" Source="yonghuzhinan.png" Stretch="Fill"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="用户指南" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7" Margin="177,20,0,0"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="需要获取报表项目的审计程序实务操作指引，按F1键" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Margin="177,65,0,0"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="审计程序中发现差异时，按F2键获取进一步信息" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Margin="177,95,0,0"/>
+		</Grid>
+		<Grid Margin="280,500,20,370">
+			<Rectangle Fill="White" HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="1620"/>
+			<Rectangle Fill="#FFEDEDED" HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="2" Margin="160,0,0,0"/>
+			<Image Margin="50,20,1510,130" Source="guanyuwomen.png" Stretch="Fill"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="关于我们" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7" Margin="177,20,0,0"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="计学实训：CPA实务培训专家。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Margin="177,65,0,0"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="我们以全实务界的注册会计师师资，构建起行业后备人才培养机制。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Margin="177,95,0,0"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="在成都，我们已和四川省注册会计师协会、西南财经大学建立起战略合作关系。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Margin="177,125,0,0"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="每年为无数财经学子提供与注册会计师行业、投资银行等相关的实务培训，并为行业输送了无数优秀人才。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Margin="177,155,0,0"/>
+		</Grid>
+		<Grid Margin="280,725,20,145">
+			<Rectangle Fill="White" HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="1620"/>
+			<Rectangle Fill="#FFEDEDED" HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="2" Margin="160,0,0,0"/>
+			<Image Margin="50,20,1510,130" Source="falvtiaokuan.png" Stretch="Fill"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="法律条款" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7" Margin="177,20,0,0"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="本软件的所有知识产权归计学实训所有。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Margin="177,65,0,0"/>
+		</Grid>
+		<Grid Margin="280,950,20,20">
+			<Rectangle Fill="White" HorizontalAlignment="Left" Height="110" VerticalAlignment="Top" Width="1620"/>
+			<Rectangle Fill="#FFEDEDED" HorizontalAlignment="Left" Height="110" VerticalAlignment="Top" Width="2" Margin="160,0,0,0"/>
+			<Image Margin="50,20,1510,30" Source="dizhi.png" Stretch="Fill"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="本机地址查看" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7" Margin="177,20,0,0"/>
+			<TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="本机IP: 112.44.107.4" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Margin="177,65,0,0"/>
+		</Grid>
+	</Grid>
+</UserControl>
