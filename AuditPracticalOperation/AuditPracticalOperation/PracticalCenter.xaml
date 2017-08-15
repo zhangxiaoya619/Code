@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="AuditPracticalOperation.PracticalCenter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AuditPracticalOperation"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1024">
+    <UserControl.Resources>
+        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid>
+                            <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
+                            <Image x:Name="state" Visibility="Collapsed" Source="Images/yiwancheng.png" Height="22" Width="22" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+                                <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
+                                <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsChecked" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+                            </MultiTrigger>
+                            <DataTrigger Binding="{Binding IsDone}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" TargetName="state"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+            <Setter Property="FontSize" Value="18.667"/>
+            <Setter Property="Foreground" Value="#FF319CD8"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="local:PracticalCenter.OpenPracticalOperate" Executed="OpenPracticalOperateExecuted" />
+    </UserControl.CommandBindings>
+    <Grid Background="#FFEDEDED">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#FFFFFF"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="请选择报表科目，开始学习！" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF319CD8"/>
+        <Border Grid.Row="2" Background="#FFFFFF">
+            <ListView x:Name="practicallist" Margin="22.5" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Border x:Name="Bd" Padding="22.5">
+                                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Content="{Binding Name}" Width="220" Height="50" Style="{StaticResource RadioButtonStyle}" GroupName="kemu" Command="local:PracticalCenter.OpenPracticalOperate" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
+    </Grid>
+</UserControl>
