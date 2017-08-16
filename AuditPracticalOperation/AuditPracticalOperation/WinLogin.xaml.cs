@@ -52,10 +52,14 @@ namespace AuditPracticalOperation
                 TextBoxName.Text = "请输入姓名+学号";
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public static RoutedUICommand Login = new RoutedUICommand("Login", "Login", typeof(WinLogin));
+
+        private void LoginExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             //TODO:存储用户名
-            this.DialogResult = true;
+            MainWindow main = new MainWindow();
+            Application.Current.MainWindow = main;
+            main.Show();
             this.Close();
         }
     }

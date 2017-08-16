@@ -140,6 +140,10 @@
       <Project>{b017b515-9431-4d5c-b0e7-f9ea222aa9f8}</Project>
       <Name>Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f59c5777-2bb6-49e4-b1a5-55f1b9266d44}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{17eb8aaf-31bb-426f-82bf-69da6fac2d32}</Project>
       <Name>ViewModel</Name>
@@ -162,6 +166,12 @@
     <Resource Include="Images\jxlogo.png" />
     <Resource Include="Images\QQ.png" />
     <Resource Include="Images\wechat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\practicalsy.png" />
+    <Resource Include="Images\practicaltop.jpg" />
+    <Resource Include="Images\practicalwwc.png" />
+    <Resource Include="Images\practicalywc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

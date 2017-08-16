@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditPracticalOperation", "AuditPracticalOperation\AuditPracticalOperation.csproj", "{DBCD3BD3-4AF6-428E-9751-B42D25DC83D7}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Temporary", "Temporary", "{406287EE-51E6-4E7F-90E1-523E42BE8189}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivationCodeManage", "ActivationCodeManage\ActivationCodeManage.csproj", "{3F07DF18-02DD-4321-A159-040D36BD9C55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{3F07DF18-02DD-4321-A159-040D36BD9C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F07DF18-02DD-4321-A159-040D36BD9C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F07DF18-02DD-4321-A159-040D36BD9C55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,25 +20,6 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
                             </Trigger>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
-                                <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
-                            </Trigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsChecked" Value="True"/>
-                                    <Condition Property="IsMouseOver" Value="True"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Fill" TargetName="rectangle" Value="#FF319CD8"/>
-                                <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
-                            </MultiTrigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsMouseOver" Value="True"/>
-                                    <Condition Property="IsChecked" Value="False"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
-                            </MultiTrigger>
                             <DataTrigger Binding="{Binding IsDone}" Value="True">
                                 <Setter Property="Visibility" Value="Visible" TargetName="state"/>
                             </DataTrigger>

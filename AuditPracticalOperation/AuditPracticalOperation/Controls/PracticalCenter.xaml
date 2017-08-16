@@ -8,7 +8,17 @@
              d:DesignHeight="768" d:DesignWidth="1024">
     <UserControl.Resources>
         <controls:ProjectProcessConverter x:Key="projectProcessConverter" />
+        <controls:ProjectHasDoneCountConverter x:Key="projectHasDoneCountConverter"/>
+        <controls:ProjectHasDoneCountEnumType x:Key="hasDone">
+            HasDone
+        </controls:ProjectHasDoneCountEnumType>
+        <controls:ProjectHasDoneCountEnumType x:Key="dontHasDone">
+            DontHasDone
+        </controls:ProjectHasDoneCountEnumType>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="controls:PracticalCenter.Back" Executed="BackExecuted"/>
+    </UserControl.CommandBindings>
     <Grid Background="#FFEDEDED" x:Name="container">
         <Grid.RowDefinitions>
             <RowDefinition Height="109"/>
@@ -20,69 +30,66 @@
         <Image Source="/Images/practicaltop.jpg" Stretch="UniformToFill"/>
         <Grid Grid.Row="2" Background="#FFFFFF">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="180"/>
-                <ColumnDefinition Width="180"/>
-                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="170"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <TextBlock HorizontalAlignment="Left" Margin="20,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Name, StringFormat='当前科目：{0}'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#FF319CD8"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0,0,0">
                 <Image Height="48" Width="48" Source="/Images/practicalsy.png"/>
                 <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Projects.Count, StringFormat='共{0}项任务清单'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
             </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0,0,0">
-                <Image Height="48" Width="48" Source="/Images/practicalywc.png"/>
-                <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Projects.Count, StringFormat='已完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
-            </StackPanel>
             <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="20,0,0,0">
-                <Image Height="48" Width="48" Source="/Images/practicalwwc.png"/>
-                <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Projects.Count, StringFormat='未完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
+                <Image Height="48" Width="48" Source="/Images/practicalywc.png"/>
+                <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource hasDone},StringFormat='已完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
             </StackPanel>
-            <Grid Grid.Column="3" HorizontalAlignment="Right" Width="428" Height="26" Margin="0,0,40,0">
+            <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="20,0,0,0">
+                <Image Height="48" Width="48" Source="/Images/practicalwwc.png"/>
+                <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource dontHasDone},StringFormat='未完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
+            </StackPanel>
+            <Grid Grid.Column="4" Height="26" Margin="0,0,40,0">
                 <ProgressBar Maximum="100" Minimum="0" Value="{Binding Path=., Converter={StaticResource projectProcessConverter}}">
+                    <ProgressBar.Resources>
+                        <LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#BABABA" Offset="0"/>
+                            <GradientStop Color="#C7C7C7" Offset="0.5"/>
+                            <GradientStop Color="#BABABA" Offset="1"/>
+                        </LinearGradientBrush>
+                        <LinearGradientBrush x:Key="ProgressBarBorderBrush" EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#B2B2B2" Offset="0"/>
+                            <GradientStop Color="#8C8C8C" Offset="1"/>
+                        </LinearGradientBrush>
+                        <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#00FFFFFF" Offset="0"/>
+                            <GradientStop Color="#60FFFFFF" Offset="0.4"/>
+                            <GradientStop Color="#60FFFFFF" Offset="0.6"/>
+                            <GradientStop Color="#00FFFFFF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </ProgressBar.Resources>
                     <ProgressBar.Style>
                         <Style TargetType="{x:Type ProgressBar}">
-                            <Setter Property="Foreground" Value="#329cd7"/>
-                            <Setter Property="Background" Value="#ebebeb"/>
-                            <Setter Property="BorderBrush" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="#01D328"/>
+                            <Setter Property="Background" Value="{StaticResource ProgressBarBackground}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource ProgressBarBorderBrush}"/>
                             <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ProgressBar}">
-                                        <Grid x:Name="TemplateRoot">
-                                            <VisualStateManager.VisualStateGroups>
-                                                <VisualStateGroup x:Name="CommonStates">
-                                                    <VisualState x:Name="Determinate"/>
-                                                    <VisualState x:Name="Indeterminate">
-                                                        <Storyboard RepeatBehavior="Forever">
-                                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Animation">
-                                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.25"/>
-                                                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25"/>
-                                                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25"/>
-                                                            </DoubleAnimationUsingKeyFrames>
-                                                            <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="Animation">
-                                                                <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5"/>
-                                                                <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
-                                                                <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5"/>
-                                                            </PointAnimationUsingKeyFrames>
-                                                        </Storyboard>
-                                                    </VisualState>
-                                                </VisualStateGroup>
-                                            </VisualStateManager.VisualStateGroups>
-                                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
-                                            <Rectangle x:Name="PART_Track"/>
-                                            <Grid x:Name="PART_Indicator" ClipToBounds="True" HorizontalAlignment="Left">
-                                                <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}"/>
-                                                <Rectangle x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5">
-                                                    <Rectangle.RenderTransform>
-                                                        <TransformGroup>
-                                                            <ScaleTransform/>
-                                                            <SkewTransform/>
-                                                            <RotateTransform/>
-                                                            <TranslateTransform/>
-                                                        </TransformGroup>
-                                                    </Rectangle.RenderTransform>
-                                                </Rectangle>
-                                            </Grid>
+                                        <Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
+                                            <Rectangle Fill="#FFEBEBEB"/>
+                                            <Rectangle x:Name="PART_Track" Margin="1"/>
+                                            <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left" Margin="1">
+                                                <Grid x:Name="Foreground">
+                                                    <Rectangle x:Name="Indicator" Fill="#FF329CD7"/>
+                                                    <Grid x:Name="Animation" ClipToBounds="true">
+                                                        <Rectangle x:Name="PART_GlowRect" Fill="{StaticResource ProgressBarIndicatorAnimatedFill}" HorizontalAlignment="Left" Margin="-100,0,0,0" Width="100"/>
+                                                    </Grid>
+                                                </Grid>
+                                            </Decorator>
+                                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
                                         </Grid>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="Orientation" Value="Vertical">
@@ -92,9 +99,10 @@
                                                     </Setter.Value>
                                                 </Setter>
                                             </Trigger>
-                                            <Trigger Property="IsIndeterminate" Value="True">
+                                            <Trigger Property="IsIndeterminate" Value="true">
                                                 <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
                                             </Trigger>
+                                            <Trigger Property="IsIndeterminate" Value="false"/>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -102,8 +110,61 @@
                         </Style>
                     </ProgressBar.Style>
                 </ProgressBar>
-                <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectProcessConverter}, StringFormat='已完成{0}%'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" HorizontalAlignment="Center"/>
+                <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectProcessConverter}, StringFormat='已完成{0}%'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#FFFF6800" HorizontalAlignment="Center"/>
             </Grid>
+            <StackPanel Grid.Column="5" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#33289BDA"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#FF289BDA"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textBlock">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled"/>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Rectangle x:Name="rectangle" Stroke="#FF289BDA" RadiusX="4" RadiusY="4" Fill="White"/>
+                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF289BDA"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsFocused" Value="True"/>
+                                        <Trigger Property="IsDefaulted" Value="True"/>
+                                        <Trigger Property="IsMouseOver" Value="True"/>
+                                        <Trigger Property="IsPressed" Value="True"/>
+                                        <Trigger Property="IsEnabled" Value="False"/>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                        <Setter Property="FontSize" Value="18.667"/>
+                        <Setter Property="Foreground" Value="#FF289BDA"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="去完成" Width="100" Height="30" />
+                <Rectangle Width="15"/>
+                <Button Content="返回科目" Width="100" Height="30" Command="controls:PracticalCenter.Back" />
+                <Rectangle Width="20"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
