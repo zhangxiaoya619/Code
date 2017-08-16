@@ -58,6 +58,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UContorls\UCHeader.xaml.cs">
+      <DependentUpon>UCHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UContorls\UCLoginHeader.xaml.cs">
+      <DependentUpon>UCLoginHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinLogin.xaml.cs">
+      <DependentUpon>WinLogin.xaml</DependentUpon>
+    </Compile>
     <Page Include="ControlDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -75,6 +84,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PracticalCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UContorls\UCHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UContorls\UCLoginHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +140,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\yiwancheng.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\nav_01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\raw_1501471037.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\01_login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\erweima.png" />
+    <Resource Include="Images\jxlogo.png" />
+    <Resource Include="Images\QQ.png" />
+    <Resource Include="Images\wechat.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
