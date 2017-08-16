@@ -8,12 +8,13 @@ using System.Text;
 
 namespace Business.Processer
 {
+    [Singleton]
     public class LocalSerialNumProcessor
     {
 
-        static bool White = true;
-        static bool Code = false;
-        public static string GetCpuSerialNum()
+        private bool White = true;
+        private bool Code = false;
+        public string GetCpuSerialNum()
         {
             try
             {
@@ -38,7 +39,7 @@ namespace Business.Processer
             }
 
         }
-        public static bool RegistIt(string currentCode, string realCode)
+        public bool RegistIt(string currentCode, string realCode)
         {
             if (!string.IsNullOrEmpty(realCode))
             {
@@ -64,7 +65,7 @@ namespace Business.Processer
             else return Code;
         }
 
-        public static bool BoolRegist(string sn)
+        public bool BoolRegist(string sn)
         {
             string[] keynames;
             bool flag = false;
@@ -103,7 +104,7 @@ namespace Business.Processer
             }
         }
 
-        public static string GetMd5(object text)
+        public string GetMd5(object text)
         {
             string path = text.ToString();
 
@@ -113,6 +114,11 @@ namespace Business.Processer
 
             string md5result = BitConverter.ToString(byteResult).Replace("-", "");
             return md5result;
+        }
+
+        private LocalSerialNumProcessor()
+        {
+
         }
     }
 }

@@ -1,0 +1,69 @@
+﻿<Window x:Class="AuditPracticalOperation.WinLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:UC="clr-namespace:AuditPracticalOperation.UContorls"
+        Height="480" Width="800"
+        BorderThickness="1"  BorderBrush="{DynamicResource BaseBorder-Sketch}"   WindowStyle="None" 
+        AllowDrop="False"  ResizeMode="NoResize" 
+        Background="White"
+        AllowsTransparency="False" 
+        WindowStartupLocation="CenterScreen"
+        TextOptions.TextFormattingMode="Display" 
+        Title="计学系统" 
+        Icon="pack://application:,,,/Images/nav_01.png"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.RowSpan="2">
+            <Image Source="pack://application:,,,/Images/01_login.png" Stretch="Fill"/>
+        </Grid>
+        <Grid Grid.Row="0">
+            <UC:UCLoginHeader x:Name="header"  MouseLeftButtonDown="Header_MouseLeftButtonDown"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.25*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.42*"/>
+                        <ColumnDefinition Width="0.26*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.7*"/>
+                            <ColumnDefinition Width="0.34*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Margin="0,15,0,0" Width="120" Height="57.8" Source="pack://application:,,,/Images/jxlogo.png" Stretch="Fill"/>
+                            <Grid x:Name="username" Margin="0,15,0,0">
+                                <Rectangle Fill="#FFF2F2F2" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="200" Stroke="#FFF0F0F0"/>
+                                <Path HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,6,0,0" Data="M26.144002,22.314948C26.144002,22.314948,37.124986,24.929934,38.169999,35.386948L0,35.386948C0,35.386948,3.1390064,23.883915,12.55099,22.838019L15.100001,33.752917 16.972986,33.737903 19.103998,28.150021 17.114984,24.702029 21.088004,24.702029 19.184991,28.237912 21.614005,33.699939 23.073997,33.687976z M18.821006,0C24.639007,0 29.358007,4.7180004 29.358007,10.537002 29.358007,16.355002 24.639007,21.073002 18.821006,21.073002 13.002006,21.073002 8.2850049,16.355002 8.2850049,10.537002 8.2850049,4.7180004 13.002006,0 18.821006,0z" Stretch="Uniform" Fill="#FFADADAD" Width="20" Height="20" RenderTransformOrigin="0.5,0.5"/>
+                                <TextBox GotFocus="TextBoxName_GotFocus" LostFocus="TextBoxName_LostFocus" x:Name="TextBoxName" HorizontalAlignment="Center" Height="30" Margin="30,0,0,0" TextWrapping="Wrap" Text="请输入姓名+学号" VerticalAlignment="Center" Width="170" FontSize="14"  BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FFC4C4C4" Style="{DynamicResource TextBoxStyle1}" SelectionBrush="{x:Null}"/>
+                            </Grid>
+                            <Button Content="登录" Width="200" Height="32" Margin="0,15,0,0" Style="{DynamicResource ButtonStyle_Login}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" FontSize="12" Text="激活软件客服联系" VerticalAlignment="Center" FontFamily="Microsoft YaHei" Foreground="#FF9E9E9E"/>
+                            <StackPanel Orientation="Horizontal" Margin="10,10,10,0">
+                                <Image Margin="0,0,0,0" Source="pack://application:,,,/Images/QQ.png" Stretch="Fill" Width="20" Height="20"/>
+                                <TextBlock HorizontalAlignment="Center" Margin="5,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="3430513578" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
+                                <Image Margin="0,0,0,0" Source="pack://application:,,,/Images/wechat.png" Stretch="Fill" Width="20" Height="20" VerticalAlignment="Top"/>
+                                <Image Margin="0,0,0,0" Source="pack://application:,,,/Images/erweima.png" Stretch="Fill" Width="80" Height="80"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
