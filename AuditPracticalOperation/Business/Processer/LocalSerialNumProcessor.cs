@@ -8,12 +8,8 @@ namespace Business.Processer
 {
     public class LocalSerialNumProcessor
     {
-        private LocalSerialNumProcessor()
-        {
 
-        }
-
-        public string GetCpuID()
+        public static string GetCpuSerialNum()
         {
             try
             {
