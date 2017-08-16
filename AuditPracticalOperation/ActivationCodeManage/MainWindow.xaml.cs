@@ -52,7 +52,7 @@ namespace ActivationCodeManage
 
         private void BtnCreate_Click(object sender, RoutedEventArgs e)
         {
-            //TODO:生成激活码
+            Textbox_ActivationCode.Text = getRNum(Textbox_SerialNum.Text);
         }
 
 
@@ -67,23 +67,23 @@ namespace ActivationCodeManage
         /// <summary>
         /// 存机器码的Ascii值
         /// </summary>
-        int[] intNumber = new int[25];
+        int[] intNumber = new int[15];
         /// <summary>
         /// 存储机器码字
         /// </summary>
-        char[] Charcode = new char[25];
+        char[] Charcode = new char[15];
 
         /// <summary>
         /// 生成机器码
         /// </summary>
         /// <param name="serialnum"></param>
         /// <returns></returns>
-        public string getMNum(string serialnum)
+        private string getMNum(string serialnum)
         {
 
             string strNum = serialnum;//+ GetDiskVolumeSerialNumber();//获得24位Cpu和硬盘序列号
 
-            string strMNum = strNum.Substring(0, 24);//从生成的字符串中取出前24个字符做为机器码
+            string strMNum = strNum.Substring(0, 16);//从生成的字符串中取出前16个字符做为机器码
 
             return strMNum;
 
