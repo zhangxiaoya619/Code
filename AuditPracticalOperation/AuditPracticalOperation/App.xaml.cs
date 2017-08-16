@@ -14,7 +14,19 @@ namespace AuditPracticalOperation
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
+            Application.Current.ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
+            WinLogin window = new WinLogin();
+            bool? dialogResult = window.ShowDialog();
+            if ((dialogResult.HasValue == true) &&
+                (dialogResult.Value == true))
+            {
+                base.OnStartup(e);
+                Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            }
+            else
+            {
+                this.Shutdown();
+            }
         }
     }
 }

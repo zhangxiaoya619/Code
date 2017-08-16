@@ -51,5 +51,12 @@ namespace AuditPracticalOperation
             if (string.IsNullOrEmpty(TextBoxName.Text.Trim()))
                 TextBoxName.Text = "请输入姓名+学号";
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO:存储用户名
+            this.DialogResult = true;
+            this.Close();
+        }
     }
 }
