@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ViewModel
 {
-    public class PracticalItem: ViewModelBase
+    public class PracticalItem : ViewModelBase
     {
         private string name;
         private string id;
@@ -21,7 +21,7 @@ namespace ViewModel
             set
             {
                 name = value;
-                RaisePropertyChanged(nameof(Name));
+                RaisePropertyChanged("Name");
             }
         }
 
@@ -35,7 +35,7 @@ namespace ViewModel
             set
             {
                 id = value;
-                RaisePropertyChanged(nameof(ID));
+                RaisePropertyChanged("ID");
             }
         }
 
@@ -49,7 +49,7 @@ namespace ViewModel
             set
             {
                 isDone = value;
-                RaisePropertyChanged(nameof(IsDone));
+                RaisePropertyChanged("IsDone");
             }
         }
     }
