@@ -7,6 +7,6 @@ namespace ViewModel
 {
     public interface IPower
     {
-        bool HasPower();
+        bool HasPower(string practicalItemID);
     }
 }

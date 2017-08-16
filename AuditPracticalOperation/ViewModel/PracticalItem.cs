@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
 namespace ViewModel
 {
-    public class PracticalItem: ViewModelBase
+    public class PracticalItem : ViewModelBase
     {
         private string name;
         private string id;
         private bool isDone;
+        private ObservableCollection<PracticalItemProject> projects;
 
         public string Name
         {
@@ -21,7 +22,7 @@ namespace ViewModel
             set
             {
                 name = value;
-                RaisePropertyChanged(nameof(Name));
+                RaisePropertyChanged("Name");
             }
         }
 
@@ -35,7 +36,7 @@ namespace ViewModel
             set
             {
                 id = value;
-                RaisePropertyChanged(nameof(ID));
+                RaisePropertyChanged("ID");
             }
         }
 
@@ -49,8 +50,27 @@ namespace ViewModel
             set
             {
                 isDone = value;
-                RaisePropertyChanged(nameof(IsDone));
+                RaisePropertyChanged("IsDone");
             }
+        }
+
+        public ObservableCollection<PracticalItemProject> Projects
+        {
+            get
+            {
+                return projects;
+            }
+
+            set
+            {
+                projects = value;
+                RaisePropertyChanged("Projects");
+            }
+        }
+
+        public PracticalItem()
+        {
+            Projects = new ObservableCollection<PracticalItemProject>();
         }
     }
 }

@@ -7,9 +7,12 @@ namespace ViewModel
 {
     public class User : ViewModelBase, IPower
     {
-        public bool HasPower()
+        public bool HasPower(string practicalItemID)
         {
-            return true;
+            if (Convert.ToInt32(practicalItemID) % 2 == 0)
+                return true;
+            else
+                return false;
         }
     }
 }
