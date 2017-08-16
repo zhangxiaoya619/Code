@@ -1246,4 +1246,107 @@
         <Setter Property="TextAlignment" Value="Right"/>
     </Style>
 
+    <Style x:Key="ButtonStyle_Close" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                            <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                            <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle Fill="#FF299BDA"/>
+                        <Path x:Name="path" Data="M16.78125,18.2799987792969L26.0625,18.2799987792969 48.28125,40.4987487792969 70.78125,18.2799987792969 79.78125,18.2799987792969 79.78125,27.5612487792969 57.5625,49.7799987792969 79.78125,71.9987487792969 79.78125,81.2799987792969 70.78125,81.2799987792969 48.28125,59.0612487792969 26.0625,81.2799987792969 16.78125,81.2799987792969 16.78125,72.2799987792969 39,49.7799987792969 16.78125,27.5612487792969 16.78125,18.2799987792969z" Stretch="Uniform" Fill="#FF9BA5AF" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True"/>
+                        <Trigger Property="IsDefaulted" Value="True"/>
+                        <Trigger Property="IsMouseOver" Value="True"/>
+                        <Trigger Property="IsPressed" Value="True"/>
+                        <Trigger Property="IsEnabled" Value="False"/>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="ButtonStyle_Login" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FFE07CDB"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FF1AA5EE"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FFCF76CA"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="rectangle">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#FF1282BF"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle x:Name="rectangle" Width="200" VerticalAlignment="Top" Height="32" HorizontalAlignment="Left">
+                            <Rectangle.Stroke>
+                                <LinearGradientBrush EndPoint="1.002,0.025" StartPoint="0.004,0.001">
+                                    <GradientStop Color="#FFE185DA" Offset="0"/>
+                                    <GradientStop Color="#FF058ED9" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Stroke>
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.989,0.046" StartPoint="0.001,0.007">
+                                    <GradientStop Color="#FFE18EDD"/>
+                                    <GradientStop Color="#FF219BDD" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto"  Style="{DynamicResource BasicTextBlock-Sketch}" Text="登录" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="13" Foreground="White"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True"/>
+                        <Trigger Property="IsDefaulted" Value="True"/>
+                        <Trigger Property="IsMouseOver" Value="True"/>
+                        <Trigger Property="IsPressed" Value="True"/>
+                        <Trigger Property="IsEnabled" Value="False"/>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
 </ResourceDictionary>
