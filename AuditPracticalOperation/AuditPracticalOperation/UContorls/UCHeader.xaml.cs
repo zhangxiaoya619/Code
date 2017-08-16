@@ -12,21 +12,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AuditPracticalOperation
+namespace AuditPracticalOperation.UContorls
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// UCHeader.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UCHeader : UserControl
     {
-        public MainWindow()
+        public UCHeader()
         {
             InitializeComponent();
-        }
-
-        private void PracticalCenter_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
