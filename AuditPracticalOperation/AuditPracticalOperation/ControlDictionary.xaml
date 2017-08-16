@@ -5,9 +5,7 @@
 	xmlns:sys="clr-namespace:System;assembly=mscorlib" 
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	mc:Ignorable="d" 
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-	d:IsSketchFlowStyle="True"
-	d:IsSketchFlowDefaultStyle="True">
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" >
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Microsoft.Expression.Prototyping.SketchControls;component/ScrollViewerStyles.xaml"/>
@@ -330,7 +328,7 @@
     </Style>
 
     <!-- Sketch Editable ComboBox ControlTemplate -->
-    <ControlTemplate x:Key="ComboBoxEditableTemplate-Sketch" d:IsControlPart="true" TargetType="{x:Type ComboBox}">
+    <ControlTemplate x:Key="ComboBoxEditableTemplate-Sketch" TargetType="{x:Type ComboBox}">
         <Grid x:Name="Placement" SnapsToDevicePixels="true">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
