@@ -42,7 +42,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPracticalContentManager.cs" />
     <Compile Include="Processer\LocalSerialNumProcessor.cs" />
+    <Compile Include="Processer\PracticalContentProcesser.cs" />
     <Compile Include="Processer\PracticalItemProcesser.cs" />
     <Compile Include="Processer\UserProcesser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

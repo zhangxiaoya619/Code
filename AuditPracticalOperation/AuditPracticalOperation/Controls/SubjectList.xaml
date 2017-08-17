@@ -6,32 +6,6 @@
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024">
-    <UserControl.Resources>
-        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Grid>
-                            <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                            <Image x:Name="state" Visibility="Collapsed" Source="/Images/yiwancheng.png" Height="22" Width="22" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                            <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
-                            </Trigger>
-                            <DataTrigger Binding="{Binding IsDone}" Value="True">
-                                <Setter Property="Visibility" Value="Visible" TargetName="state"/>
-                            </DataTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-            <Setter Property="FontSize" Value="18.667"/>
-            <Setter Property="Foreground" Value="#FF319CD8"/>
-        </Style>
-    </UserControl.Resources>
     <UserControl.CommandBindings>
         <CommandBinding Command="controls:SubjectList.OpenPracticalOperate" Executed="OpenPracticalOperateExecuted" />
     </UserControl.CommandBindings>
@@ -66,7 +40,34 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <RadioButton Content="{Binding Name}" Width="220" Height="50" Style="{StaticResource RadioButtonStyle}" GroupName="kemu" Command="controls:SubjectList.OpenPracticalOperate" CommandParameter="{Binding}" />
+                            <RadioButton Content="{Binding Name}" Width="220" Height="50"  GroupName="kemu" Command="controls:SubjectList.OpenPracticalOperate" CommandParameter="{Binding}">
+                                <RadioButton.Style>
+                                    <Style TargetType="{x:Type RadioButton}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                                    <Grid>
+                                                        <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
+                                                        <Image x:Name="state" Visibility="Collapsed" Source="/Images/yiwancheng.png" Height="22" Width="22" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
+                                                        </Trigger>
+                                                        <DataTrigger Binding="{Binding IsDone}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible" TargetName="state"/>
+                                                        </DataTrigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                                        <Setter Property="FontSize" Value="18.667"/>
+                                        <Setter Property="Foreground" Value="#FF319CD8"/>
+                                    </Style>
+                                </RadioButton.Style>
+                            </RadioButton>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

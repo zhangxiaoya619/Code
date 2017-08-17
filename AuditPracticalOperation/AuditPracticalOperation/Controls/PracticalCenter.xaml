@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1024">
+             d:DesignHeight="960" d:DesignWidth="1280">
     <UserControl.Resources>
         <controls:ProjectProcessConverter x:Key="projectProcessConverter" />
-        <controls:ProjectHasDoneCountConverter x:Key="projectHasDoneCountConverter"/>
-        <controls:ProjectHasDoneCountEnumType x:Key="hasDone">
+        <controls:ProjectHasDoneCountConverter x:Key="projectHasDoneCountConverter" />
+        <controls:ProjectHasDoneCountEnumType x:Key="hasDone" >
             HasDone
         </controls:ProjectHasDoneCountEnumType>
         <controls:ProjectHasDoneCountEnumType x:Key="dontHasDone">
@@ -18,153 +18,265 @@
     </UserControl.Resources>
     <UserControl.CommandBindings>
         <CommandBinding Command="controls:PracticalCenter.Back" Executed="BackExecuted"/>
+        <CommandBinding Command="controls:PracticalCenter.Operate" Executed="OperateExcuted"/>
     </UserControl.CommandBindings>
-    <Grid Background="#FFEDEDED" x:Name="container">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="109"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Image Source="/Images/practicaltop.jpg" Stretch="UniformToFill"/>
-        <Grid Grid.Row="2" Background="#FFFFFF">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="170"/>
-                <ColumnDefinition Width="170"/>
-                <ColumnDefinition Width="170"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock HorizontalAlignment="Left" Margin="20,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Name, StringFormat='当前科目：{0}'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#FF319CD8"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0,0,0">
-                <Image Height="48" Width="48" Source="/Images/practicalsy.png"/>
-                <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Projects.Count, StringFormat='共{0}项任务清单'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
-            </StackPanel>
-            <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="20,0,0,0">
-                <Image Height="48" Width="48" Source="/Images/practicalywc.png"/>
-                <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource hasDone},StringFormat='已完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
-            </StackPanel>
-            <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="20,0,0,0">
-                <Image Height="48" Width="48" Source="/Images/practicalwwc.png"/>
-                <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource dontHasDone},StringFormat='未完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
-            </StackPanel>
-            <Grid Grid.Column="4" Height="26" Margin="0,0,40,0">
-                <ProgressBar Maximum="100" Minimum="0" Value="{Binding Path=., Converter={StaticResource projectProcessConverter}}">
-                    <ProgressBar.Resources>
-                        <LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
-                            <GradientStop Color="#BABABA" Offset="0"/>
-                            <GradientStop Color="#C7C7C7" Offset="0.5"/>
-                            <GradientStop Color="#BABABA" Offset="1"/>
-                        </LinearGradientBrush>
-                        <LinearGradientBrush x:Key="ProgressBarBorderBrush" EndPoint="0,1" StartPoint="0,0">
-                            <GradientStop Color="#B2B2B2" Offset="0"/>
-                            <GradientStop Color="#8C8C8C" Offset="1"/>
-                        </LinearGradientBrush>
-                        <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" EndPoint="1,0" StartPoint="0,0">
-                            <GradientStop Color="#00FFFFFF" Offset="0"/>
-                            <GradientStop Color="#60FFFFFF" Offset="0.4"/>
-                            <GradientStop Color="#60FFFFFF" Offset="0.6"/>
-                            <GradientStop Color="#00FFFFFF" Offset="1"/>
-                        </LinearGradientBrush>
-                    </ProgressBar.Resources>
-                    <ProgressBar.Style>
-                        <Style TargetType="{x:Type ProgressBar}">
-                            <Setter Property="Foreground" Value="#01D328"/>
-                            <Setter Property="Background" Value="{StaticResource ProgressBarBackground}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource ProgressBarBorderBrush}"/>
-                            <Setter Property="BorderThickness" Value="0"/>
+    <Grid>
+        <Grid Background="#FFEDEDED" x:Name="projectContainer">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="109"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Source="/Images/practicaltop.jpg" Stretch="UniformToFill"/>
+            <Grid Grid.Row="2" Background="#FFFFFF">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Margin="20,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Name, StringFormat='当前科目：{0}'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#FF319CD8"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0,0,0">
+                    <Image Height="48" Width="48" Source="/Images/practicalsy.png"/>
+                    <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Projects.Count, StringFormat='共{0}项任务清单'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="20,0,0,0">
+                    <Image Height="48" Width="48" Source="/Images/practicalywc.png"/>
+                    <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource hasDone},StringFormat='已完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
+                </StackPanel>
+                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="20,0,0,0">
+                    <Image Height="48" Width="48" Source="/Images/practicalwwc.png"/>
+                    <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource dontHasDone},StringFormat='未完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
+                </StackPanel>
+                <Grid Grid.Column="4" Height="26" Margin="0,0,40,0">
+                    <ProgressBar Maximum="100" Minimum="0" Value="{Binding Path=., Converter={StaticResource projectProcessConverter}}">
+                        <ProgressBar.Resources>
+                            <LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
+                                <GradientStop Color="#BABABA" Offset="0"/>
+                                <GradientStop Color="#C7C7C7" Offset="0.5"/>
+                                <GradientStop Color="#BABABA" Offset="1"/>
+                            </LinearGradientBrush>
+                            <LinearGradientBrush x:Key="ProgressBarBorderBrush" EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#B2B2B2" Offset="0"/>
+                                <GradientStop Color="#8C8C8C" Offset="1"/>
+                            </LinearGradientBrush>
+                            <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" EndPoint="1,0" StartPoint="0,0">
+                                <GradientStop Color="#00FFFFFF" Offset="0"/>
+                                <GradientStop Color="#60FFFFFF" Offset="0.4"/>
+                                <GradientStop Color="#60FFFFFF" Offset="0.6"/>
+                                <GradientStop Color="#00FFFFFF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ProgressBar.Resources>
+                        <ProgressBar.Style>
+                            <Style TargetType="{x:Type ProgressBar}">
+                                <Setter Property="Foreground" Value="#01D328"/>
+                                <Setter Property="Background" Value="{StaticResource ProgressBarBackground}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource ProgressBarBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ProgressBar}">
+                                            <Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
+                                                <Rectangle Fill="#FFEBEBEB"/>
+                                                <Rectangle x:Name="PART_Track" Margin="1"/>
+                                                <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left" Margin="1">
+                                                    <Grid x:Name="Foreground">
+                                                        <Rectangle x:Name="Indicator" Fill="#FF329CD7"/>
+                                                        <Grid x:Name="Animation" ClipToBounds="true">
+                                                            <Rectangle x:Name="PART_GlowRect" Fill="{StaticResource ProgressBarIndicatorAnimatedFill}" HorizontalAlignment="Left" Margin="-100,0,0,0" Width="100"/>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Decorator>
+                                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="Orientation" Value="Vertical">
+                                                    <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                                        <Setter.Value>
+                                                            <RotateTransform Angle="-90"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                                <Trigger Property="IsIndeterminate" Value="true">
+                                                    <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+                                                </Trigger>
+                                                <Trigger Property="IsIndeterminate" Value="false"/>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ProgressBar.Style>
+                    </ProgressBar>
+                    <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectProcessConverter}, StringFormat='已完成{0}%'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#FFFF6800" HorizontalAlignment="Center"/>
+                </Grid>
+                <StackPanel Grid.Column="5" Orientation="Horizontal">
+                    <Button Content="返回科目" Width="100" Height="30" Command="controls:PracticalCenter.Back">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Grid>
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualState x:Name="Normal"/>
+                                                        <VisualState x:Name="MouseOver">
+                                                            <Storyboard>
+                                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+                                                                    <EasingColorKeyFrame KeyTime="0" Value="#33289BDA"/>
+                                                                </ColorAnimationUsingKeyFrames>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                        <VisualState x:Name="Pressed">
+                                                            <Storyboard>
+                                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+                                                                    <EasingColorKeyFrame KeyTime="0" Value="#FF289BDA"/>
+                                                                </ColorAnimationUsingKeyFrames>
+                                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textBlock">
+                                                                    <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                                                </ColorAnimationUsingKeyFrames>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                        <VisualState x:Name="Disabled"/>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
+                                                <Rectangle x:Name="rectangle" Stroke="#FF289BDA" RadiusX="4" RadiusY="4" Fill="White"/>
+                                                <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF289BDA"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsFocused" Value="True"/>
+                                                <Trigger Property="IsDefaulted" Value="True"/>
+                                                <Trigger Property="IsMouseOver" Value="True"/>
+                                                <Trigger Property="IsPressed" Value="True"/>
+                                                <Trigger Property="IsEnabled" Value="False"/>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                                <Setter Property="FontSize" Value="18.667"/>
+                                <Setter Property="Foreground" Value="#FF289BDA"/>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Rectangle Width="20"/>
+                </StackPanel>
+            </Grid>
+            <Border Grid.Row="4" Background="#FFFFFF">
+                <ListView ItemsSource="{Binding Projects}" Margin="22.5" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
                             <Setter Property="Template">
                                 <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ProgressBar}">
-                                        <Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
-                                            <Rectangle Fill="#FFEBEBEB"/>
-                                            <Rectangle x:Name="PART_Track" Margin="1"/>
-                                            <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left" Margin="1">
-                                                <Grid x:Name="Foreground">
-                                                    <Rectangle x:Name="Indicator" Fill="#FF329CD7"/>
-                                                    <Grid x:Name="Animation" ClipToBounds="true">
-                                                        <Rectangle x:Name="PART_GlowRect" Fill="{StaticResource ProgressBarIndicatorAnimatedFill}" HorizontalAlignment="Left" Margin="-100,0,0,0" Width="100"/>
-                                                    </Grid>
-                                                </Grid>
-                                            </Decorator>
-                                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="Orientation" Value="Vertical">
-                                                <Setter Property="LayoutTransform" TargetName="TemplateRoot">
-                                                    <Setter.Value>
-                                                        <RotateTransform Angle="-90"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                            <Trigger Property="IsIndeterminate" Value="true">
-                                                <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
-                                            </Trigger>
-                                            <Trigger Property="IsIndeterminate" Value="false"/>
-                                        </ControlTemplate.Triggers>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border x:Name="Bd">
+                                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Stretch"/>
+                                        </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                         </Style>
-                    </ProgressBar.Style>
-                </ProgressBar>
-                <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectProcessConverter}, StringFormat='已完成{0}%'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#FFFF6800" HorizontalAlignment="Center"/>
-            </Grid>
-            <StackPanel Grid.Column="5" Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Grid>
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal"/>
-                                                <VisualState x:Name="MouseOver">
-                                                    <Storyboard>
-                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
-                                                            <EasingColorKeyFrame KeyTime="0" Value="#33289BDA"/>
-                                                        </ColorAnimationUsingKeyFrames>
-                                                    </Storyboard>
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                    <Storyboard>
-                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
-                                                            <EasingColorKeyFrame KeyTime="0" Value="#FF289BDA"/>
-                                                        </ColorAnimationUsingKeyFrames>
-                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textBlock">
-                                                            <EasingColorKeyFrame KeyTime="0" Value="White"/>
-                                                        </ColorAnimationUsingKeyFrames>
-                                                    </Storyboard>
-                                                </VisualState>
-                                                <VisualState x:Name="Disabled"/>
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
-                                        <Rectangle x:Name="rectangle" Stroke="#FF289BDA" RadiusX="4" RadiusY="4" Fill="White"/>
-                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF289BDA"/>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsFocused" Value="True"/>
-                                        <Trigger Property="IsDefaulted" Value="True"/>
-                                        <Trigger Property="IsMouseOver" Value="True"/>
-                                        <Trigger Property="IsPressed" Value="True"/>
-                                        <Trigger Property="IsEnabled" Value="False"/>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-                        <Setter Property="FontSize" Value="18.667"/>
-                        <Setter Property="Foreground" Value="#FF289BDA"/>
-                    </Style>
-                </StackPanel.Resources>
-                <Button Content="去完成" Width="100" Height="30" />
-                <Rectangle Width="15"/>
-                <Button Content="返回科目" Width="100" Height="30" Command="controls:PracticalCenter.Back" />
-                <Rectangle Width="20"/>
-            </StackPanel>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="70">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Width="18" Height="18" Margin="0,0,15,0" Source="/Images/yiwanchengblue.png" Stretch="UniformToFill">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsDone}" Value="False">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <Image Width="18" Height="18" Margin="0,0,15,0" Source="/Images/zhengzaijingxing.png" Stretch="UniformToFill">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsDone}" Value="True">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <TextBlock Grid.Column="1" Style="{DynamicResource BasicTextBlock-Sketch}" FontFamily="Microsoft YaHei" FontSize="16" Foreground="#FF9C9C9C" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Name}"/>
+                                <Button Grid.Column="2" Width="100" Height="30" Margin="20,0,20,0" Command="controls:PracticalCenter.Operate" CommandParameter="{Binding}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Grid>
+                                                            <VisualStateManager.VisualStateGroups>
+                                                                <VisualStateGroup x:Name="CommonStates">
+                                                                    <VisualState x:Name="Normal"/>
+                                                                    <VisualState x:Name="MouseOver">
+                                                                        <Storyboard>
+                                                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+                                                                                <EasingColorKeyFrame KeyTime="0" Value="#33289BDA"/>
+                                                                            </ColorAnimationUsingKeyFrames>
+                                                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textBlock">
+                                                                                <EasingColorKeyFrame KeyTime="0" Value="#FF329CD7"/>
+                                                                            </ColorAnimationUsingKeyFrames>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                    <VisualState x:Name="Pressed">
+                                                                        <Storyboard>
+                                                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+                                                                                <EasingColorKeyFrame KeyTime="0" Value="#FF289BDA"/>
+                                                                            </ColorAnimationUsingKeyFrames>
+                                                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="textBlock">
+                                                                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                                                            </ColorAnimationUsingKeyFrames>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                    <VisualState x:Name="Disabled"/>
+                                                                </VisualStateGroup>
+                                                            </VisualStateManager.VisualStateGroups>
+                                                            <Rectangle x:Name="rectangle" Stroke="#FF289BDA" RadiusX="4" RadiusY="4" Fill="#FF329CD7"/>
+                                                            <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="去完成" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FFFFFF"/>
+                                                        </Grid>
+                                                        <ControlTemplate.Triggers>
+                                                            <DataTrigger Binding="{Binding IsDone}" Value="True">
+                                                                <Setter TargetName="rectangle" Property="Fill" Value="#FFFFFF"/>
+                                                                <Setter TargetName="textBlock" Property="Text" Value="再次练习"/>
+                                                                <Setter TargetName="textBlock" Property="Foreground" Value="#FF329CD7"/>
+                                                            </DataTrigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                                            <Setter Property="FontSize" Value="18.667"/>
+                                            <Setter Property="Foreground" Value="#FF289BDA"/>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Rectangle Fill="#FFEDEDED" Height="1" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Margin="5,0,5,0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
         </Grid>
+        <ContentControl x:Name="operateContainer" Visibility="Collapsed"/>
     </Grid>
 </UserControl>

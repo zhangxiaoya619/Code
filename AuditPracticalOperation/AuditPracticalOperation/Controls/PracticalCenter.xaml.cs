@@ -5,6 +5,8 @@ using System.Windows.Data;
 using System.Linq;
 using ViewModel;
 using System.Windows.Input;
+using Common.Utils;
+using System.Windows;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -18,14 +20,35 @@ namespace AuditPracticalOperation.Controls
         public PracticalCenter(PracticalItem practicalItem)
         {
             InitializeComponent();
-            container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = practicalItem });
+
+            if (!this.IsInDesignMode())
+                projectContainer.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = practicalItem });
         }
 
-        public static RoutedUICommand Back = new RoutedUICommand("Back To SubjectList ", "BackToSubjectList", typeof(PracticalCenter));
+        public static RoutedUICommand Back = new RoutedUICommand("Back To SubjectList", "BackToSubjectList", typeof(PracticalCenter));
         private void BackExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (OnBacked != null)
                 OnBacked();
+        }
+
+        public static RoutedCommand Operate = new RoutedUICommand("Open PracticalOperate", "OpenPracticalOperate", typeof(PracticalCenter));
+        private void OperateExcuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            PracticalItemProject project = (PracticalItemProject)e.Parameter;
+            PracticalOperate practicalOperate = new PracticalOperate(project);
+            operateContainer.Content = practicalOperate;
+            practicalOperate.OnBacked += PracticalOperate_OnBacked;
+            projectContainer.Visibility = Visibility.Collapsed;
+            operateContainer.Visibility = Visibility.Visible;
+        }
+
+        private void PracticalOperate_OnBacked()
+        {
+            ((PracticalOperate)operateContainer.Content).OnBacked -= PracticalOperate_OnBacked;
+            operateContainer.Content = null;
+            projectContainer.Visibility = Visibility.Visible;
+            operateContainer.Visibility = Visibility.Collapsed;
         }
     }
 
@@ -33,6 +56,9 @@ namespace AuditPracticalOperation.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (Utils.IsInDesignMode())
+                return 0;
+
             PracticalItem item = (PracticalItem)value;
 
             if (item.Projects.Count > 0)
@@ -51,6 +77,9 @@ namespace AuditPracticalOperation.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (Utils.IsInDesignMode())
+                return 0;
+
             PracticalItem item = (PracticalItem)value;
             ProjectHasDoneCountEnumType type = (ProjectHasDoneCountEnumType)parameter;
 

@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\PracticalOperate.xaml.cs">
+      <DependentUpon>PracticalOperate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UContorls\UCHeader.xaml.cs">
       <DependentUpon>UCHeader.xaml</DependentUpon>
     </Compile>
@@ -68,6 +71,10 @@
       <DependentUpon>WinLogin.xaml</DependentUpon>
     </Compile>
     <Page Include="ControlDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PracticalOperate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,6 +179,15 @@
     <Resource Include="Images\practicaltop.jpg" />
     <Resource Include="Images\practicalwwc.png" />
     <Resource Include="Images\practicalywc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\yiwanchengblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\zhengzaijingxing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\operate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
