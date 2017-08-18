@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivationCodeManage", "Act
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticalImportTools", "PracticalImportTools\PracticalImportTools.csproj", "{756150DD-A1C8-44D8-AAA2-8D795F5625C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F59C5777-2BB6-49E4-B1A5-55F1B9266D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756150DD-A1C8-44D8-AAA2-8D795F5625C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756150DD-A1C8-44D8-AAA2-8D795F5625C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756150DD-A1C8-44D8-AAA2-8D795F5625C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756150DD-A1C8-44D8-AAA2-8D795F5625C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
