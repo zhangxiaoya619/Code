@@ -56,7 +56,7 @@ namespace AuditPracticalOperation
 
         private void LoginExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            //TODO:存储用户名
+            //TODO:存储用户信息
             MainWindow main = new MainWindow();
             Application.Current.MainWindow = main;
             main.Show();
