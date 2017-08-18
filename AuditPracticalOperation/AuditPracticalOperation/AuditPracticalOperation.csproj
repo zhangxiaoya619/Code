@@ -67,6 +67,9 @@
     <Compile Include="UContorls\UCLoginHeader.xaml.cs">
       <DependentUpon>UCLoginHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UContorls\UCMenu.xaml.cs">
+      <DependentUpon>UCMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinLogin.xaml.cs">
       <DependentUpon>WinLogin.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UContorls\UCLoginHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UContorls\UCMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
