@@ -26,6 +26,7 @@ namespace Business.Processer
         public PracticalContentProcesser(PracticalItemProject project)
         {
             this.project = project;
+            this.contentManager = SingletonManager.Get<PracticalContentManager>();
         }
     }
 }
