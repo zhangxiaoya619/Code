@@ -61,6 +61,9 @@
     <Compile Include="Controls\PracticalOperate.xaml.cs">
       <DependentUpon>PracticalOperate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProofShow.xaml.cs">
+      <DependentUpon>ProofShow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UContorls\UCHeader.xaml.cs">
       <DependentUpon>UCHeader.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PracticalOperate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProofShow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
