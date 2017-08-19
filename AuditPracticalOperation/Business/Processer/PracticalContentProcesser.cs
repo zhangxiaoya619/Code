@@ -8,7 +8,7 @@ namespace Business.Processer
 {
     public class PracticalContentProcesser
     {
-        private IPracticalContentManager contentManager;
+        private IPracticalManager contentManager;
         private PracticalItemProject project;
         private string filePath;
 
@@ -26,7 +26,7 @@ namespace Business.Processer
         public PracticalContentProcesser(PracticalItemProject project)
         {
             this.project = project;
-            this.contentManager = SingletonManager.Get<PracticalContentManager>();
+            this.contentManager = SingletonManager.Get<PracticalManager>();
         }
     }
 }

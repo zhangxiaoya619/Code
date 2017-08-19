@@ -14,5 +14,51 @@ namespace ViewModel
             else
                 return false;
         }
+
+        private string name;
+        private string id;
+        private string cpuId;
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+                RaisePropertyChanged("Name");
+            }
+        }
+
+        public string ID
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+                RaisePropertyChanged("ID");
+            }
+        }
+
+        public string CPUID
+        {
+            get
+            {
+                return cpuId;
+            }
+
+            set
+            {
+                cpuId = value;
+                RaisePropertyChanged("CPUID");
+            }
+        }
     }
 }
