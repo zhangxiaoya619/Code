@@ -78,6 +78,10 @@ namespace AuditPracticalOperation.Controls
                     case ViewModel.FileTypeEnum.Pdf:
                         break;
                     case ViewModel.FileTypeEnum.Img:
+                        string fileName = choiseItem.Path;
+                        BitmapImage image = new BitmapImage(new Uri(fileName));
+                        CurrentImage.Source = image;
+                        GridImageShow.Visibility = System.Windows.Visibility.Visible;
                         //查看图片
                         break;
                     default:
@@ -99,6 +103,10 @@ namespace AuditPracticalOperation.Controls
                 }
                 proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
             }
+        }
+        private void ImageShow_Click(object sender, RoutedEventArgs e)
+        {
+            GridImageShow.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }

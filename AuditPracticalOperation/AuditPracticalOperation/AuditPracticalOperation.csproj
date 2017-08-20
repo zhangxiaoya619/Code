@@ -203,6 +203,14 @@
   <ItemGroup>
     <Resource Include="Images\operate.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrowleft.png" />
+    <Resource Include="Images\arrowleftclick.png" />
+    <Resource Include="Images\arrowlefthover.png" />
+    <Resource Include="Images\arrowright.png" />
+    <Resource Include="Images\arrowrightclick.png" />
+    <Resource Include="Images\arrowrighthover.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
