@@ -8,7 +8,7 @@ namespace Business
 {
     internal interface IPracticalManager
     {
-        string LoadContentByPractialID(string id);
+        string LoadContentByPractialID(int id);
 
         void SaveContent(string filePath);
 

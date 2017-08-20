@@ -117,6 +117,7 @@ namespace PracticalImportTools
             FileStream fs = null;
             byte[] buffer = null;
             FileStream[] fileFsArray = null;
+            byte[][][] projectContentBufferArray = new byte[files.Count][][];
 
             try
             {
@@ -126,6 +127,27 @@ namespace PracticalImportTools
                 #region 写模板个数
                 buffer = BitConverter.GetBytes(files.Count);
                 fs.Write(buffer, 0, buffer.Length);
+                #endregion
+
+                #region 任务清单个数
+                for (int i = 0; i < files.Count; i++)
+                {
+                    buffer = BitConverter.GetBytes(files[i].Projects.Count);
+                    fs.Write(buffer, 0, buffer.Length);
+                }
+                #endregion
+
+                #region 任务清单内容长度
+                for (int i = 0; i < files.Count; i++)
+                {
+                    projectContentBufferArray[i] = new byte[files[i].Projects.Count][];
+                    for (int j = 0; j < files[i].Projects.Count; j++)
+                    {
+                        projectContentBufferArray[i][j] = UTF8Encoding.UTF8.GetBytes(files[i].Projects[j].Content);
+                        buffer = BitConverter.GetBytes(projectContentBufferArray[i][j].Length);
+                        fs.Write(buffer, 0, buffer.Length);
+                    }
+                }
                 #endregion
 
                 #region 写模板名长度
@@ -146,6 +168,12 @@ namespace PracticalImportTools
                     buffer = BitConverter.GetBytes(fileFsArray[i].Length);
                     fs.Write(buffer, 0, buffer.Length);
                 }
+                #endregion
+
+                #region 任务清单内容
+                for (int i = 0; i < files.Count; i++)
+                    for (int j = 0; j < files[i].Projects.Count; j++)
+                        fs.Write(projectContentBufferArray[i][j], 0, projectContentBufferArray[i][j].Length);
                 #endregion
 
                 #region 写模板名

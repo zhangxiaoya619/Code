@@ -8,7 +8,7 @@ namespace ViewModel
     public class PracticalItem : ViewModelBase
     {
         private string name;
-        private string id;
+        private int id;
         private bool isDone;
         private ObservableCollection<PracticalItemProject> projects;
 
@@ -26,7 +26,7 @@ namespace ViewModel
             }
         }
 
-        public string ID
+        public int ID
         {
             get
             {

@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <controls:ProjectProcessConverter x:Key="projectProcessConverter" />
         <controls:ProjectHasDoneCountConverter x:Key="projectHasDoneCountConverter" />
+        <controls:ProjectNumNameConverter x:Key="projectNumNameConverter"/>
         <controls:ProjectHasDoneCountEnumType x:Key="hasDone" >
             HasDone
         </controls:ProjectHasDoneCountEnumType>
@@ -32,14 +33,14 @@
             <Image Source="/Images/practicaltop.jpg" Stretch="UniformToFill"/>
             <Grid Grid.Row="2" Background="#FFFFFF">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="170"/>
                     <ColumnDefinition Width="170"/>
                     <ColumnDefinition Width="170"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Margin="20,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Name, StringFormat='当前科目：{0}'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18" Foreground="#FF319CD8"/>
+                <TextBlock HorizontalAlignment="Left" Margin="20,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Name, StringFormat='当前科目：{0}'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="15" Foreground="#FF319CD8"/>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0,0,0">
                     <Image Height="48" Width="48" Source="/Images/practicalsy.png"/>
                     <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Projects.Count, StringFormat='共{0}项任务清单'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
@@ -217,7 +218,14 @@
                                         </Style>
                                     </Image.Style>
                                 </Image>
-                                <TextBlock Grid.Column="1" Style="{DynamicResource BasicTextBlock-Sketch}" FontFamily="Microsoft YaHei" FontSize="16" Foreground="#FF9C9C9C" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Name}"/>
+                                <TextBlock Grid.Column="1" Style="{DynamicResource BasicTextBlock-Sketch}" FontFamily="Microsoft YaHei" FontSize="16" Foreground="#FF9C9C9C" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource projectNumNameConverter}">
+                                            <Binding Path="ID"/>
+                                            <Binding Path="Name"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                                 <Button Grid.Column="2" Width="100" Height="30" Margin="20,0,20,0" Command="controls:PracticalCenter.Operate" CommandParameter="{Binding}">
                                     <Button.Style>
                                         <Style TargetType="Button">

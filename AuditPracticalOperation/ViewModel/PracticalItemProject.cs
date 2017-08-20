@@ -7,11 +7,11 @@ namespace ViewModel
 {
     public class PracticalItemProject : ViewModelBase
     {
-        private string id;
+        private int id;
         private string name;
         private bool isDone;
 
-        public string ID
+        public int ID
         {
             get
             {
