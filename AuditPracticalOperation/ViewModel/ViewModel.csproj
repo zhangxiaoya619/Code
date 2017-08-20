@@ -39,6 +39,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GainItem.cs" />
     <Compile Include="IPower.cs" />
     <Compile Include="PracticalItem.cs" />
     <Compile Include="PracticalItemProject.cs" />
