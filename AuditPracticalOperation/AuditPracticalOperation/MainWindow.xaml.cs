@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AuditPracticalOperation.Controls;
+using Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,9 +38,10 @@ namespace AuditPracticalOperation
             switch (index)
             {
                 case 0:
-                    myMainChild.Child = new AuditPracticalOperation.Controls.SubjectList();
+                    myMainChild.Child = new SubjectList();
                     break;
                 case 1:
+                    myMainChild.Child = new ProofShow();//SingletonManager.Get<ProofShow>();
                     break;
                 case 2:
                     break;

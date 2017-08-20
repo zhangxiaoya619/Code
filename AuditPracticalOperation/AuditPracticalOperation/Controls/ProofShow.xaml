@@ -4,8 +4,219 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             Background="#FFEDEDED"
+             d:DesignHeight="400" 
+             d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <ListView x:Name="xunhuanList" Background="Transparent" Margin="0,50,0,0" BorderBrush="#FFEDEDED"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Border x:Name="Bd" Padding="0,25,0,0">
+                                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Content="{Binding Name}" Tag="{Binding}" Width="260" Height="40" IsChecked="{Binding IsChecked,Mode=TwoWay}" Checked="xunhuan_Checked"  GroupName="xunhuan">
+                            <RadioButton.Style>
+                                <Style TargetType="{x:Type RadioButton}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type RadioButton}">
+                                                <Grid>
+                                                    <Rectangle x:Name="rectangle" Width="220" VerticalAlignment="Center" Stroke="#FF329CD7" RadiusX="4" RadiusY="4" Height="40" HorizontalAlignment="Center" Fill="#FFEDEDED"/>
+                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Fill" TargetName="rectangle" Value="#33329CD7"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter Property="Fill" TargetName="rectangle" Value="#FF329CD7"/>
+                                                        <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+                                                    </Trigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+                                                            <Condition Property="IsChecked" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Fill" TargetName="rectangle" Value="#FF329CD7"/>
+                                                        <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+                                                    </MultiTrigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+                                                            <Condition Property="IsChecked" Value="False"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Fill" TargetName="rectangle" Value="#33329CD7"/>
+                                                    </MultiTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                                    <Setter Property="FontSize" Value="21.333"/>
+                                    <Setter Property="Foreground" Value="#FF329CD7"/>
+                                </Style>
+                            </RadioButton.Style>
+                        </RadioButton>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Grid Grid.Column="1"  Margin="10,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="0,0,0,0" Orientation="Horizontal">
+                <Rectangle Fill="#FF329CD7" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="10" Margin="10,10,0,0"/>
+                <ListView x:Name="dirList" HorizontalAlignment="Left" VerticalAlignment="Top"  Background="Transparent" Margin="10,10,0,0" BorderBrush="#FFEDEDED"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border x:Name="Bd" Padding="1">
+                                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton Content="{Binding Name}" Tag="{Binding}" IsChecked="True" Click="ChoiseDir_Checked" Width="auto" >
+                                <RadioButton.Style>
+                                    <Style TargetType="{x:Type RadioButton}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="0,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black"/>
+                                                        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="&gt;"  FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black"/>
+                                                    </StackPanel>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Foreground" TargetName="textBlock" Value="#FF299BDA"/>
+                                                            <Setter Property="Foreground" TargetName="textBlock1" Value="#FF299BDA"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsChecked" Value="True">
+                                                            <Setter Property="Foreground" TargetName="textBlock" Value="#FF299BDA"/>
+                                                            <Setter Property="Foreground" TargetName="textBlock1" Value="#FF299BDA"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsChecked" Value="False">
+                                                            <Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+                                                            <Setter Property="Foreground" TargetName="textBlock1" Value="Black"/>
+                                                        </Trigger>
+                                                        <MultiTrigger>
+                                                            <MultiTrigger.Conditions>
+                                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                                <Condition Property="IsChecked" Value="True"/>
+                                                            </MultiTrigger.Conditions>
+                                                            <Setter Property="Foreground" TargetName="textBlock" Value="Black"/>
+                                                            <Setter Property="Foreground" TargetName="textBlock1" Value="Black"/>
+                                                        </MultiTrigger>
+                                                        <MultiTrigger>
+                                                            <MultiTrigger.Conditions>
+                                                                <Condition Property="IsMouseOver" Value="True"/>
+                                                                <Condition Property="IsChecked" Value="False"/>
+                                                            </MultiTrigger.Conditions>
+                                                            <Setter Property="Foreground" TargetName="textBlock" Value="#33299BDA"/>
+                                                            <Setter Property="Foreground" TargetName="textBlock1" Value="#33299BDA"/>
+                                                        </MultiTrigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                                        <Setter Property="FontSize" Value="18.667"/>
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+                                </RadioButton.Style>
+                            </RadioButton>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <ListView Grid.Row="1" x:Name="proofList" Background="White" Margin="0,10,0,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FFEDEDED"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <Border x:Name="Bd" Padding="25">
+                                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}" Tag="{Binding}" Width="260" Height="40"  MouseLeftButtonDown="ShowImg_MouseLeftButtonDown">
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Label}">
+                                                <Grid>
+                                                    <Rectangle x:Name="rectangle" Width="220" VerticalAlignment="Center" Stroke="#FF329CD7" RadiusX="4" RadiusY="4" Height="40" HorizontalAlignment="Center" Fill="#FFEDEDED"/>
+                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Fill" TargetName="rectangle" Value="#33329CD7"/>
+                                                    </Trigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Fill" TargetName="rectangle" Value="#FF329CD7"/>
+                                                        <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
+                                                    </MultiTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                                    <Setter Property="FontSize" Value="21.333"/>
+                                    <Setter Property="Foreground" Value="#FF329CD7"/>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </UserControl>

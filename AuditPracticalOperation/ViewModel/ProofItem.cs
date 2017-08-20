@@ -11,6 +11,7 @@ namespace ViewModel
         private string name;
         private string path;
         private FileTypeEnum type;
+        private bool isChecked;
         private ObservableCollection<ProofItem> proofs;
         public string Name
         {
@@ -54,6 +55,22 @@ namespace ViewModel
                 {
                     type = value;
                     RaisePropertyChanged("Type");
+                }
+            }
+        }
+
+        public bool IsChecked
+        {
+            get
+            {
+                return isChecked;
+            }
+            set
+            {
+                if (isChecked != value)
+                {
+                    isChecked = value;
+                    RaisePropertyChanged("IsChecked");
                 }
             }
         }

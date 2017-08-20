@@ -47,6 +47,7 @@
     <Compile Include="Processer\PracticalContentManager.cs" />
     <Compile Include="Processer\PracticalContentProcesser.cs" />
     <Compile Include="Processer\PracticalItemProcesser.cs" />
+    <Compile Include="Processer\ProofShowProcessor.cs" />
     <Compile Include="Processer\UserProcesser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingletonManager.cs" />
