@@ -17,7 +17,7 @@ namespace PracticalImportTools
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string RESOURCE_FILE_NAME = "resource.prac";
+        private const string RESOURCE_FILE_NAME = "resource.sub";
         private const int BUFFER_PACKAGE_LENGTH = 1000;
         private ObservableCollection<PracticalFile> files;
 
@@ -74,23 +74,35 @@ namespace PracticalImportTools
             files.Clear();
         }
 
+        public static RoutedUICommand OpenPracticalProject = new RoutedUICommand("Open the Practical Project", "OpenPracticalProject", typeof(MainWindow));
+
+        private void OpenPracticalProjectExcuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            PracticalProjectEditor practicalProject = new PracticalProjectEditor((PracticalFile)e.Parameter);
+            practicalProject.Owner = this;
+            practicalProject.ShowDialog();
+        }
+
         public static RoutedUICommand ImportPracticalFile = new RoutedUICommand("Import the Practical File", "ImportPracticalFile", typeof(MainWindow));
 
         private void ImportPracticalFileExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
             try
             {
-                System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
                 if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     Import(fbd.SelectedPath);
                     MessageBox.Show("生成成功。");
                 }
-                fbd.Dispose();
             }
             catch
             {
                 MessageBox.Show("生成失败。");
+            }
+            finally
+            {
+                fbd.Dispose();
             }
         }
 
@@ -105,6 +117,7 @@ namespace PracticalImportTools
             FileStream fs = null;
             byte[] buffer = null;
             FileStream[] fileFsArray = null;
+            byte[][][] projectContentBufferArray = new byte[files.Count][][];
 
             try
             {
@@ -114,6 +127,27 @@ namespace PracticalImportTools
                 #region 写模板个数
                 buffer = BitConverter.GetBytes(files.Count);
                 fs.Write(buffer, 0, buffer.Length);
+                #endregion
+
+                #region 任务清单个数
+                for (int i = 0; i < files.Count; i++)
+                {
+                    buffer = BitConverter.GetBytes(files[i].Projects.Count);
+                    fs.Write(buffer, 0, buffer.Length);
+                }
+                #endregion
+
+                #region 任务清单内容长度
+                for (int i = 0; i < files.Count; i++)
+                {
+                    projectContentBufferArray[i] = new byte[files[i].Projects.Count][];
+                    for (int j = 0; j < files[i].Projects.Count; j++)
+                    {
+                        projectContentBufferArray[i][j] = UTF8Encoding.UTF8.GetBytes(files[i].Projects[j].Content);
+                        buffer = BitConverter.GetBytes(projectContentBufferArray[i][j].Length);
+                        fs.Write(buffer, 0, buffer.Length);
+                    }
+                }
                 #endregion
 
                 #region 写模板名长度
@@ -134,6 +168,12 @@ namespace PracticalImportTools
                     buffer = BitConverter.GetBytes(fileFsArray[i].Length);
                     fs.Write(buffer, 0, buffer.Length);
                 }
+                #endregion
+
+                #region 任务清单内容
+                for (int i = 0; i < files.Count; i++)
+                    for (int j = 0; j < files[i].Projects.Count; j++)
+                        fs.Write(projectContentBufferArray[i][j], 0, projectContentBufferArray[i][j].Length);
                 #endregion
 
                 #region 写模板名
@@ -177,6 +217,7 @@ namespace PracticalImportTools
         private string name;
         private string path;
         private bool isLast;
+        private ObservableCollection<PracticalProject> projects;
 
         public int Index
         {
@@ -220,6 +261,81 @@ namespace PracticalImportTools
                 path = value;
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Path"));
+            }
+        }
+
+        public bool IsLast
+        {
+            get
+            {
+                return isLast;
+            }
+
+            set
+            {
+                isLast = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("IsLast"));
+            }
+        }
+
+        public ObservableCollection<PracticalProject> Projects
+        {
+            get
+            {
+                return projects;
+            }
+
+            set
+            {
+                projects = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Projects"));
+            }
+        }
+
+        public PracticalFile()
+        {
+            projects = new ObservableCollection<PracticalProject>();
+        }
+    }
+
+    public class PracticalProject : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private int index;
+        private string content;
+        private bool isLast;
+
+        public int Index
+        {
+            get
+            {
+                return index;
+            }
+
+            set
+            {
+                index = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Index"));
+            }
+        }
+
+        public string Content
+        {
+            get
+            {
+                return content;
+            }
+
+            set
+            {
+                content = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Content"));
+
             }
         }
 

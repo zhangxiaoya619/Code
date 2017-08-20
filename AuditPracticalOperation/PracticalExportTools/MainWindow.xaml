@@ -1,10 +1,9 @@
-﻿<Window
+﻿<Window x:Class="PracticalExportTools.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PracticalImportTools"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="PracticalImportTools.MainWindow"
+        xmlns:local="clr-namespace:PracticalExportTools"
         mc:Ignorable="d"
         Title="MainWindow" Height="639" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -12,22 +11,27 @@
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindow.OpenFileDialog" Executed="OpenFileDialogExecuted"/>
-        <CommandBinding Command="local:MainWindow.DeletePracticalFile" Executed="DeletePraticalFileExecuted"/>
-        <CommandBinding Command="local:MainWindow.DeleteAllPracticalFile" CanExecute="Command_CanExecute" Executed="DeleteAllPraticalFileExecuted"/>
-        <CommandBinding Command="local:MainWindow.OpenPracticalProject" Executed="OpenPracticalProjectExcuted"/>
-        <CommandBinding Command="local:MainWindow.ImportPracticalFile" CanExecute="Command_CanExecute" Executed="ImportPracticalFileExecuted"/>
+        <CommandBinding Command="local:MainWindow.ExportPracticalFile" CanExecute="ExportPracticalFileCanExecute" Executed="ExportPracticalFileExecuted"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="11,10,0,10">
-            <Button Width="180" Content="选择需要生成的实操模板文件" Command="local:MainWindow.OpenFileDialog" Margin="0,0,15,0"/>
-            <Button Width="60" Content="生成" Command="local:MainWindow.ImportPracticalFile" Margin="0,0,15,0"/>
-            <Button Width="60" Content="清除" Command="local:MainWindow.DeleteAllPracticalFile"/>
+            <Button Width="180" Content="选择需要导出的实操文件" Command="local:MainWindow.OpenFileDialog" Margin="0,0,15,0"/>
+            <Button Width="60" Content="导出" Command="local:MainWindow.ExportPracticalFile" />
         </StackPanel>
-        <ListView Grid.Row="1" x:Name="list" Margin="10" BorderBrush="{x:Null}" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Grid.RowSpan="2">
+        <StackPanel x:Name="studentInfo" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="11,10,0,10">
+            <TextBlock FontFamily="Microsoft YaHei" Text="学号："/>
+            <TextBlock FontFamily="Microsoft YaHei" Margin="0,0,30,0" Width="150" Text="{Binding ID}"/>
+            <TextBlock FontFamily="Microsoft YaHei" Text="姓名："/>
+            <TextBlock FontFamily="Microsoft YaHei" Margin="0,0,30,0" Width="80" Text="{Binding Name}"/>
+            <TextBlock FontFamily="Microsoft YaHei" Text="CPU序列号："/>
+            <TextBlock FontFamily="Microsoft YaHei" Width="150" Text="{Binding CPUID}"/>
+        </StackPanel>
+        <ListView Grid.Row="2" x:Name="list" Margin="10" BorderBrush="{x:Null}" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Grid.RowSpan="2">
             <ListView.Template>
                 <ControlTemplate TargetType="{x:Type ListView}">
                     <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
@@ -39,21 +43,13 @@
                             <Grid Background="#949494" Width="{Binding ActualWidth, ElementName=container}" HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="4*"/>
-                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,0,1">
                                     <TextBlock FontFamily="Microsoft YaHei" Text="序号" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Border>
-                                <Border Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,0,1">
+                                <Border Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,1,1">
                                     <TextBlock FontFamily="Microsoft YaHei" Text="文件名" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                                <Border Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,0,1">
-                                    <TextBlock FontFamily="Microsoft YaHei" Text="文件路径" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Border>
-                                <Border Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,1,1">
-                                    <TextBlock Width="60" TextAlignment="Center" FontFamily="Microsoft YaHei" Text="操作" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Border>
                             </Grid>
                             <ScrollViewer Grid.Row="1" Focusable="False" Padding="{TemplateBinding Padding}">
@@ -108,9 +104,7 @@
                     <Grid Height="45">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000">
                             <TextBlock FontFamily="Microsoft YaHei" Text="{Binding Index, Converter={StaticResource practicalFileNumConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -141,39 +135,6 @@
                                 </Style>
                             </Border.Style>
                             <TextBlock Margin="10,0,0,0" FontFamily="Microsoft YaHei" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        </Border>
-                        <Border Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=IsLast}" Value="True">
-                                            <Setter Property="BorderThickness" Value="1,0,0,0"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=IsLast}" Value="False">
-                                            <Setter Property="BorderThickness" Value="1,0,0,1"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <TextBlock Margin="10,0,0,0" FontFamily="Microsoft YaHei" Text="{Binding Path}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        </Border>
-                        <Border Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=IsLast}" Value="True">
-                                            <Setter Property="BorderThickness" Value="1,0,0,0"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=IsLast}" Value="False">
-                                            <Setter Property="BorderThickness" Value="1,0,0,1"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Width="60" Height="25" Content="任务清单" VerticalAlignment="Center" Command="local:MainWindow.OpenPracticalProject" CommandParameter="{Binding}" Margin="0,0,15,0"/>
-                                <Button Width="60" Height="25" Content="删除" VerticalAlignment="Center" Command="local:MainWindow.DeletePracticalFile" CommandParameter="{Binding Index}"/>
-                            </StackPanel>
                         </Border>
                         <Rectangle Grid.ColumnSpan="4" VerticalAlignment="Bottom" Height="1" Stroke="#000000"/>
                     </Grid>

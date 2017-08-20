@@ -99,6 +99,22 @@ namespace AuditPracticalOperation.Controls
         }
     }
 
+    public class ProjectNumNameConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (Utils.IsInDesignMode())
+                return string.Empty;
+
+            return string.Format("{0}、{1}", (int)values[0] + 1, values[1]);
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public enum ProjectHasDoneCountEnumType
     {
         HasDone,
