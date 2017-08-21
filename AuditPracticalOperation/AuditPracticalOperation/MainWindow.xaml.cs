@@ -44,7 +44,7 @@ namespace AuditPracticalOperation
                     myMainChild.Child = new ProofShow();//SingletonManager.Get<ProofShow>();
                     break;
                 case 2:
-                    myMainChild.Child = new GainExport();
+                    //myMainChild.Child = new GainExport();
                     break;
                 case 3:
                     break;

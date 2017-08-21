@@ -8,9 +8,11 @@ namespace Business
 {
     internal interface IPracticalManager
     {
-        string LoadContentByPractialID(int id);
+        string LoadContentByPractialID(int practicalId);
 
         void SaveContent(string filePath);
+
+        void SetPracticalProjectDone(int practicalID, int projectID);
 
         PracticalItem[] GetAllPractical();
     }

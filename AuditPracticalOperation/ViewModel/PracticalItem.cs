@@ -9,7 +9,7 @@ namespace ViewModel
     {
         private string name;
         private int id;
-        private bool isDone;
+        private PracticalStateEnum state;
         private ObservableCollection<PracticalItemProject> projects;
 
         public string Name
@@ -40,17 +40,17 @@ namespace ViewModel
             }
         }
 
-        public bool IsDone
+        public PracticalStateEnum State
         {
             get
             {
-                return isDone;
+                return state;
             }
 
             set
             {
-                isDone = value;
-                RaisePropertyChanged("IsDone");
+                state = value;
+                RaisePropertyChanged("State");
             }
         }
 
@@ -73,4 +73,12 @@ namespace ViewModel
             Projects = new ObservableCollection<PracticalItemProject>();
         }
     }
+
+    public enum PracticalStateEnum
+    {
+        Default,
+        OnWorking,
+        HasDone,
+    }
+
 }

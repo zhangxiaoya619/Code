@@ -19,6 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticalImportTools", "Pra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticalExportTools", "PracticalExportTools\PracticalExportTools.csproj", "{F35C3513-D15C-4033-ACCC-FFB6A21D4F68}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "references", "references", "{8C34B0D9-F06A-4A92-9E37-46386E5C7D53}"
+	ProjectSection(SolutionItems) = preProject
+		libs\AxInterop.DSOFramer.dll = libs\AxInterop.DSOFramer.dll
+		libs\Interop.DSOFramer.dll = libs\Interop.DSOFramer.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

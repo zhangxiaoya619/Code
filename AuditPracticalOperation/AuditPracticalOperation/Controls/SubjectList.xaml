@@ -4,8 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
+             xmlns:viewmodel="clr-namespace:ViewModel;assembly=ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="768" d:DesignWidth="1024">
+    <UserControl.Resources>
+        <viewmodel:PracticalStateEnum x:Key="defaultState">
+            Default
+        </viewmodel:PracticalStateEnum>
+        <viewmodel:PracticalStateEnum x:Key="onWorkingState">
+            OnWorking
+        </viewmodel:PracticalStateEnum>
+        <viewmodel:PracticalStateEnum x:Key="hasDoneState">
+            HasDone
+        </viewmodel:PracticalStateEnum>
+    </UserControl.Resources>
     <UserControl.CommandBindings>
         <CommandBinding Command="controls:SubjectList.OpenPracticalOperate" Executed="OpenPracticalOperateExecuted" />
     </UserControl.CommandBindings>
@@ -48,15 +60,21 @@
                                                 <ControlTemplate TargetType="{x:Type RadioButton}">
                                                     <Grid>
                                                         <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                                                        <Image x:Name="state" Visibility="Collapsed" Source="/Images/yiwancheng.png" Height="22" Width="22" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                                        <Image x:Name="ywc" Visibility="Collapsed" Source="/Images/yiwancheng.png" Height="22" Width="22" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                                        <Image x:Name="zzjx" Visibility="Collapsed" Source="/Images/zhengzaijingxing.png" Height="22" Width="22" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                                                         <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
                                                     </Grid>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
                                                             <Setter Property="Fill" TargetName="rectangle" Value="#33319CD8"/>
                                                         </Trigger>
-                                                        <DataTrigger Binding="{Binding IsDone}" Value="True">
-                                                            <Setter Property="Visibility" Value="Visible" TargetName="state"/>
+                                                        <DataTrigger Binding="{Binding State}" Value="{StaticResource hasDoneState}">
+                                                            <Setter Property="Visibility" Value="Visible" TargetName="ywc"/>
+                                                            <Setter Property="Visibility" Value="Collapsed" TargetName="zzjx"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding State}" Value="{StaticResource onWorkingState}">
+                                                            <Setter Property="Visibility" Value="Collapsed" TargetName="ywc"/>
+                                                            <Setter Property="Visibility" Value="Visible" TargetName="zzjx"/>
                                                         </DataTrigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>

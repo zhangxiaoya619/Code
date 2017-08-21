@@ -16,9 +16,16 @@ namespace Business.Processer
             return user;
         }
 
+        public User GetUser()
+        {
+            return user;
+        }
+
         private UserProcesser()
         {
             user = new User();
+            user.ID = "51123";
+            user.Name = "张三";
         }
     }
 }

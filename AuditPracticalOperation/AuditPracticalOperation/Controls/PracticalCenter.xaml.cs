@@ -17,8 +17,11 @@ namespace AuditPracticalOperation.Controls
     {
         public event Action OnBacked;
 
+        private PracticalItem practicalItem;
+
         public PracticalCenter(PracticalItem practicalItem)
         {
+            this.practicalItem = practicalItem;
             InitializeComponent();
 
             if (!this.IsInDesignMode())
@@ -36,7 +39,7 @@ namespace AuditPracticalOperation.Controls
         private void OperateExcuted(object sender, ExecutedRoutedEventArgs e)
         {
             PracticalItemProject project = (PracticalItemProject)e.Parameter;
-            PracticalOperate practicalOperate = new PracticalOperate(project);
+            PracticalOperate practicalOperate = new PracticalOperate(practicalItem.ID, project);
             operateContainer.Content = practicalOperate;
             practicalOperate.OnBacked += PracticalOperate_OnBacked;
             projectContainer.Visibility = Visibility.Collapsed;

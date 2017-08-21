@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
+             xmlns:dsoFramer="clr-namespace:AxDSOFramer;assembly=AxInterop.DSOFramer"
              mc:Ignorable="d" 
-             d:DesignHeight="960" d:DesignWidth="1280">
+             d:DesignHeight="960" d:DesignWidth="1280" Loaded="UserControl_Loaded" SizeChanged="WindowSizeChanged">
     <UserControl.CommandBindings>
         <CommandBinding Command="controls:PracticalOperate.Back" Executed="BackExecuted"/>
+        <CommandBinding Command="controls:PracticalOperate.Save" Executed="SaveExecuted"/>
     </UserControl.CommandBindings>
     <Grid Background="#FFEDEDED" x:Name="container">
         <Grid.RowDefinitions>
@@ -24,8 +26,8 @@
                 <Image Height="48" Width="48" Source="/Images/operate.png"/>
                 <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto" Text="{Binding Name}"/>
             </StackPanel>
-            <Button Grid.Column="1" Content="查看任务清单" Width="100" Height="30" Margin="0,0,20,0" Command="controls:PracticalOperate.Back">
-                <Button.Style>
+            <StackPanel Grid.Column="1" Height="30" Orientation="Horizontal">
+                <StackPanel.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Template">
                             <Setter.Value>
@@ -71,8 +73,22 @@
                         <Setter Property="FontSize" Value="18.667"/>
                         <Setter Property="Foreground" Value="#FF289BDA"/>
                     </Style>
-                </Button.Style>
-            </Button>
+                </StackPanel.Resources>
+                <Button  Content="保存并返回任务清单" Width="150"  Margin="0,0,20,0" Command="controls:PracticalOperate.Save" />
+                <Button  Content="返回任务清单" Width="150"  Margin="0,0,20,0" Command="controls:PracticalOperate.Back" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="editorContainer">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <WindowsFormsHost>
+                <dsoFramer:AxFramerControl x:Name="framer" OnDocumentOpened="DocumentOpened"/>
+            </WindowsFormsHost>
+            <Grid Grid.Row="1" Background="#FFFFFF" x:Name="masker">
+                <TextBlock HorizontalAlignment="Stretch" Style="{DynamicResource BasicTextBlock-Sketch}" Text="加载中..." VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="81" TextAlignment="Center" Foreground="#FF319CD8"/>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

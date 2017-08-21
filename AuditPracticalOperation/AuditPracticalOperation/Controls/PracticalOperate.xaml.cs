@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViewModel;
 using Common.Utils;
+using AxDSOFramer;
+using System.Windows.Threading;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -26,22 +28,88 @@ namespace AuditPracticalOperation.Controls
 
         private PracticalContentProcesser contentProcesser;
 
-        public PracticalOperate(PracticalItemProject project)
+        private string practicalFilePath;
+
+        private bool isInit;
+
+        private bool _isFramerDirty;
+
+        public PracticalOperate(int practicalID, PracticalItemProject project)
         {
             InitializeComponent();
 
             if (!this.IsInDesignMode())
             {
-                contentProcesser = new PracticalContentProcesser(project);
+                contentProcesser = new PracticalContentProcesser(practicalID, project.ID);
                 container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
+                practicalFilePath = contentProcesser.LoadContent();
             }
         }
 
         public static RoutedUICommand Back = new RoutedUICommand("Back To PracticalCenter", "BackToPracticalCenter", typeof(PracticalOperate));
         private void BackExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            contentProcesser.SaveContent();
+
+            framer.Close();
+
             if (OnBacked != null)
                 OnBacked();
+        }
+
+        public static RoutedUICommand Save = new RoutedUICommand("Save", "Save", typeof(PracticalOperate));
+        private void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            framer.Close();
+
+            if (OnBacked != null)
+                OnBacked();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!isInit)
+            {
+                framer.Menubar = false;
+                framer.Titlebar = false;
+                framer.BorderStyle = DSOFramer.dsoBorderStyle.dsoBorderNone;
+
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
+                {
+                    framer.Open(practicalFilePath);
+                    return null;
+                }, null);
+
+                isInit = true;
+            }
+        }
+
+        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            _isFramerDirty = true;
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
+            {
+                if (framer != null && _isFramerDirty)
+                {
+                    masker.Height = editorContainer.ActualHeight;
+                    framer.Activate();
+                }
+                return null;
+            }, null);
+            framer.Activate();
+        }
+
+        private void DocumentOpened(object sender, _DFramerCtlEvents_OnDocumentOpenedEvent e)
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem((state) =>
+            {
+                System.Threading.Thread.Sleep(500);
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    masker.Height = 0;
+                    framer.Activate();
+                }));
+            });
         }
     }
 }
