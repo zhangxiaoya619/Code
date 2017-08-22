@@ -388,12 +388,17 @@ namespace Business.Processer
                     hasDoneItems.Add(hasDoneItem);
                 }
 
-                return hasDoneItems.ToArray();
+                return hasDoneItems.OrderBy(item => item.ID).ToArray();
             }
             catch
             {
                 throw new Exception("获取完成结果失败。");
             }
+        }
+
+        public void ExportPractical(string fileName, HasDonePracticalItem[] hasDonePracticalItem)
+        {
+
         }
 
         private PracticalManager()

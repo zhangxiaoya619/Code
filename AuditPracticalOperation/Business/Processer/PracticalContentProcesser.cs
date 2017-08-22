@@ -8,28 +8,28 @@ namespace Business.Processer
 {
     public class PracticalContentProcesser
     {
-        private IPracticalManager contentManager;
+        private IPracticalManager practicalManager;
         private int practicalID;
         private int projectID;
         private string filePath;
 
         public string LoadContent()
         {
-            filePath = contentManager.LoadContentByPractialID(practicalID);
+            filePath = practicalManager.LoadContentByPractialID(practicalID);
             return filePath;
         }
 
         public void SaveContent()
         {
-            contentManager.SaveContent(practicalID, filePath);
-            contentManager.SetPracticalProjectDone(practicalID, projectID);
+            practicalManager.SaveContent(practicalID, filePath);
+            practicalManager.SetPracticalProjectDone(practicalID, projectID);
         }
 
         public PracticalContentProcesser(int practicalID, int projectID)
         {
             this.practicalID = practicalID;
             this.projectID = projectID;
-            this.contentManager = SingletonManager.Get<PracticalManager>();
+            this.practicalManager = SingletonManager.Get<PracticalManager>();
         }
     }
 }
