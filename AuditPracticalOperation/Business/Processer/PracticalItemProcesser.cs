@@ -21,9 +21,9 @@ namespace Business.Processer
             return practicalManager.GetHasDonePractical();
         }
 
-        public void ExportPractical(string fileName, HasDonePracticalItem[] hasDonePracticalItem)
+        public void ExportPractical(string fileName, HasDonePracticalItem[] hasDonePracticalItems)
         {
-            practicalManager.ExportPractical(fileName, hasDonePracticalItem);
+            practicalManager.ExportPractical(fileName, hasDonePracticalItems);
         }
 
         private PracticalItemProcesser()

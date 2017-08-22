@@ -396,9 +396,90 @@ namespace Business.Processer
             }
         }
 
-        public void ExportPractical(string fileName, HasDonePracticalItem[] hasDonePracticalItem)
+        public void ExportPractical(string fileName, HasDonePracticalItem[] hasDonePracticalItems)
         {
+            FileStream[] readFsArray = null;
+            FileStream writeFs = null;
+            byte[] buffer = null;
+            byte[][] practicalFileNameBufferArray = null;
 
+            try
+            {
+                writeFs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                PracticalItem[] items = GetAllPractical();
+                readFsArray = new FileStream[hasDonePracticalItems.Length];
+                practicalFileNameBufferArray = new byte[hasDonePracticalItems.Length][];
+
+                for (int i = 0; i < hasDonePracticalItems.Length; i++)
+                    readFsArray[i] = new FileStream(Path.Combine(practicalFileFolder, hasDonePracticalItems[i].ID + ".pracd"), FileMode.Open, FileAccess.Read);
+
+                #region 写入学号
+                buffer = UTF8Encoding.UTF8.GetBytes(SingletonManager.Get<UserProcesser>().GetUser().ID);
+                writeFs.Write(BitConverter.GetBytes(buffer.Length), 0, sizeof(int));
+                writeFs.Write(buffer, 0, buffer.Length);
+                #endregion
+
+                #region 写入姓名
+                buffer = UTF8Encoding.UTF8.GetBytes(SingletonManager.Get<UserProcesser>().GetUser().Name);
+                writeFs.Write(BitConverter.GetBytes(buffer.Length), 0, sizeof(int));
+                writeFs.Write(buffer, 0, buffer.Length);
+                #endregion
+
+                #region 写入CPU序列号
+                buffer = UTF8Encoding.UTF8.GetBytes(SingletonManager.Get<UserProcesser>().GetUser().CPUID);
+                writeFs.Write(BitConverter.GetBytes(buffer.Length), 0, sizeof(int));
+                writeFs.Write(buffer, 0, buffer.Length);
+                #endregion
+
+                #region 写入文档个数
+                writeFs.Write(BitConverter.GetBytes(hasDonePracticalItems.Length), 0, sizeof(int));
+                #endregion
+
+                #region 写入文档名长度
+                for (int i = 0; i < hasDonePracticalItems.Length; i++)
+                {
+                    practicalFileNameBufferArray[i] = UTF8Encoding.UTF8.GetBytes(items[hasDonePracticalItems[i].ID].Name);
+                    writeFs.Write(BitConverter.GetBytes(practicalFileNameBufferArray[i].Length), 0, sizeof(int));
+                }
+                #endregion
+
+                #region 写入文档长度
+                for (int i = 0; i < hasDonePracticalItems.Length; i++)
+                    writeFs.Write(BitConverter.GetBytes(readFsArray[i].Length - sizeof(long)), 0, sizeof(long));
+                #endregion
+
+                #region 写入文档名
+                for (int i = 0; i < hasDonePracticalItems.Length; i++)
+                    writeFs.Write(practicalFileNameBufferArray[i], 0, practicalFileNameBufferArray[i].Length);
+                #endregion
+
+                #region 写入文档
+                for (int i = 0; i < hasDonePracticalItems.Length; i++)
+                {
+                    readFsArray[i].Position = sizeof(long);
+                    while (readFsArray[i].Position < readFsArray[i].Length)
+                    {
+                        buffer = new byte[readFsArray[i].Length - readFsArray[i].Position > BUFFER_PACKAGE_LENGTH ? BUFFER_PACKAGE_LENGTH : readFsArray[i].Length - readFsArray[i].Position];
+                        readFsArray[i].Read(buffer, 0, buffer.Length);
+                        writeFs.Write(buffer, 0, buffer.Length);
+                    }
+                }
+                #endregion
+            }
+            catch
+            {
+                throw new Exception("导出失败。");
+            }
+            finally
+            {
+                if (writeFs != null)
+                    writeFs.Dispose();
+
+                if (readFsArray != null)
+                    for (int i = 0; i < readFsArray.Length; i++)
+                        if (readFsArray[i] != null)
+                            readFsArray[i].Dispose();
+            }
         }
 
         private PracticalManager()

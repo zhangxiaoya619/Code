@@ -26,6 +26,7 @@ namespace Business.Processer
             user = new User();
             user.ID = "51123";
             user.Name = "张三";
+            user.CPUID = "CSZS-123";
         }
     }
 }
