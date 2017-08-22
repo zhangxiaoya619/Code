@@ -184,7 +184,7 @@ namespace Business.Processer
                 byte[] buffer = UTF8Encoding.UTF8.GetBytes(writer.GetStringBuilder().ToString());
                 File.WriteAllText(practicalProcessFileName, string.Join(" ", buffer.Select(item => item.ToString()).ToArray()));
             }
-            catch(Exception ex)
+            catch
             {
                 throw new Exception("保存失败。");
             }
