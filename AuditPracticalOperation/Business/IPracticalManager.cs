@@ -15,5 +15,7 @@ namespace Business
         void SetPracticalProjectDone(int practicalID, int projectID);
 
         PracticalItem[] GetAllPractical();
+
+        HasDonePracticalItem[] GetHasDonePractical();
     }
 }

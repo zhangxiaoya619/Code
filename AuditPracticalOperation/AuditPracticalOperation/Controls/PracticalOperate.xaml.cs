@@ -109,7 +109,7 @@ namespace AuditPracticalOperation.Controls
                 OnBacked();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void UserControlLoaded(object sender, RoutedEventArgs e)
         {
             if (!isInit)
             {

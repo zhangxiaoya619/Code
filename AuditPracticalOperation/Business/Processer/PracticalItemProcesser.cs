@@ -16,6 +16,11 @@ namespace Business.Processer
             return practicalManager.GetAllPractical();
         }
 
+        public IList<HasDonePracticalItem> GetHasDonePracticalItems()
+        {
+            return practicalManager.GetHasDonePractical();
+        }
+
         private PracticalItemProcesser()
         {
             practicalManager = SingletonManager.Get<PracticalManager>();

@@ -361,6 +361,41 @@ namespace Business.Processer
             }
         }
 
+        public HasDonePracticalItem[] GetHasDonePractical()
+        {
+            try
+            {
+                string[] files = Directory.GetFiles(practicalFileFolder);
+                PracticalItem[] items = GetAllPractical();
+                IList<HasDonePracticalItem> hasDoneItems = new List<HasDonePracticalItem>();
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    if (!files[i].Contains("pracd"))
+                        continue;
+
+                    int id = Convert.ToInt32(Path.GetFileNameWithoutExtension(files[i]));
+
+                    if (items[id].State != PracticalStateEnum.HasDone)
+                        continue;
+
+                    HasDonePracticalItem hasDoneItem = new HasDonePracticalItem();
+
+                    hasDoneItem.ID = id;
+                    hasDoneItem.Name = items[id].Name;
+                    hasDoneItem.IsSelected = false;
+
+                    hasDoneItems.Add(hasDoneItem);
+                }
+
+                return hasDoneItems.ToArray();
+            }
+            catch
+            {
+                throw new Exception("获取完成结果失败。");
+            }
+        }
+
         private PracticalManager()
         {
             startIndex = 0;

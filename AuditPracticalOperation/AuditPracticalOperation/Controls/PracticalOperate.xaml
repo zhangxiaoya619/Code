@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
              xmlns:dsoFramer="clr-namespace:AxDSOFramer;assembly=AxInterop.DSOFramer"
              mc:Ignorable="d" 
-             d:DesignHeight="960" d:DesignWidth="1280" Loaded="UserControl_Loaded" SizeChanged="WindowSizeChanged">
+             d:DesignHeight="960" d:DesignWidth="1280" Loaded="UserControlLoaded" SizeChanged="WindowSizeChanged">
     <UserControl.CommandBindings>
         <CommandBinding Command="controls:PracticalOperate.Back" Executed="BackExecuted"/>
         <CommandBinding Command="controls:PracticalOperate.Save" Executed="SaveExecuted"/>

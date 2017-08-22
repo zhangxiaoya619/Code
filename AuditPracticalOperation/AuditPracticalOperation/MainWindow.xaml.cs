@@ -41,10 +41,10 @@ namespace AuditPracticalOperation
                     myMainChild.Child = new SubjectList();
                     break;
                 case 1:
-                    myMainChild.Child = new ProofShow();//SingletonManager.Get<ProofShow>();
+                    myMainChild.Child = new ProofShow();
                     break;
                 case 2:
-                    //myMainChild.Child = new GainExport();
+                    myMainChild.Child = new GainExport();
                     break;
                 case 3:
                     break;

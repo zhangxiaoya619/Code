@@ -31,7 +31,7 @@
             <Rectangle Fill="#FFFFFF"/>
             <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="请选择报表科目，开始学习！" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF319CD8"/>
             <Border Grid.Row="2" Background="#FFFFFF">
-                <ListView x:Name="practicalList" Margin="22.5" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView x:Name="practicalList" Margin="22.5" BorderBrush="{x:Null}" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel/>

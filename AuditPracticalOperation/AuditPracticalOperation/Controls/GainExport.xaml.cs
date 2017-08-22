@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Common.Utils;
+using Business;
+using Business.Processer;
+using ViewModel;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -20,52 +24,45 @@ namespace AuditPracticalOperation.Controls
     /// </summary>
     public partial class GainExport : UserControl
     {
+        private IList<HasDonePracticalItem> items;
+        private bool isSelected;
+
         public GainExport()
         {
+            isSelected = true;
+
             InitializeComponent();
-            gains = new ObservableCollection<ViewModel.GainItem>();
-            gainList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = gains });
-            this.Loaded += GainExport_Loaded;
-        }
 
-        void GainExport_Loaded(object sender, RoutedEventArgs e)
-        {
-            for (int i = 1; i <= 20; i++)
+            if (!this.IsInDesignMode())
             {
-                gains.Add(new ViewModel.GainItem()
-                    {
-                        Name = "成果" + i,
-                        Path = "",
-                    });
+                items = SingletonManager.Get<PracticalItemProcesser>().GetHasDonePracticalItems();
+                practicalList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = items });
             }
         }
-        ObservableCollection<ViewModel.GainItem> gains;
 
-
-        private void Button_SelectAll_Click(object sender, RoutedEventArgs e)
+        public static RoutedUICommand CheckAll = new RoutedUICommand("Check all the has done", "CheckAll", typeof(SubjectList));
+        private void CheckAllExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            bool isChecked = true;
-            foreach (var item in gains)
-            {
-                if (!item.IsChecked)
-                    isChecked = false;
-            }
-            if (isChecked)
-                foreach (var item in gains)
-                {
-                    item.IsChecked = false;
-                }
-            else
-                foreach (var item in gains)
-                {
-                    item.IsChecked = true;
-                }
+            for (int i = 0; i < items.Count; i++)
+                items[i].IsSelected = isSelected;
+
+            isSelected = !isSelected;
+        }
+
+        public static RoutedUICommand Export = new RoutedUICommand("Export the selected has done", "Export", typeof(SubjectList));
+        private void ExportExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
 
         }
 
-        private void Button_Export_Click(object sender, RoutedEventArgs e)
+        private void CheckAllCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
+            e.CanExecute = items != null ? items.Count > 0 : false;
+        }
 
+        private void ExportCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = items != null ? items.Count(item => item.IsSelected) > 0 : false;
         }
     }
 }
