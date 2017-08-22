@@ -108,5 +108,10 @@ namespace AuditPracticalOperation.Controls
         {
             GridImageShow.Visibility = System.Windows.Visibility.Collapsed;
         }
+
+        private void CurrentImage_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+
+        }
     }
 }
