@@ -84,7 +84,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <WindowsFormsHost>
-                <dsoFramer:AxFramerControl x:Name="framer" OnDocumentOpened="DocumentOpened"/>
+                <dsoFramer:AxFramerControl x:Name="framer" OnDocumentOpened="DocumentOpened" OnSaveCompleted="DucomentSaveCompleted"/>
             </WindowsFormsHost>
             <Grid Grid.Row="1" Background="#FFFFFF" x:Name="masker">
                 <TextBlock HorizontalAlignment="Stretch" Style="{DynamicResource BasicTextBlock-Sketch}" Text="加载中..." VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="81" TextAlignment="Center" Foreground="#FF319CD8"/>

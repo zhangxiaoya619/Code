@@ -16,6 +16,7 @@ using ViewModel;
 using Common.Utils;
 using AxDSOFramer;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -40,27 +41,69 @@ namespace AuditPracticalOperation.Controls
 
             if (!this.IsInDesignMode())
             {
-                contentProcesser = new PracticalContentProcesser(practicalID, project.ID);
-                container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
-                practicalFilePath = contentProcesser.LoadContent();
+                if (!CheckProcess())
+                {
+                    Close(true);
+                }
+                else
+                {
+                    contentProcesser = new PracticalContentProcesser(practicalID, project.ID);
+                    container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
+                    practicalFilePath = contentProcesser.LoadContent();
+                }
+            }
+        }
+
+        private bool CheckProcess()
+        {
+            foreach (Process IsProcedding in Process.GetProcessesByName("EXCEL"))
+            {
+                if (IsProcedding.ProcessName == "EXCEL")
+                {
+                    if (MessageBox.Show("打开实操文档需要关闭所有的EXCEL进程，请确认是否关闭所有EXCEL进程并打开实操文档？", "打开实操文档", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        KillAllProcess();
+                        return true;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private void KillAllProcess()
+        {
+            while (Process.GetProcessesByName("EXCEL").Count(process => process.ProcessName == "EXCEL") > 0)
+            {
+                foreach (Process IsProcedding in Process.GetProcessesByName("EXCEL"))
+                    if (IsProcedding.ProcessName == "EXCEL")
+                        if (!IsProcedding.HasExited)
+                            IsProcedding.Kill();
             }
         }
 
         public static RoutedUICommand Back = new RoutedUICommand("Back To PracticalCenter", "BackToPracticalCenter", typeof(PracticalOperate));
         private void BackExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            contentProcesser.SaveContent();
-
-            framer.Close();
-
-            if (OnBacked != null)
-                OnBacked();
+            Close(true);
         }
 
         public static RoutedUICommand Save = new RoutedUICommand("Save", "Save", typeof(PracticalOperate));
         private void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            framer.Save();
+        }
+
+        private void Close(bool isDispose)
+        {
             framer.Close();
+
+            if (isDispose)
+                framer.Dispose();
 
             if (OnBacked != null)
                 OnBacked();
@@ -73,6 +116,7 @@ namespace AuditPracticalOperation.Controls
                 framer.Menubar = false;
                 framer.Titlebar = false;
                 framer.BorderStyle = DSOFramer.dsoBorderStyle.dsoBorderNone;
+                masker.Height = editorContainer.ActualHeight;
 
                 this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
                 {
@@ -91,7 +135,6 @@ namespace AuditPracticalOperation.Controls
             {
                 if (framer != null && _isFramerDirty)
                 {
-                    masker.Height = editorContainer.ActualHeight;
                     framer.Activate();
                 }
                 return null;
@@ -110,6 +153,13 @@ namespace AuditPracticalOperation.Controls
                     framer.Activate();
                 }));
             });
+        }
+
+        private void DucomentSaveCompleted(object sender, _DFramerCtlEvents_OnSaveCompletedEvent e)
+        {
+            KillAllProcess();
+            contentProcesser.SaveContent();
+            Close(false);
         }
     }
 }

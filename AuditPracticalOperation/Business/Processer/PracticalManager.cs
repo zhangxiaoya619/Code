@@ -14,40 +14,56 @@ namespace Business.Processer
         private const string TEMPLATE_FILE_NAME = "resource.sub";
         private readonly string templateFileName;
         private const string PRACTICAL_FILE_FOLDER = "prac";
-        private readonly string practicalFileName;
-        private const string PRACTICAL_PROCESS_FILE_NAME = "process.xml";
+        private readonly string practicalFileFolder;
+        private const string PRACTICAL_PROCESS_FILE_NAME = "process.dat";
         private readonly string practicalProcessFileName;
         private const int BUFFER_PACKAGE_LENGTH = 1000;
         private long startIndex;
         private int practicalCount;
         private long[] practicalContentBufferLength;
 
-        public string LoadContentByPractialID(int practicalId)
+        public string LoadContentByPractialID(int practicalID)
         {
             FileStream fs = null;
             FileStream tempFs = null;
             byte[] buffer = null;
-            string tempPracticalFilePath = string.Empty;
+            string tempPracticalFilePath = Path.Combine(Path.GetTempPath(), string.Format("{0}.xls", Guid.NewGuid().ToString()));
 
             try
             {
-                long bufferOffset = 0;
-                fs = new FileStream(templateFileName, FileMode.Open, FileAccess.Read);
-
-                for (int i = 0; i < practicalId; i++)
-                    bufferOffset += practicalContentBufferLength[i];
-
-                fs.Position = startIndex + bufferOffset;
-
-                tempPracticalFilePath = Path.Combine(Path.GetTempPath(), string.Format("{0}.xls", Guid.NewGuid().ToString()));
-
-                tempFs = new FileStream(tempPracticalFilePath, FileMode.Create, FileAccess.Write);
-
-                while (tempFs.Length != practicalContentBufferLength[practicalId])
+                if (ExistPract(practicalID))
                 {
-                    buffer = new byte[practicalContentBufferLength[practicalId] - tempFs.Length > BUFFER_PACKAGE_LENGTH ? BUFFER_PACKAGE_LENGTH : practicalContentBufferLength[practicalId] - tempFs.Length];
-                    fs.Read(buffer, 0, buffer.Length);
-                    tempFs.Write(buffer, 0, buffer.Length);
+                    string fileName = Path.Combine(practicalFileFolder, practicalID + ".pracd");
+                    fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    tempFs = new FileStream(tempPracticalFilePath, FileMode.Create, FileAccess.Write);
+
+                    fs.Position += sizeof(long);
+
+                    while (fs.Position != fs.Length)
+                    {
+                        buffer = new byte[fs.Length - fs.Position > BUFFER_PACKAGE_LENGTH ? BUFFER_PACKAGE_LENGTH : fs.Length - fs.Position];
+                        fs.Read(buffer, 0, buffer.Length);
+                        tempFs.Write(buffer, 0, buffer.Length);
+                    }
+                }
+                else
+                {
+                    long bufferOffset = 0;
+                    fs = new FileStream(templateFileName, FileMode.Open, FileAccess.Read);
+
+                    for (int i = 0; i < practicalID; i++)
+                        bufferOffset += practicalContentBufferLength[i];
+
+                    fs.Position = startIndex + bufferOffset;
+
+                    tempFs = new FileStream(tempPracticalFilePath, FileMode.Create, FileAccess.Write);
+
+                    while (tempFs.Length != practicalContentBufferLength[practicalID])
+                    {
+                        buffer = new byte[practicalContentBufferLength[practicalID] - tempFs.Length > BUFFER_PACKAGE_LENGTH ? BUFFER_PACKAGE_LENGTH : practicalContentBufferLength[practicalID] - tempFs.Length];
+                        fs.Read(buffer, 0, buffer.Length);
+                        tempFs.Write(buffer, 0, buffer.Length);
+                    }
                 }
             }
             catch
@@ -66,9 +82,41 @@ namespace Business.Processer
             return tempPracticalFilePath;
         }
 
-        public void SaveContent(string filePath)
+        public void SaveContent(int practicalID, string filePath)
         {
+            FileStream readFs = null;
+            FileStream writeFs = null;
+            byte[] buffer = null;
+            string fileName = Path.Combine(practicalFileFolder, practicalID + ".pracd");
 
+            try
+            {
+                readFs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                writeFs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                buffer = BitConverter.GetBytes(readFs.Length);
+                writeFs.Write(buffer, 0, buffer.Length);
+                while (readFs.Position != readFs.Length)
+                {
+                    buffer = new byte[readFs.Length - readFs.Position > BUFFER_PACKAGE_LENGTH ? BUFFER_PACKAGE_LENGTH : readFs.Length - readFs.Position];
+                    readFs.Read(buffer, 0, buffer.Length);
+                    writeFs.Write(buffer, 0, buffer.Length);
+                }
+            }
+            catch
+            {
+                throw new Exception("保存失败。");
+            }
+            finally
+            {
+                if (readFs != null)
+                    readFs.Dispose();
+
+                if (writeFs != null)
+                    writeFs.Dispose();
+
+                if (File.Exists(filePath))
+                    File.Delete(filePath);
+            }
         }
 
         public void SetPracticalProjectDone(int practicalID, int projectID)
@@ -77,17 +125,15 @@ namespace Business.Processer
                 CreateProcessFile();
 
             StringWriter writer = null;
-            FileStream fs = null;
 
             try
             {
                 writer = new StringWriter();
                 XmlDocument document = new XmlDocument();
 
-                using (StringReader reader = new StringReader(UTF8Encoding.UTF8.GetString(File.ReadAllBytes(practicalProcessFileName))))
+                using (StringReader reader = new StringReader(UTF8Encoding.UTF8.GetString(File.ReadAllText(practicalProcessFileName).Split(' ').Select(item => Convert.ToByte(item)).ToArray())))
                     document.Load(reader);
 
-                fs = new FileStream(practicalProcessFileName, FileMode.Open, FileAccess.Write);
                 XmlNode rootNode = document.SelectSingleNode("process");
                 XmlNode practicalNode = null;
                 XmlNode projectNode = null;
@@ -131,14 +177,14 @@ namespace Business.Processer
                     practicalNode.AppendChild(projectNode);
                 }
 
-                projectNode.Attributes["hasdone"].Value = true.ToString();
+                projectNode.Attributes["hasdone"].Value = ExistPract(practicalID).ToString();
 
                 document.Save(writer);
 
                 byte[] buffer = UTF8Encoding.UTF8.GetBytes(writer.GetStringBuilder().ToString());
-                fs.Write(buffer, 0, buffer.Length);
+                File.WriteAllText(practicalProcessFileName, string.Join(" ", buffer.Select(item => item.ToString()).ToArray()));
             }
-            catch
+            catch(Exception ex)
             {
                 throw new Exception("保存失败。");
             }
@@ -146,20 +192,20 @@ namespace Business.Processer
             {
                 if (writer != null)
                     writer.Dispose();
-
-                if (fs != null)
-                    fs.Dispose();
             }
+        }
+
+        private bool ExistPract(int practicalID)
+        {
+            return File.Exists(Path.Combine(practicalFileFolder, practicalID + ".pracd"));
         }
 
         private void CreateProcessFile()
         {
-            FileStream fs = null;
             StringWriter writer = null;
 
             try
             {
-                fs = File.Create(practicalProcessFileName);
                 writer = new StringWriter();
                 XmlDocument document = new XmlDocument();
                 document.CreateXmlDeclaration("1.0", "utf-8", "yes");
@@ -167,7 +213,7 @@ namespace Business.Processer
                 document.AppendChild(rootNode);
                 document.Save(writer);
                 byte[] buffer = UTF8Encoding.UTF8.GetBytes(writer.GetStringBuilder().ToString());
-                fs.Write(buffer, 0, buffer.Length);
+                File.WriteAllText(practicalProcessFileName, string.Join(" ", buffer.Select(item => item.ToString()).ToArray()));
             }
             catch
             {
@@ -175,8 +221,6 @@ namespace Business.Processer
             }
             finally
             {
-                if (fs != null)
-                    fs.Dispose();
                 if (writer != null)
                     writer.Dispose();
             }
@@ -281,7 +325,7 @@ namespace Business.Processer
             {
                 XmlDocument document = new XmlDocument();
 
-                using (StringReader reader = new StringReader(UTF8Encoding.UTF8.GetString(File.ReadAllBytes(practicalProcessFileName))))
+                using (StringReader reader = new StringReader(UTF8Encoding.UTF8.GetString(File.ReadAllText(practicalProcessFileName).Split(' ').Select(item => Convert.ToByte(item)).ToArray())))
                     document.Load(reader);
 
                 foreach (XmlNode practical in document.SelectSingleNode("process"))
@@ -300,7 +344,7 @@ namespace Business.Processer
                         if (practicalItem == null)
                             continue;
 
-                        projectItem.IsDone = Convert.ToBoolean(project.Attributes["hasdone"].Value);
+                        projectItem.IsDone = ExistPract(practicalItem.ID) && Convert.ToBoolean(project.Attributes["hasdone"].Value);
                     }
 
                     if (practicalItem.Projects.Count(item => item.IsDone) == 0)
@@ -324,8 +368,7 @@ namespace Business.Processer
             practicalContentBufferLength = null;
 
             templateFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, TEMPLATE_FILE_NAME);
-            string practicalFileFolder = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PRACTICAL_FILE_FOLDER), SingletonManager.Get<UserProcesser>().GetUser().ID);
-            practicalFileName = Path.Combine(practicalFileFolder, string.Format("{0}-{1}.prac", SingletonManager.Get<UserProcesser>().GetUser().ID, SingletonManager.Get<UserProcesser>().GetUser().Name));
+            practicalFileFolder = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PRACTICAL_FILE_FOLDER), SingletonManager.Get<UserProcesser>().GetUser().ID);
             practicalProcessFileName = Path.Combine(practicalFileFolder, PRACTICAL_PROCESS_FILE_NAME);
 
             if (!Directory.Exists(practicalFileFolder))

@@ -21,7 +21,7 @@ namespace Business.Processer
 
         public void SaveContent()
         {
-            contentManager.SaveContent(filePath);
+            contentManager.SaveContent(practicalID, filePath);
             contentManager.SetPracticalProjectDone(practicalID, projectID);
         }
 
