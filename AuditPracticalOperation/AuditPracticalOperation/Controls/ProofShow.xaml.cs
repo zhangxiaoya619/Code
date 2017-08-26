@@ -61,7 +61,7 @@ namespace AuditPracticalOperation.Controls
 
         private void ShowImg_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ViewModel.ProofItem choiseItem = (sender as Label).Tag as ViewModel.ProofItem;
+            ViewModel.ProofItem choiseItem = (sender as Image).Tag as ViewModel.ProofItem;
             if (e.ClickCount == 2)
             {
                 switch (choiseItem.Type)
@@ -82,12 +82,13 @@ namespace AuditPracticalOperation.Controls
                         BitmapImage image = new BitmapImage(new Uri(fileName));
                         CurrentImage.Source = image;
                         GridImageShow.Visibility = System.Windows.Visibility.Visible;
-                        //查看图片
                         break;
                     default:
                         break;
                 }
             }
+            originalX = tlt.X;
+            originalY = tlt.Y;
         }
 
         private void ChoiseDir_Checked(object sender, RoutedEventArgs e)
@@ -109,9 +110,65 @@ namespace AuditPracticalOperation.Controls
             GridImageShow.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+
+
+
+
+        private bool isMouseLeftButtonDown = false;
+        Point previousMousePoint = new Point(0, 0);
+        double originalX = 0, originalY = 0;
         private void CurrentImage_MouseWheel(object sender, MouseWheelEventArgs e)
         {
+            //image缩放
+            Point centerPoint = e.GetPosition(CurrentImage);
 
+            double val = (double)e.Delta / 1000;   //描述鼠标滑轮滚动
+            if (sfr.ScaleX <= 1 && sfr.ScaleY <= 1 && e.Delta < 0)
+            {
+                tlt.X = originalX;
+                tlt.Y = originalY;
+                return;
+            }
+            sfr.CenterX = centerPoint.X;
+            sfr.CenterY = centerPoint.Y;
+
+            sfr.ScaleX += val;
+            sfr.ScaleY += val;
+        }
+        private void img_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            isMouseLeftButtonDown = true;
+            previousMousePoint = e.GetPosition(CurrentImage);
+        }
+
+        private void img_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            isMouseLeftButtonDown = false;
+            if (sfr.ScaleX <= 1)
+            {
+                tlt.X = originalX;
+                tlt.Y = originalY;
+            }
+        }
+
+        private void img_MouseLeave(object sender, MouseEventArgs e)
+        {
+            isMouseLeftButtonDown = false;
+            if (sfr.ScaleX <= 1)
+            {
+                tlt.X = originalX;
+                tlt.Y = originalY;
+            }
+        }
+
+        private void img_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseLeftButtonDown == true)
+            {
+                Point position = e.GetPosition(CurrentImage);
+                tlt.X += position.X - this.previousMousePoint.X;
+                tlt.Y += position.Y - this.previousMousePoint.Y;
+            }
         }
     }
 }

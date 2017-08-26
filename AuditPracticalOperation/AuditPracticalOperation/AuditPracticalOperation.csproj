@@ -79,6 +79,8 @@
     <Compile Include="Controls\ProofShow.xaml.cs">
       <DependentUpon>ProofShow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\LongStrToShortStrConverter.cs" />
+    <Compile Include="Converters\StringToImageSourceConverter.cs" />
     <Compile Include="UContorls\UCHeader.xaml.cs">
       <DependentUpon>UCHeader.xaml</DependentUpon>
     </Compile>
@@ -190,45 +192,87 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\yiwancheng.png" />
+    <Content Include="Images\yiwancheng.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\nav_01.png" />
+    <Content Include="Images\nav_01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\raw_1501471037.png" />
+    <Content Include="Images\raw_1501471037.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\01_login.png" />
+    <Content Include="Images\01_login.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\erweima.png" />
-    <Resource Include="Images\jxlogo.png" />
-    <Resource Include="Images\QQ.png" />
-    <Resource Include="Images\wechat.png" />
+    <Content Include="Images\erweima.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\jxlogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\QQ.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\wechat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\practicalsy.png" />
-    <Resource Include="Images\practicaltop.jpg" />
-    <Resource Include="Images\practicalwwc.png" />
-    <Resource Include="Images\practicalywc.png" />
+    <Content Include="Images\practicalsy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\practicaltop.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\practicalwwc.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\practicalywc.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\yiwanchengblue.png" />
+    <Content Include="Images\yiwanchengblue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\zhengzaijingxing.png" />
+    <Content Include="Images\zhengzaijingxing.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\operate.png" />
+    <Content Include="Images\operate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\arrowleft.png" />
-    <Resource Include="Images\arrowleftclick.png" />
-    <Resource Include="Images\arrowlefthover.png" />
-    <Resource Include="Images\arrowright.png" />
-    <Resource Include="Images\arrowrightclick.png" />
-    <Resource Include="Images\arrowrighthover.png" />
+    <Content Include="Images\arrowleft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\arrowleftclick.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\arrowlefthover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\arrowright.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\arrowrightclick.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\arrowrighthover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="stdole">
@@ -240,6 +284,11 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\file.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -73,6 +73,7 @@ namespace Business.Processer
                             IsChecked = true,
                             Name = item.Name,
                             Path = item.FullName,
+                            ImgSource = AppDomain.CurrentDomain.BaseDirectory + "Images\\file.png",
                             Proofs = null,
                             Type = FileTypeEnum.Directory
                         };
@@ -100,6 +101,7 @@ namespace Business.Processer
                             case "png":
                             case "bmp":
                             case "gif":
+                                proof.ImgSource = item.FullName;
                                 proof.Type = FileTypeEnum.Img;
                                 break;
                             case "doc":

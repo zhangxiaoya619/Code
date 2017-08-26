@@ -3,11 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:AuditPracticalOperation.Converters"
              mc:Ignorable="d" 
              Background="#FFEDEDED"
              d:DesignHeight="400" 
              d:DesignWidth="800">
     <UserControl.Resources>
+        <convert:StringToImageSourceConverter x:Key="imageConverter"/>
+        <convert:LongStrToShortStrConverter x:Key="longStrConverter"/>
         <Style x:Key="ButtonStyle5" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -319,37 +322,15 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding Name}" Tag="{Binding}" Width="220" Height="40"  MouseLeftButtonDown="ShowImg_MouseLeftButtonDown">
-                                <Label.Style>
-                                    <Style TargetType="{x:Type Label}">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Label}">
-                                                    <Grid>
-                                                        <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF329CD7"/>
-                                                    </Grid>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Fill" TargetName="rectangle" Value="#33329CD7"/>
-                                                        </Trigger>
-                                                        <MultiTrigger>
-                                                            <MultiTrigger.Conditions>
-                                                                <Condition Property="IsMouseOver" Value="True"/>
-                                                            </MultiTrigger.Conditions>
-                                                            <Setter Property="Fill" TargetName="rectangle" Value="#FF329CD7"/>
-                                                            <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
-                                                        </MultiTrigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-                                        <Setter Property="FontSize" Value="21.333"/>
-                                        <Setter Property="Foreground" Value="#FF329CD7"/>
-                                    </Style>
-                                </Label.Style>
-                            </Label>
+                            <Grid Width="120" Height="160"  ToolTip="{Binding Name}" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Image Grid.Row="0" Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Tag="{Binding}" Stretch="Fill"  MouseLeftButtonDown="ShowImg_MouseLeftButtonDown"/>
+                                <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="13.33" VerticalAlignment="Center" Content="{Binding Name,Converter={StaticResource longStrConverter}}" Tag="{Binding}"/>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -361,8 +342,6 @@
                         <ColumnDefinition Width="0.25*"/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Fill="#7F000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <!--<Button Grid.Column="0" Content="leftbig" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{DynamicResource ButtonStyle6}" Width="60" Height="60" Margin="0,0,0,0"/>
-                    <Button Grid.Column="2" Content="rightbig" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource ButtonStyle7}" Width="60" Height="60"  Margin="0,0,0,0"/>-->
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.1*"/>
@@ -374,7 +353,22 @@
                             <Rectangle  Fill="#FFE5E5E5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                             <StackPanel Orientation="Vertical">
                                 <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Name}" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="13" Foreground="Black"/>
-                                <Image x:Name="CurrentImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseWheel="CurrentImage_MouseWheel"/>
+                                <ScrollViewer  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Image x:Name="CurrentImage" HorizontalAlignment="Center" VerticalAlignment="Center" MouseWheel="CurrentImage_MouseWheel"
+                                    MouseDown="img_MouseDown" 
+                                    MouseMove="img_MouseMove"
+                                    MouseUp="img_MouseUp"
+                                    MouseLeave="img_MouseLeave"
+                                    Stretch="Uniform"  
+                                    RenderOptions.BitmapScalingMode="NearestNeighbor" >
+                                        <Image.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform x:Name="sfr" ScaleX="1" ScaleY="1"/>
+                                                <TranslateTransform x:Name="tlt" />
+                                            </TransformGroup>
+                                        </Image.RenderTransform>
+                                    </Image>
+                                </ScrollViewer>
                             </StackPanel>
                         </Grid>
                     </Grid>
