@@ -74,6 +74,9 @@
     <Compile Include="Controls\GainExport.xaml.cs">
       <DependentUpon>GainExport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MyAchievement.xaml.cs">
+      <DependentUpon>MyAchievement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PracticalOperate.xaml.cs">
       <DependentUpon>PracticalOperate.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GainExport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MyAchievement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +211,15 @@
     <Resource Include="Images\falvtiaokuan.png" />
     <Resource Include="Images\guanyuwomen.png" />
     <Resource Include="Images\xianshangkefu.png" />
+    <Resource Include="Images\bg.png" />
+    <Resource Include="Images\touxiang1.png" />
+    <Resource Include="Images\cpa.jpeg" />
+    <Resource Include="Images\huozuohuoban.png" />
+    <Resource Include="Images\dier.png" />
+    <Resource Include="Images\disan.png" />
+    <Resource Include="Images\diyi.png" />
+    <Resource Include="Images\touxiang2.png" />
+    <Resource Include="Images\touxiang3.png" />
     <Content Include="Images\yiwancheng.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -258,6 +274,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\yonghuzhinan.png" />
+    <Resource Include="Images\zhengshu.jpeg" />
     <Content Include="Images\zhengzaijingxing.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

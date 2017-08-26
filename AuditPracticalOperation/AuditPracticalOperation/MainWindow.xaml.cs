@@ -52,6 +52,7 @@ namespace AuditPracticalOperation
                     myMainChild.Child = new GainExport();
                     break;
                 case 3:
+                    myMainChild.Child = new MyAchievement();
                     break;
                 case 4:
                     myMainChild.Child = new UserCenter();
