@@ -21,12 +21,20 @@ namespace Business.Processer
             return user;
         }
 
+        public bool UserLogin(string userName, string ID)
+        {
+            bool ret = true;
+            user.ID = ID;
+            user.Name = userName;
+            return ret;
+        }
         private UserProcesser()
         {
             user = new User();
-            user.ID = "51123";
-            user.Name = "张三";
-            user.CPUID = "CSZS-123";
+            user.CPUID = SingletonManager.Get<LocalSerialNumProcessor>().GetCpuSerialNum();
+            //user.ID = "51123";
+            //user.Name = "张三";
+            //user.CPUID = "CSZS-123";
         }
     }
 }
