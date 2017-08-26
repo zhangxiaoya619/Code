@@ -315,6 +315,11 @@
                                         <Border x:Name="Bd" Padding="25">
                                             <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                         </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter TargetName="Bd" Property="Background" Value="LightBlue"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -331,6 +336,7 @@
                                 <Image Grid.Row="0" Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Tag="{Binding}" Stretch="Fill"  MouseLeftButtonDown="ShowImg_MouseLeftButtonDown"/>
                                 <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="13.33" VerticalAlignment="Center" Content="{Binding Name,Converter={StaticResource longStrConverter}}" Tag="{Binding}"/>
                             </Grid>
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
