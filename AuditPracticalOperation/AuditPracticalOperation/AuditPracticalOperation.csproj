@@ -80,6 +80,9 @@
     <Compile Include="Controls\ProofShow.xaml.cs">
       <DependentUpon>ProofShow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserCenter.xaml.cs">
+      <DependentUpon>UserCenter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\LongStrToShortStrConverter.cs" />
     <Compile Include="Converters\StringToImageSourceConverter.cs" />
     <Compile Include="UContorls\UCHeader.xaml.cs">
@@ -107,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProofShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserCenter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,6 +200,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\dizhi.png" />
+    <Resource Include="Images\falvtiaokuan.png" />
+    <Resource Include="Images\guanyuwomen.png" />
+    <Resource Include="Images\xianshangkefu.png" />
     <Content Include="Images\yiwancheng.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -246,6 +257,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\yonghuzhinan.png" />
     <Content Include="Images\zhengzaijingxing.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
