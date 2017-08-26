@@ -180,7 +180,7 @@
                                             <ControlTemplate TargetType="{x:Type RadioButton}">
                                                 <Grid>
                                                     <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF329CD7"/>
+                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -334,7 +334,7 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
                                 <Image Grid.Row="0" Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Tag="{Binding}" Stretch="Fill"  MouseLeftButtonDown="ShowImg_MouseLeftButtonDown"/>
-                                <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="13.33" VerticalAlignment="Center" Content="{Binding Name,Converter={StaticResource longStrConverter}}" Tag="{Binding}"/>
+                                <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="15" VerticalAlignment="Center" Content="{Binding Name,Converter={StaticResource longStrConverter}}" Tag="{Binding}"/>
                             </Grid>
 
                         </DataTemplate>
