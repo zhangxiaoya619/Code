@@ -27,7 +27,7 @@ namespace AuditPracticalOperation.Controls
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            CloseWindow();
         }
 
         private void DragWindow(object sender, MouseButtonEventArgs e)
@@ -38,7 +38,19 @@ namespace AuditPracticalOperation.Controls
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
+                CloseWindow();
+        }
+
+        private void CloseWindow()
+        {
+            try
+            {
                 this.Close();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

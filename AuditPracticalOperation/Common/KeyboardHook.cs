@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Common
@@ -16,8 +17,12 @@ namespace Common
 
         public event KeyUpHandler OnKeyUp;
 
-        private const byte VK_LSHIFT = 0xA0;
-        private const byte VK_RSHIFT = 0xA1;
+        protected const byte VK_LSHIFT = 0xA0;
+        protected const byte VK_RSHIFT = 0xA1;
+        protected const byte VK_LCONTROL = 0xA2;
+        protected const byte VK_RCONTROL = 0x3;
+        protected const byte VK_LALT = 0xA4;
+        protected const byte VK_RALT = 0xA5;
 
         /// <summary>
         /// 安装键盘钩子
@@ -62,15 +67,16 @@ namespace Common
 
                 int keyData = KeyDataFromHook.vkCode;
 
-                bool shift = (Win32Api.GetKeyState(VK_LSHIFT) & 0x80) != 0 || (Win32Api.GetKeyState(VK_RSHIFT) & 0x80) != 0;
+                bool control = (Win32Api.GetKeyState(VK_LCONTROL) & 0x80) != 0 || (Win32Api.GetKeyState(VK_RCONTROL) & 0x80) != 0;
+
 
                 if (OnKeyUp != null && (wParam == Win32Api.WM_KEYUP || wParam == Win32Api.WM_SYSKEYUP))
-                    OnKeyUp((Key)keyData, shift);
+                    OnKeyUp((Keys)keyData, control);
             }
 
             return Win32Api.CallNextHookEx(hHook, nCode, wParam, lParam);
         }
     }
 
-    public delegate void KeyUpHandler(Key key, bool shift);
+    public delegate void KeyUpHandler(Keys key, bool control);
 }
