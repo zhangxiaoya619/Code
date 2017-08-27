@@ -3,11 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:AuditPracticalOperation.Converters"
              mc:Ignorable="d" 
              Background="#FFEDEDED"
              d:DesignHeight="400" 
              d:DesignWidth="800">
     <UserControl.Resources>
+        <convert:StringToImageSourceConverter x:Key="imageConverter"/>
+        <convert:LongStrToShortStrConverter x:Key="longStrConverter"/>
         <Style x:Key="ButtonStyle5" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -177,7 +180,7 @@
                                             <ControlTemplate TargetType="{x:Type RadioButton}">
                                                 <Grid>
                                                     <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF329CD7"/>
+                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -312,6 +315,11 @@
                                         <Border x:Name="Bd" Padding="25">
                                             <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                         </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter TargetName="Bd" Property="Background" Value="LightBlue"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -319,37 +327,16 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding Name}" Tag="{Binding}" Width="220" Height="40"  MouseLeftButtonDown="ShowImg_MouseLeftButtonDown">
-                                <Label.Style>
-                                    <Style TargetType="{x:Type Label}">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Label}">
-                                                    <Grid>
-                                                        <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF329CD7"/>
-                                                    </Grid>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Fill" TargetName="rectangle" Value="#33329CD7"/>
-                                                        </Trigger>
-                                                        <MultiTrigger>
-                                                            <MultiTrigger.Conditions>
-                                                                <Condition Property="IsMouseOver" Value="True"/>
-                                                            </MultiTrigger.Conditions>
-                                                            <Setter Property="Fill" TargetName="rectangle" Value="#FF329CD7"/>
-                                                            <Setter Property="Foreground" TargetName="textBlock" Value="White"/>
-                                                        </MultiTrigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-                                        <Setter Property="FontSize" Value="21.333"/>
-                                        <Setter Property="Foreground" Value="#FF329CD7"/>
-                                    </Style>
-                                </Label.Style>
-                            </Label>
+                            <Grid Width="120" Height="160"  ToolTip="{Binding Name}" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Image Grid.Row="0" Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Tag="{Binding}" Stretch="Fill"  MouseLeftButtonDown="ShowImg_MouseLeftButtonDown"/>
+                                <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="15" VerticalAlignment="Center" Content="{Binding Name,Converter={StaticResource longStrConverter}}" Tag="{Binding}"/>
+                            </Grid>
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -361,8 +348,6 @@
                         <ColumnDefinition Width="0.25*"/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Fill="#7F000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <!--<Button Grid.Column="0" Content="leftbig" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{DynamicResource ButtonStyle6}" Width="60" Height="60" Margin="0,0,0,0"/>
-                    <Button Grid.Column="2" Content="rightbig" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource ButtonStyle7}" Width="60" Height="60"  Margin="0,0,0,0"/>-->
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.1*"/>
@@ -373,11 +358,39 @@
                             <Button Content="close" Style="{DynamicResource ButtonStyle5}" Width="40" Height="40" Click="ImageShow_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-27,-27,0"/>
                             <Rectangle  Fill="#FFE5E5E5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                             <StackPanel Orientation="Vertical">
-                                <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Name}" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="13" Foreground="Black"/>
-                                <Image x:Name="CurrentImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseWheel="CurrentImage_MouseWheel"/>
+                                <TextBlock HorizontalAlignment="Left" x:Name="imageTitle" Style="{DynamicResource BasicTextBlock-Sketch}" Text="" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="13" Foreground="Black"/>
+                                
+                                    <Image x:Name="CurrentImage" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Stretch="Uniform"  
+                                           MouseLeftButtonDown="img_MouseDown"
+                                    MouseLeftButtonUp="img_MouseUp"
+                                    MouseMove="img_MouseMove"
+                                    MouseWheel="CurrentImage_MouseWheel"
+                                    RenderOptions.BitmapScalingMode="NearestNeighbor"  RenderTransformOrigin="0.5,0.5">
+                                        <Image.RenderTransform>
+                                            <TransformGroup x:Name="ImageTransformGroup">
+                                                <ScaleTransform x:Name="sfr"  ScaleX="1" ScaleY="1"/>
+                                                <TranslateTransform x:Name="tlt" />
+                                                <RotateTransform x:Name="rotate"  Angle="0"/>
+                                            </TransformGroup>
+                                        </Image.RenderTransform>
+                                    </Image>
                             </StackPanel>
                         </Grid>
                     </Grid>
+                    <!--<Grid Grid.Column="2">
+                        <Button Content="旋转"  Width="40" Height="40" Click="RotateTransform_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                    </Grid>-->
+                </Grid>
+                <Grid x:Name="GridPdfShow" Background="Transparent" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="0.9*"/>
+                        <RowDefinition Height="0.05*"/>
+                    </Grid.RowDefinitions>
+                    <Button Content="close" Style="{DynamicResource ButtonStyle5}" Width="40" Height="40" Click="pdfShow_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,-10,0"/>
+                    <WindowsFormsHost x:Name="winFormHost" Grid.Row="1" Margin="0,0,0,0" >
+                    </WindowsFormsHost>
                 </Grid>
             </Grid>
         </Grid>

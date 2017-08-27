@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="AuditPracticalOperation.Controls.UserCenter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Background="#FFEDEDED"
+             d:DesignHeight="768" 
+             d:DesignWidth="1000">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.15*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="White" Margin="0,5,5,5">
+            <StackPanel Orientation="Horizontal">
+                <Grid Width="160" Margin="0,10,0,0">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="60" Source="pack://application:,,,/Images/xianshangkefu.png" Stretch="Fill"/>
+                </Grid>
+                <Rectangle Fill="#FFEDEDED" HorizontalAlignment="Stretch"  Margin="0,0,0,0" VerticalAlignment="Stretch" Width="2"/>
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="线上客服" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Images/QQ.png" Stretch="Fill" Width="36" Height="36" VerticalAlignment="Center" Margin="40,0,0,0"/>
+                        <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="3430513578" Margin="20,0,0,0" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black"/>
+                        <Image Source="pack://application:,,,/Images/wechat.png" Stretch="Fill" Width="36" Height="36"  Margin="60,0,0,0"/>
+                        <Image Source="pack://application:,,,/Images/erweima.png" Stretch="Fill" Width="90" Height="90"  Margin="20,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Background="White" Margin="0,5,5,5">
+            <StackPanel Orientation="Horizontal">
+                <Grid Width="160" Margin="0,10,0,0" >
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="60" Source="pack://application:,,,/Images/yonghuzhinan.png" Stretch="Fill"/>
+                </Grid>
+                <Rectangle Fill="#FFEDEDED" HorizontalAlignment="Stretch"  Margin="0,0,0,0" VerticalAlignment="Stretch" Width="2"/>
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="用户指南" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="需要获取报表项目的审计程序实务操作指引，按F1键" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Height="30" Margin="0,20,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="审计程序中发现差异时，按F2键获取进一步信息" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Height="30" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Background="White" Margin="0,5,5,5">
+            <StackPanel Orientation="Horizontal">
+                <Grid Width="160"  Margin="0,10,0,0">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="60" Source="pack://application:,,,/Images/guanyuwomen.png" Stretch="Fill"/>
+                </Grid>
+                <Rectangle Fill="#FFEDEDED" HorizontalAlignment="Stretch"  Margin="0,0,0,0" VerticalAlignment="Stretch" Width="2"/>
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="关于我们" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="计学实训：CPA实务培训专家。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Height="30" Margin="0,20,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="我们以全实务界的注册会计师师资，构建起行业后备人才培养机制。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Height="30"/>
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="在成都，我们已和四川省注册会计师协会、西南财经大学建立起战略合作关系。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3"  Height="30"/>
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="每年为无数财经学子提供与注册会计师行业、投资银行等相关的实务培训，并为行业输送了无数优秀人才。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Height="30"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3" Background="White" Margin="0,5,5,5">
+            <StackPanel Orientation="Horizontal">
+                <Grid Width="160"  Margin="0,10,0,0">
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="60" Source="pack://application:,,,/Images/falvtiaokuan.png" Stretch="Fill"/>
+                </Grid>
+                <Rectangle Fill="#FFEDEDED" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="2"/>
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="法律条款" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="本软件的所有知识产权归计学实训所有。" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Height="30" Margin="0,20,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="4" Background="White" Margin="0,5,5,0">
+            <StackPanel Orientation="Horizontal">
+                <Grid Width="160" Margin="0,10,0,0" >
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="60" Source="pack://application:,,,/Images/dizhi.png" Stretch="Fill"/>
+                </Grid>
+                <Rectangle Fill="#FFEDEDED" HorizontalAlignment="Stretch"  Margin="0,0,0,0" VerticalAlignment="Stretch" Width="2"/>
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="本机序列号查看" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF329CD7"/>
+                    <TextBlock x:Name="TextBlock_xuliehao" HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="序列号: 112.44.107.4" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FFB3B3B3" Height="30" Margin="0,20,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

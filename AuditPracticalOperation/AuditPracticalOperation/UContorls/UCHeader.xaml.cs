@@ -23,5 +23,9 @@ namespace AuditPracticalOperation.UContorls
         {
             InitializeComponent();
         }
+        public void SetUserName(string name)
+        {
+            this.UserName.Text = name;
+        }
     }
 }

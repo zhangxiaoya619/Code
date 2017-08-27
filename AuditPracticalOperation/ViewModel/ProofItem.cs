@@ -10,9 +10,11 @@ namespace ViewModel
     {
         private string name;
         private string path;
+        private string _imageSource = null;
         private FileTypeEnum type;
         private bool isChecked;
         private ObservableCollection<ProofItem> proofs;
+
         public string Name
         {
             get
@@ -42,6 +44,22 @@ namespace ViewModel
                     RaisePropertyChanged("Path");
                 }
             }
+        }
+        public string ImgSource
+        {
+            get
+            {
+                return _imageSource;
+            }
+            set
+            {
+                if (value != _imageSource)
+                {
+                    _imageSource = value;
+                    RaisePropertyChanged("ImgSource");
+                }
+            }
+
         }
         public FileTypeEnum Type
         {

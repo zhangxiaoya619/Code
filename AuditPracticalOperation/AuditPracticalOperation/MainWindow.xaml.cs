@@ -1,5 +1,6 @@
 ﻿using AuditPracticalOperation.Controls;
 using Business;
+using Business.Processer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,12 @@ namespace AuditPracticalOperation
         {
             Menu.OnUserLogout += Menu_OnUserLogout;
             Menu.OnUserClickMenu += Menu_OnUserClickMenu;
+            SetUserName(SingletonManager.Get<UserProcesser>().GetUser().Name);
         }
-
+        private void SetUserName(string name)
+        {
+            header.SetUserName(name);
+        }
         void Menu_OnUserClickMenu(int index)
         {
             switch (index)
@@ -47,8 +52,10 @@ namespace AuditPracticalOperation
                     myMainChild.Child = new GainExport();
                     break;
                 case 3:
+                    myMainChild.Child = new MyAchievement();
                     break;
                 case 4:
+                    myMainChild.Child = new UserCenter();
                     break;
                 default:
                     break;

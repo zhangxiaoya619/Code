@@ -7,11 +7,17 @@ namespace ViewModel
 {
     public class User : ViewModelBase, IPower
     {
+        public void ChangePower(bool ispower)
+        {
+            _isPower = ispower;
+        }
         public bool HasPower(int practicalItemID)
         {
-            return true;
+            if (practicalItemID == 0 || practicalItemID == 1 || practicalItemID == 2)
+                return true;
+            return _isPower;
         }
-
+        private bool _isPower = false;
         private string name;
         private string id;
         private string cpuId;
