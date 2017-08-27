@@ -356,7 +356,6 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="1">
                             <Button Content="close" Style="{DynamicResource ButtonStyle5}" Width="40" Height="40" Click="ImageShow_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-27,-27,0"/>
-                            <Button Content="旋转"  Width="40" Height="40" Click="RotateTransform_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="103,-27,117,0"/>
                             <Rectangle  Fill="#FFE5E5E5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                             <StackPanel Orientation="Vertical">
                                 <TextBlock HorizontalAlignment="Left" x:Name="imageTitle" Style="{DynamicResource BasicTextBlock-Sketch}" Text="" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="13" Foreground="Black"/>
@@ -379,6 +378,9 @@
                                 </ScrollViewer>
                             </StackPanel>
                         </Grid>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button Content="旋转"  Width="40" Height="40" Click="RotateTransform_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
                     </Grid>
                 </Grid>
                 <Grid x:Name="GridPdfShow" Background="Transparent" Visibility="Collapsed">

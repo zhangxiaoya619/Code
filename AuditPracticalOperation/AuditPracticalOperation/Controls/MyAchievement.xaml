@@ -87,14 +87,14 @@
                     <Grid Grid.Column="0" Margin="2">
                         <Rectangle Fill="White" Stretch="Fill"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="88" Width="110" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="96" Foreground="#FFAE69D5"/>
+                            <TextBlock x:Name="TextBlock_DonePercent" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="88" Width="110" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="96" Foreground="#FFAE69D5"/>
                             <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="经验值" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei" FontSize="24" Foreground="Black"/>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="1" Margin="2">
                         <Rectangle Fill="White" Stretch="Fill"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="2" Width="110" TextAlignment="Center"  VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="96" Foreground="#FF4B96DC"/>
+                            <TextBlock x:Name="TextBlock_DoneCount" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="2" Width="110" TextAlignment="Center"  VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="96" Foreground="#FF4B96DC"/>
                             <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="完成科目" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei" FontSize="24" Foreground="Black"/>
                         </StackPanel>
                     </Grid>

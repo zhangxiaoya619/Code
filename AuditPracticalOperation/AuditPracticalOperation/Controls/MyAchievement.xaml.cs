@@ -32,6 +32,8 @@ namespace AuditPracticalOperation.Controls
             TextBlock_UserName.Text = SingletonManager.Get<UserProcesser>().GetUser().Name;
             TextBlock_UserID.Text = SingletonManager.Get<UserProcesser>().GetUser().ID;
             TextBlock_ranking.Text = SingletonManager.Get<UserProcesser>().GetUser().Name;
+            TextBlock_DoneCount.Text = SingletonManager.Get<PracticalItemProcesser>().GetHasDonePracticalItems().Count.ToString();
+            TextBlock_DonePercent.Text = ((int)SingletonManager.Get<PracticalItemProcesser>().GetHasDonePracticalItems().Count / SingletonManager.Get<PracticalItemProcesser>().GetPracticalItems().Count * 100).ToString();
         }
     }
 }
