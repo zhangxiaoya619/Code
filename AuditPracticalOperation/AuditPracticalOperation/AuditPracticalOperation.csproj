@@ -54,6 +54,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
@@ -88,6 +89,12 @@
     </Compile>
     <Compile Include="Converters\LongStrToShortStrConverter.cs" />
     <Compile Include="Converters\StringToImageSourceConverter.cs" />
+    <Compile Include="UContorls\PDFReader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UContorls\PDFReader.Designer.cs">
+      <DependentUpon>PDFReader.cs</DependentUpon>
+    </Compile>
     <Compile Include="UContorls\UCHeader.xaml.cs">
       <DependentUpon>UCHeader.xaml</DependentUpon>
     </Compile>
@@ -185,6 +192,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UContorls\PDFReader.resx">
+      <DependentUpon>PDFReader.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -220,6 +230,9 @@
     <Resource Include="Images\diyi.png" />
     <Resource Include="Images\touxiang2.png" />
     <Resource Include="Images\touxiang3.png" />
+    <EmbeddedResource Include="Images\pdf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Images\yiwancheng.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -305,6 +318,23 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -316,9 +346,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\file.png">
+    <EmbeddedResource Include="Images\file.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

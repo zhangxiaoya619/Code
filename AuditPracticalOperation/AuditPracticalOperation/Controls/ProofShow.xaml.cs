@@ -1,4 +1,5 @@
-﻿using Business;
+﻿using AuditPracticalOperation.UContorls;
+using Business;
 using Business.Processer;
 using System;
 using System.Collections.Generic;
@@ -76,12 +77,18 @@ namespace AuditPracticalOperation.Controls
                     case ViewModel.FileTypeEnum.Excel:
                         break;
                     case ViewModel.FileTypeEnum.Pdf:
+                        string pdffileName = choiseItem.Path;
+                        GridPdfShow.Visibility = System.Windows.Visibility.Visible;
+                        PDFReader pdfCtl = new PDFReader();
+                        pdfCtl.AdobeReaderControl(pdffileName);
+                        winFormHost.Child = pdfCtl;
                         break;
                     case ViewModel.FileTypeEnum.Img:
                         string fileName = choiseItem.Path;
                         BitmapImage image = new BitmapImage(new Uri(fileName));
                         CurrentImage.Source = image;
                         GridImageShow.Visibility = System.Windows.Visibility.Visible;
+                        imageTitle.Text = choiseItem.Name;
                         break;
                     default:
                         break;
@@ -169,6 +176,20 @@ namespace AuditPracticalOperation.Controls
                 tlt.X += position.X - this.previousMousePoint.X;
                 tlt.Y += position.Y - this.previousMousePoint.Y;
             }
+        }
+
+        private void RotateTransform_Click(object sender, RoutedEventArgs e)
+        {
+            rotate.Angle += 90;
+            sfr.ScaleX = 1;
+            sfr.ScaleY = 1;
+            tlt.X = originalX;
+            tlt.Y = originalY;
+        }
+
+        private void pdfShow_Click(object sender, RoutedEventArgs e)
+        {
+            GridPdfShow.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }
