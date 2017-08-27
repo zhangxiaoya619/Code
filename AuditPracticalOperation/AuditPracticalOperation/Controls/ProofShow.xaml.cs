@@ -128,19 +128,43 @@ namespace AuditPracticalOperation.Controls
         {
             //image缩放
             Point centerPoint = e.GetPosition(CurrentImage);
+            ContentControl image = sender as ContentControl;
+            Point point = e.GetPosition(image);
+            double scale = e.Delta * 0.001;
+            ZoomImage(point, scale);
+        }
+        private void ZoomImage(Point point, double scale)
+        {
+            TransformGroup group = ImageTransformGroup;
 
-            double val = (double)e.Delta / 1000;   //描述鼠标滑轮滚动
-            if (sfr.ScaleX <= 1 && sfr.ScaleY <= 1 && e.Delta < 0)
+            Point pointToContent = group.Inverse.Transform(point);
+
+            ScaleTransform transform = group.Children[0] as ScaleTransform;
+
+            if (transform.ScaleX + scale <= 1)
+            {
+                transform.ScaleX = 1;
+            }
+            if (transform.ScaleY + scale <= 1)
+            {
+                transform.ScaleY = 1;
+            }
+            if (sfr.ScaleX <= 1 && sfr.ScaleY <= 1 && scale < 0)
             {
                 tlt.X = originalX;
                 tlt.Y = originalY;
                 return;
             }
-            sfr.CenterX = centerPoint.X;
-            sfr.CenterY = centerPoint.Y;
+            transform.ScaleX += scale;
 
-            sfr.ScaleX += val;
-            sfr.ScaleY += val;
+            transform.ScaleY += scale;
+
+            TranslateTransform transform1 = group.Children[1] as TranslateTransform;
+
+            transform1.X = -1 * ((pointToContent.X * transform.ScaleX) - point.X);
+
+            transform1.Y = -1 * ((pointToContent.Y * transform.ScaleY) - point.Y);
+
         }
         private void img_MouseDown(object sender, MouseButtonEventArgs e)
         {
