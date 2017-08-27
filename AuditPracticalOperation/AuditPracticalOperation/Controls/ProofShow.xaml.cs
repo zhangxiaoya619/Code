@@ -128,7 +128,7 @@ namespace AuditPracticalOperation.Controls
         {
             //image缩放
             Point centerPoint = e.GetPosition(CurrentImage);
-            ContentControl image = sender as ContentControl;
+            Image image = sender as Image;
             Point point = e.GetPosition(image);
             double scale = e.Delta * 0.001;
             ZoomImage(point, scale);

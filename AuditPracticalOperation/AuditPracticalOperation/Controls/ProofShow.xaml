@@ -359,13 +359,13 @@
                             <Rectangle  Fill="#FFE5E5E5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                             <StackPanel Orientation="Vertical">
                                 <TextBlock HorizontalAlignment="Left" x:Name="imageTitle" Style="{DynamicResource BasicTextBlock-Sketch}" Text="" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="13" Foreground="Black"/>
-                                <ContentControl x:Name="TestContentControl1"
-                                    MouseLeftButtonDown="img_MouseDown"
-                                    MouseLeftButtonUp="img_MouseUp"
-                                    MouseMove="img_MouseMove"
-                                    MouseWheel="CurrentImage_MouseWheel">
+                                
                                     <Image x:Name="CurrentImage" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                     Stretch="Uniform"  
+                                           MouseLeftButtonDown="img_MouseDown"
+                                    MouseLeftButtonUp="img_MouseUp"
+                                    MouseMove="img_MouseMove"
+                                    MouseWheel="CurrentImage_MouseWheel"
                                     RenderOptions.BitmapScalingMode="NearestNeighbor"  RenderTransformOrigin="0.5,0.5">
                                         <Image.RenderTransform>
                                             <TransformGroup x:Name="ImageTransformGroup">
@@ -375,13 +375,12 @@
                                             </TransformGroup>
                                         </Image.RenderTransform>
                                     </Image>
-                                </ContentControl>
                             </StackPanel>
                         </Grid>
                     </Grid>
-                    <Grid Grid.Column="2">
+                    <!--<Grid Grid.Column="2">
                         <Button Content="旋转"  Width="40" Height="40" Click="RotateTransform_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                    </Grid>
+                    </Grid>-->
                 </Grid>
                 <Grid x:Name="GridPdfShow" Background="Transparent" Visibility="Collapsed">
                     <Grid.RowDefinitions>
