@@ -61,11 +61,29 @@
     <Reference Include="Microsoft.Expression.Prototyping.SketchControls" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bangzuzhiyin_的副本.xaml.cs">
+      <DependentUpon>bangzuzhiyin_的副本.xaml</DependentUpon>
+    </Compile>
     <Compile Include="chenguodaochu_的副本.xaml.cs">
       <DependentUpon>chenguodaochu_的副本.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gundongtiao.xaml.cs">
+      <DependentUpon>gundongtiao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="huoqujihuo_的副本.xaml.cs">
+      <DependentUpon>huoqujihuo_的副本.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="huoqujihuo_的副本_1.xaml.cs">
+      <DependentUpon>huoqujihuo_的副本_1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="huoquzhengshu_的副本.xaml.cs">
+      <DependentUpon>huoquzhengshu_的副本.xaml</DependentUpon>
+    </Compile>
     <Compile Include="kenuxuanze_的副本.xaml.cs">
       <DependentUpon>kenuxuanze_的副本.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="kenuxuanze_的副本_1.xaml.cs">
+      <DependentUpon>kenuxuanze_的副本_1.xaml</DependentUpon>
     </Compile>
     <Compile Include="login_的副本.xaml.cs">
       <DependentUpon>login_的副本.xaml</DependentUpon>
@@ -85,11 +103,35 @@
     <Compile Include="屏幕_1.xaml.cs">
       <DependentUpon>屏幕_1.xaml</DependentUpon>
     </Compile>
+    <Page Include="bangzuzhiyin_的副本.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="chenguodaochu_的副本.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="gundongtiao.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="huoqujihuo_的副本.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="huoqujihuo_的副本_1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="huoquzhengshu_的副本.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="kenuxuanze_的副本.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="kenuxuanze_的副本_1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -156,6 +198,7 @@
     <Resource Include="touxiang3.png" />
     <Resource Include="wechat.png" />
     <Resource Include="xianshangkefu.png" />
+    <Resource Include="xingxiang.png" />
     <Resource Include="yiwancheng.png" />
     <Resource Include="yiwanchengblue.png" />
     <Resource Include="yonghuzhinan.png" />
@@ -166,10 +209,16 @@
     <None Include="bg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="chenggong.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="cpa.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="huozuohuoban.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="shibai.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -236,6 +236,8 @@ namespace Business.Processer
             PracticalItem[] items = null;
             int[] practicalProjectCountArray = null;
             int[][] practicalProjectContentBufferLengthArray = null;
+            int[][] practicalProjectF1BufferLengthArray = null;
+            int[] practicalProjectF2BufferLengthArray = null;
             int[] practicalNameBufferLength = null;
 
             try
@@ -246,6 +248,8 @@ namespace Business.Processer
                 items = new PracticalItem[BitConverter.ToInt32(buffer, 0)];
                 practicalProjectCountArray = new int[items.Length];
                 practicalProjectContentBufferLengthArray = new int[items.Length][];
+                practicalProjectF1BufferLengthArray = new int[items.Length][];
+                practicalProjectF2BufferLengthArray = new int[items.Length];
                 practicalNameBufferLength = new int[items.Length];
                 practicalContentBufferLength = new long[items.Length];
 
@@ -258,6 +262,16 @@ namespace Business.Processer
                     fs.Read(buffer, 0, buffer.Length);
                     practicalProjectCountArray[i] = BitConverter.ToInt32(buffer, 0);
                     practicalProjectContentBufferLengthArray[i] = new int[practicalProjectCountArray[i]];
+                    practicalProjectF1BufferLengthArray[i] = new int[practicalProjectCountArray[i]];
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                    {
+                        PracticalItemProject project = new PracticalItemProject();
+                        project.ID = j;
+                        items[i].Projects.Add(project);
+                    }
                 }
                 for (int i = 0; i < items.Length; i++)
                 {
@@ -267,6 +281,21 @@ namespace Business.Processer
                         fs.Read(buffer, 0, buffer.Length);
                         practicalProjectContentBufferLengthArray[i][j] = BitConverter.ToInt32(buffer, 0);
                     }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                    {
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        practicalProjectF1BufferLengthArray[i][j] = BitConverter.ToInt32(buffer, 0);
+                    }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[sizeof(int)];
+                    fs.Read(buffer, 0, buffer.Length);
+                    practicalProjectF2BufferLengthArray[i] = BitConverter.ToInt32(buffer, 0);
                 }
                 for (int i = 0; i < items.Length; i++)
                 {
@@ -286,11 +315,23 @@ namespace Business.Processer
                     {
                         buffer = new byte[practicalProjectContentBufferLengthArray[i][j]];
                         fs.Read(buffer, 0, buffer.Length);
-                        PracticalItemProject project = new PracticalItemProject();
-                        project.ID = j;
-                        project.Name = UTF8Encoding.UTF8.GetString(buffer);
-                        items[i].Projects.Add(project);
+                        items[i].Projects[j].Name = UTF8Encoding.UTF8.GetString(buffer);
                     }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                    {
+                        buffer = new byte[practicalProjectF1BufferLengthArray[i][j]];
+                        fs.Read(buffer, 0, buffer.Length);
+                        items[i].Projects[j].HelperText = UTF8Encoding.UTF8.GetString(buffer);
+                    }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[practicalProjectF2BufferLengthArray[i]];
+                    fs.Read(buffer, 0, buffer.Length);
+                    items[i].HelperText = UTF8Encoding.UTF8.GetString(buffer);
                 }
                 for (int i = 0; i < items.Length; i++)
                 {

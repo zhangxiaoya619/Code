@@ -17,6 +17,7 @@ using Common.Utils;
 using AxDSOFramer;
 using System.Windows.Threading;
 using System.Diagnostics;
+using Common;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -35,8 +36,20 @@ namespace AuditPracticalOperation.Controls
 
         private bool _isFramerDirty;
 
-        public PracticalOperate(int practicalID, PracticalItemProject project)
+        private IHelper f2Helper;
+
+        private IHelper f1Helper;
+
+        private KeyboardHook keyboardHook;
+
+        public PracticalOperate(IHelper f2Helper, int practicalID, PracticalItemProject project)
         {
+            this.f1Helper = project;
+            this.f2Helper = f2Helper;
+            this.keyboardHook = new KeyboardHook();
+            this.keyboardHook.SetHook();
+            this.keyboardHook.OnKeyUp += KeyboardHook_OnKeyUp;
+
             InitializeComponent();
 
             if (!this.IsInDesignMode())
@@ -52,6 +65,14 @@ namespace AuditPracticalOperation.Controls
                     practicalFilePath = contentProcesser.LoadContent();
                 }
             }
+        }
+
+        private void KeyboardHook_OnKeyUp(Key key, bool shift)
+        {
+            if (shift && key == Key.F1)
+                ShowHelper(f1Helper);
+            else if (shift && key == Key.F2)
+                ShowHelper(f2Helper);
         }
 
         private bool CheckProcess()
@@ -101,6 +122,8 @@ namespace AuditPracticalOperation.Controls
         private void Close(bool isDispose)
         {
             framer.Close();
+
+            keyboardHook.UnHook();
 
             if (isDispose)
                 framer.Dispose();
@@ -160,6 +183,16 @@ namespace AuditPracticalOperation.Controls
             KillAllProcess();
             contentProcesser.SaveContent();
             Close(false);
+        }
+
+        private void ShowHelper(IHelper helper)
+        {
+            if (string.IsNullOrWhiteSpace(helper.HelperText))
+                return;
+
+            Helper helperWindow = new Helper(helper);
+            helperWindow.Owner = Application.Current.MainWindow;
+            helperWindow.ShowDialog();
         }
     }
 }

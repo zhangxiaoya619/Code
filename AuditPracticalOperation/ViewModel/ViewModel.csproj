@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="GainItem.cs" />
     <Compile Include="HasDonePracticalItem.cs" />
+    <Compile Include="IHelper.cs" />
     <Compile Include="IPower.cs" />
     <Compile Include="PracticalItem.cs" />
     <Compile Include="PracticalItemProject.cs" />

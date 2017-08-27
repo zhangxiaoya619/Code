@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracticalExportTools"
         mc:Ignorable="d"
-        Title="MainWindow" Height="639" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="639" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:PracticalFileNumConverter x:Key="practicalFileNumConverter"/>
     </Window.Resources>

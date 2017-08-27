@@ -1,0 +1,31 @@
+﻿<Window x:Class="PracticalImportTools.HelperEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PracticalImportTools"
+        mc:Ignorable="d"
+        Title="HelperEditor" Height="768" Width="1024" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Background="#FFFFFF" Closed="Window_Closed">
+    <Grid Margin="20" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" x:Name="title" FontFamily="Microsoft YaHei" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="1" x:Name="header" FontFamily="Microsoft YaHei" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Border BorderBrush="#000000" BorderThickness="1" Grid.Row="2">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <RichTextBox x:Name="editor" Background="LightGray" FontFamily="Microsoft YaHei" FocusVisualStyle="{x:Null}">
+                    <RichTextBox.Template>
+                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </Border>
+                        </ControlTemplate>
+                    </RichTextBox.Template>
+                </RichTextBox>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>

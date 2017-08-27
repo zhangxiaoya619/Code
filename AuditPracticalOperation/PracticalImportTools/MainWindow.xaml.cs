@@ -20,11 +20,16 @@ namespace PracticalImportTools
         private const string RESOURCE_FILE_NAME = "resource.sub";
         private const int BUFFER_PACKAGE_LENGTH = 1000;
         private ObservableCollection<PracticalFile> files;
-
+        private const string LOAD_PRACTICAL_FILE_FOLDER = "loadpracticalfile";
+        private readonly string loadPracticalFileFolder;
 
         public MainWindow()
         {
             files = new ObservableCollection<PracticalFile>();
+            loadPracticalFileFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, LOAD_PRACTICAL_FILE_FOLDER);
+
+            if (!Directory.Exists(loadPracticalFileFolder))
+                Directory.CreateDirectory(loadPracticalFileFolder);
 
             InitializeComponent();
 
@@ -106,7 +111,7 @@ namespace PracticalImportTools
             }
         }
 
-        private void Command_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void AfterLoadCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = files.Count > 0;
         }
@@ -118,6 +123,8 @@ namespace PracticalImportTools
             byte[] buffer = null;
             FileStream[] fileFsArray = null;
             byte[][][] projectContentBufferArray = new byte[files.Count][][];
+            byte[][][] projectF1BufferArray = new byte[files.Count][][];
+            byte[][] projectF2BufferArray = new byte[files.Count][];
 
             try
             {
@@ -129,7 +136,7 @@ namespace PracticalImportTools
                 fs.Write(buffer, 0, buffer.Length);
                 #endregion
 
-                #region 任务清单个数
+                #region 写任务清单个数
                 for (int i = 0; i < files.Count; i++)
                 {
                     buffer = BitConverter.GetBytes(files[i].Projects.Count);
@@ -137,7 +144,7 @@ namespace PracticalImportTools
                 }
                 #endregion
 
-                #region 任务清单内容长度
+                #region 写任务清单内容长度
                 for (int i = 0; i < files.Count; i++)
                 {
                     projectContentBufferArray[i] = new byte[files[i].Projects.Count][];
@@ -147,6 +154,28 @@ namespace PracticalImportTools
                         buffer = BitConverter.GetBytes(projectContentBufferArray[i][j].Length);
                         fs.Write(buffer, 0, buffer.Length);
                     }
+                }
+                #endregion
+
+                #region 写任务清单F1长度
+                for (int i = 0; i < files.Count; i++)
+                {
+                    projectF1BufferArray[i] = new byte[files[i].Projects.Count][];
+                    for (int j = 0; j < files[i].Projects.Count; j++)
+                    {
+                        projectF1BufferArray[i][j] = UTF8Encoding.UTF8.GetBytes(files[i].Projects[j].HelperText);
+                        buffer = BitConverter.GetBytes(projectF1BufferArray[i][j].Length);
+                        fs.Write(buffer, 0, buffer.Length);
+                    }
+                }
+                #endregion
+
+                #region 写实操F2帮助长度
+                for (int i = 0; i < files.Count; i++)
+                {
+                    projectF2BufferArray[i] = UTF8Encoding.UTF8.GetBytes(files[i].HelperText);
+                    buffer = BitConverter.GetBytes(projectF2BufferArray[i].Length);
+                    fs.Write(buffer, 0, buffer.Length);
                 }
                 #endregion
 
@@ -170,10 +199,21 @@ namespace PracticalImportTools
                 }
                 #endregion
 
-                #region 任务清单内容
+                #region 写任务清单内容
                 for (int i = 0; i < files.Count; i++)
                     for (int j = 0; j < files[i].Projects.Count; j++)
                         fs.Write(projectContentBufferArray[i][j], 0, projectContentBufferArray[i][j].Length);
+                #endregion
+
+                #region 写任务清单F1帮助
+                for (int i = 0; i < files.Count; i++)
+                    for (int j = 0; j < files[i].Projects.Count; j++)
+                        fs.Write(projectF1BufferArray[i][j], 0, projectF1BufferArray[i][j].Length);
+                #endregion
+
+                #region 写实操F2帮助
+                for (int i = 0; i < files.Count; i++)
+                    fs.Write(projectF2BufferArray[i], 0, projectF2BufferArray[i].Length);
                 #endregion
 
                 #region 写模板名
@@ -207,15 +247,204 @@ namespace PracticalImportTools
                         fileFsArray[i].Dispose();
             }
         }
+
+        public static RoutedUICommand LoadPracticalFile = new RoutedUICommand("Load the Practical File", "LoadPracticalFile", typeof(MainWindow));
+
+        private void LoadPracticalFileExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Filter = "题库文件|*.sub";
+            ofd.Multiselect = false;
+
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                LoadPractical(ofd.FileName);
+
+            ofd.Dispose();
+        }
+
+        private void LoadPractical(string practicalFilePath)
+        {
+            FileStream fs = null;
+            byte[] buffer = null;
+            PracticalFile[] items = null;
+            int[] practicalProjectCountArray = null;
+            int[][] practicalProjectContentBufferLengthArray = null;
+            int[][] practicalProjectF1BufferLengthArray = null;
+            int[] practicalProjectF2BufferLengthArray = null;
+            int[] practicalNameBufferLength = null;
+            long[] practicalContentBufferLength = null;
+
+            try
+            {
+                fs = new FileStream(practicalFilePath, FileMode.Open, FileAccess.Read);
+                buffer = new byte[sizeof(int)];
+                fs.Read(buffer, 0, buffer.Length);
+                items = new PracticalFile[BitConverter.ToInt32(buffer, 0)];
+                practicalProjectCountArray = new int[items.Length];
+                practicalProjectContentBufferLengthArray = new int[items.Length][];
+                practicalProjectF1BufferLengthArray = new int[items.Length][];
+                practicalProjectF2BufferLengthArray = new int[items.Length];
+                practicalNameBufferLength = new int[items.Length];
+                practicalContentBufferLength = new long[items.Length];
+
+                for (int i = 0; i < items.Length; i++)
+                    items[i] = new PracticalFile();
+
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[sizeof(int)];
+                    fs.Read(buffer, 0, buffer.Length);
+                    practicalProjectCountArray[i] = BitConverter.ToInt32(buffer, 0);
+                    practicalProjectContentBufferLengthArray[i] = new int[practicalProjectCountArray[i]];
+                    practicalProjectF1BufferLengthArray[i] = new int[practicalProjectCountArray[i]];
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                    {
+                        PracticalProject project = new PracticalProject();
+                        project.Index = j;
+                        items[i].Projects.Add(project);
+                    }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                    {
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        practicalProjectContentBufferLengthArray[i][j] = BitConverter.ToInt32(buffer, 0);
+                    }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                    {
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        practicalProjectF1BufferLengthArray[i][j] = BitConverter.ToInt32(buffer, 0);
+                    }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[sizeof(int)];
+                    fs.Read(buffer, 0, buffer.Length);
+                    practicalProjectF2BufferLengthArray[i] = BitConverter.ToInt32(buffer, 0);
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[sizeof(int)];
+                    fs.Read(buffer, 0, buffer.Length);
+                    practicalNameBufferLength[i] = BitConverter.ToInt32(buffer, 0);
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[sizeof(long)];
+                    fs.Read(buffer, 0, buffer.Length);
+                    practicalContentBufferLength[i] = BitConverter.ToInt64(buffer, 0);
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                    {
+                        buffer = new byte[practicalProjectContentBufferLengthArray[i][j]];
+                        fs.Read(buffer, 0, buffer.Length);
+                        items[i].Projects[j].Content = UTF8Encoding.UTF8.GetString(buffer);
+                    }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                    {
+                        buffer = new byte[practicalProjectF1BufferLengthArray[i][j]];
+                        fs.Read(buffer, 0, buffer.Length);
+                        items[i].Projects[j].HelperText = UTF8Encoding.UTF8.GetString(buffer);
+                    }
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[practicalProjectF2BufferLengthArray[i]];
+                    fs.Read(buffer, 0, buffer.Length);
+                    items[i].HelperText = UTF8Encoding.UTF8.GetString(buffer);
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[practicalNameBufferLength[i]];
+                    fs.Read(buffer, 0, buffer.Length);
+                    items[i].Index = i;
+                    items[i].Name = UTF8Encoding.UTF8.GetString(buffer);
+                    items[i].Path = System.IO.Path.Combine(loadPracticalFileFolder, items[i].Name + ".xls");
+
+                    for (int j = 0; j < practicalProjectCountArray[i]; j++)
+                        items[i].Projects[j].PracticalName = items[i].Name;
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    FileStream writeFs = null;
+                    try
+                    {
+                        writeFs = new FileStream(items[i].Path, FileMode.Create, FileAccess.Write);
+                        while (writeFs.Length != practicalContentBufferLength[i])
+                        {
+                            buffer = new byte[practicalContentBufferLength[i] - writeFs.Length > BUFFER_PACKAGE_LENGTH ? BUFFER_PACKAGE_LENGTH : practicalContentBufferLength[i] - writeFs.Length];
+                            fs.Read(buffer, 0, buffer.Length);
+                            writeFs.Write(buffer, 0, buffer.Length);
+                        }
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        if (writeFs != null)
+                            writeFs.Dispose();
+                    }
+                }
+
+                for (int i = 0; i < items.Length; i++)
+                    files.Add(items[i]);
+            }
+            catch
+            {
+                throw new Exception("题库加载错误。");
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Dispose();
+            }
+        }
+
+        private void BeforeLoadCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = files.Count == 0;
+        }
+
+        public static RoutedUICommand HelperEdit = new RoutedUICommand("Edit the Helper", "HelperEdit", typeof(MainWindow));
+
+        private void HelperEditExcuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelperEditor editor = new HelperEditor((PracticalFile)e.Parameter, (HelperTypeEnum)((Button)e.OriginalSource).Tag);
+            editor.Owner = this;
+            editor.ShowDialog();
+        }
     }
 
-    public class PracticalFile : INotifyPropertyChanged
+    public interface IHelper
+    {
+        string HelperText { get; set; }
+
+        string Title { get; }
+    }
+
+    public class PracticalFile : INotifyPropertyChanged, IHelper
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int index;
-        private string name;
-        private string path;
+        private string name = string.Empty;
+        private string path = string.Empty;
         private bool isLast;
         private ObservableCollection<PracticalProject> projects;
 
@@ -294,18 +523,24 @@ namespace PracticalImportTools
             }
         }
 
+        private string helperText = string.Empty;
+
+        public string HelperText { get { return helperText; } set { helperText = value; } }
+
+        public string Title { get { return name; } }
+
         public PracticalFile()
         {
             projects = new ObservableCollection<PracticalProject>();
         }
     }
 
-    public class PracticalProject : INotifyPropertyChanged
+    public class PracticalProject : INotifyPropertyChanged, IHelper
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int index;
-        private string content;
+        private string content = string.Empty;
         private bool isLast;
 
         public int Index
@@ -353,6 +588,14 @@ namespace PracticalImportTools
                     PropertyChanged(this, new PropertyChangedEventArgs("IsLast"));
             }
         }
+
+        private string helperText = string.Empty;
+
+        public string HelperText { get { return helperText; } set { helperText = value; } }
+
+        public string PracticalName { get; set; }
+
+        public string Title { get { return PracticalName + "-" + content; } }
     }
 
     public class PracticalFileNumConverter : IValueConverter
