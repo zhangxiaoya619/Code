@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ViewModel
 {
-    public class PracticalItem : ViewModelBase
+    public class PracticalItem : ViewModelBase, IHelper
     {
         private string name;
         private int id;
@@ -67,6 +67,8 @@ namespace ViewModel
                 RaisePropertyChanged("Projects");
             }
         }
+
+        public string HelperText { get; set; }
 
         public PracticalItem()
         {

@@ -54,6 +54,15 @@ namespace PracticalImportTools
                 practicalFile.Projects[i].IsLast = i == practicalFile.Projects.Count - 1;
             }
         }
+
+        public static RoutedUICommand HelperEdit = new RoutedUICommand("Edit the Helper", "HelperEdit", typeof(PracticalProjectEditor));
+
+        private void HelperEditExcuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelperEditor editor = new HelperEditor((PracticalProject)e.Parameter, (HelperTypeEnum)((Button)e.OriginalSource).Tag);
+            editor.Owner = this;
+            editor.ShowDialog();
+        }
     }
 
     public class PracticalProjectNumConverter : IValueConverter

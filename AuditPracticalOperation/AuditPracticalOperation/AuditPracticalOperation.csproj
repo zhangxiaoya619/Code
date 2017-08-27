@@ -73,6 +73,9 @@
     <Compile Include="Controls\GainExport.xaml.cs">
       <DependentUpon>GainExport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Helper.xaml.cs">
+      <DependentUpon>Helper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PracticalOperate.xaml.cs">
       <DependentUpon>PracticalOperate.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GainExport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Helper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -39,7 +39,7 @@ namespace AuditPracticalOperation.Controls
         private void OperateExcuted(object sender, ExecutedRoutedEventArgs e)
         {
             PracticalItemProject project = (PracticalItemProject)e.Parameter;
-            PracticalOperate practicalOperate = new PracticalOperate(practicalItem.ID, project);
+            PracticalOperate practicalOperate = new PracticalOperate(practicalItem, practicalItem.ID, project);
             operateContainer.Content = practicalOperate;
             practicalOperate.OnBacked += PracticalOperate_OnBacked;
             projectContainer.Visibility = Visibility.Collapsed;

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SchemaVersion="2">
   <SketchFlowGuid>1fc6a470-4fda-42de-9266-7d0609687acf</SketchFlowGuid>
-  <StartScreen>KJRJScreens.wodechengjiu_的副本</StartScreen>
+  <StartScreen>KJRJScreens.huoqujihuo_的副本</StartScreen>
   <Screens>
     <Screen>
       <Type>Navigation</Type>
@@ -99,6 +99,78 @@
       </Position>
       <VisualTag>0</VisualTag>
     </Screen>
+    <Screen>
+      <Type>Navigation</Type>
+      <ClassName>KJRJScreens.kenuxuanze_的副本_1</ClassName>
+      <DisplayName>huoqujihuo</DisplayName>
+      <FileName>kenuxuanze_的副本_1.xaml</FileName>
+      <Annotations />
+      <Position>
+        <X>122</X>
+        <Y>36</Y>
+      </Position>
+      <VisualTag>0</VisualTag>
+    </Screen>
+    <Screen>
+      <Type>Navigation</Type>
+      <ClassName>KJRJScreens.huoqujihuo_的副本</ClassName>
+      <DisplayName>huoquzhengshu</DisplayName>
+      <FileName>huoqujihuo_的副本.xaml</FileName>
+      <Annotations />
+      <Position>
+        <X>239</X>
+        <Y>37</Y>
+      </Position>
+      <VisualTag>0</VisualTag>
+    </Screen>
+    <Screen>
+      <Type>Navigation</Type>
+      <ClassName>KJRJScreens.huoqujihuo_的副本_1</ClassName>
+      <DisplayName>bangzuzhiyin</DisplayName>
+      <FileName>huoqujihuo_的副本_1.xaml</FileName>
+      <Annotations />
+      <Position>
+        <X>122</X>
+        <Y>71</Y>
+      </Position>
+      <VisualTag>0</VisualTag>
+    </Screen>
+    <Screen>
+      <Type>Navigation</Type>
+      <ClassName>KJRJScreens.gundongtiao</ClassName>
+      <DisplayName>gundongtiao</DisplayName>
+      <FileName>gundongtiao.xaml</FileName>
+      <Annotations />
+      <Position>
+        <X>242</X>
+        <Y>71</Y>
+      </Position>
+      <VisualTag>0</VisualTag>
+    </Screen>
+    <Screen>
+      <Type>Navigation</Type>
+      <ClassName>KJRJScreens.bangzuzhiyin_的副本</ClassName>
+      <DisplayName>xiaoxitishi</DisplayName>
+      <FileName>bangzuzhiyin_的副本.xaml</FileName>
+      <Annotations />
+      <Position>
+        <X>122</X>
+        <Y>106</Y>
+      </Position>
+      <VisualTag>0</VisualTag>
+    </Screen>
+    <Screen>
+      <Type>Navigation</Type>
+      <ClassName>KJRJScreens.huoquzhengshu_的副本</ClassName>
+      <DisplayName>huoquzhengshu banbener</DisplayName>
+      <FileName>huoquzhengshu_的副本.xaml</FileName>
+      <Annotations />
+      <Position>
+        <X>353</X>
+        <Y>37</Y>
+      </Position>
+      <VisualTag>0</VisualTag>
+    </Screen>
   </Screens>
   <Connections />
   <PrototypeRevision>0</PrototypeRevision>
@@ -148,7 +220,7 @@
     <Zoom>1</Zoom>
     <Center>
       <X>633</X>
-      <Y>42.5</Y>
+      <Y>69.5</Y>
     </Center>
   </ViewState>
 </Data>

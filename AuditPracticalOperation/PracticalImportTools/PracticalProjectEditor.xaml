@@ -5,13 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracticalImportTools"
         mc:Ignorable="d"
-        Title="PracticalProjectEditor" Height="600" Width="800" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+        Title="PracticalProjectEditor" Height="600" Width="1100" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Background="#FFFFFF">
     <Window.Resources>
         <local:PracticalProjectNumConverter x:Key="practicalProjectNumConverter"/>
+        <local:HelperTypeEnum x:Key="f1">
+            F1
+        </local:HelperTypeEnum>
+        <local:HelperTypeEnum x:Key="f2">
+            F2
+        </local:HelperTypeEnum>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="local:PracticalProjectEditor.AddProject" Executed="AddProjectExcuted"/>
         <CommandBinding Command="local:PracticalProjectEditor.DeleteProject" Executed="DeleteProjectExcuted"/>
+        <CommandBinding Command="local:PracticalProjectEditor.HelperEdit" Executed="HelperEditExcuted"/>
     </Window.CommandBindings>
     <Grid x:Name="container" Margin="20">
         <Grid.RowDefinitions>
@@ -36,6 +43,7 @@
                                     <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,0,1">
                                     <TextBlock FontFamily="Microsoft YaHei" Text="序号" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -43,7 +51,10 @@
                                 <Border Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,0,1">
                                     <TextBlock FontFamily="Microsoft YaHei" Text="任务内容" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Border>
-                                <Border Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,1,1">
+                                <Border Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,0,1">
+                                    <TextBlock FontFamily="Microsoft YaHei" Text="快捷键提示" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,1,1">
                                     <Button Width="60" Height="25" Content="添加任务" VerticalAlignment="Center" HorizontalAlignment="Center" Command="local:PracticalProjectEditor.AddProject"/>
                                 </Border>
                             </Grid>
@@ -98,8 +109,9 @@
                 <DataTemplate>
                     <Grid Height="45">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000">
@@ -133,6 +145,21 @@
                             <TextBox Margin="10,0" Height="25" FontFamily="Microsoft YaHei" Text="{Binding Content}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                         </Border>
                         <Border Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsLast}" Value="True">
+                                            <Setter Property="BorderThickness" Value="1,0,0,0"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsLast}" Value="False">
+                                            <Setter Property="BorderThickness" Value="1,0,0,1"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Button Width="60" Margin="0,0,10,0" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft YaHei" Tag="{StaticResource f1}" Content="F1提示" Command="local:PracticalProjectEditor.HelperEdit" CommandParameter="{Binding}"/>
+                        </Border>
+                        <Border Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Style.Triggers>

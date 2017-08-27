@@ -35,8 +35,15 @@ namespace AuditPracticalOperation.Controls
 
         private bool _isFramerDirty;
 
-        public PracticalOperate(int practicalID, PracticalItemProject project)
+        private IHelper f2Helper;
+
+        private IHelper f1Helper;
+
+        public PracticalOperate(IHelper f2Helper, int practicalID, PracticalItemProject project)
         {
+            this.f1Helper = project;
+            this.f2Helper = f2Helper;
+
             InitializeComponent();
 
             if (!this.IsInDesignMode())
@@ -160,6 +167,13 @@ namespace AuditPracticalOperation.Controls
             KillAllProcess();
             contentProcesser.SaveContent();
             Close(false);
+        }
+
+        private void ShowHelper(IHelper helper)
+        {
+            Helper helperWindow = new Helper(helper);
+            helperWindow.Owner = Application.Current.MainWindow;
+            helperWindow.ShowDialog();
         }
     }
 }
