@@ -36,7 +36,8 @@ namespace AuditPracticalOperation.Controls
             }
             else
             {
-                MessageBox.Show("你没有购买。");
+                WinBuyActivationCode winCode = new WinBuyActivationCode();
+                winCode.ShowDialog();
             }
         }
 

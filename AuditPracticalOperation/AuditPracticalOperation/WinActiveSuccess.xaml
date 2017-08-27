@@ -1,0 +1,20 @@
+﻿<Window x:Class="AuditPracticalOperation.WinActiveSuccess"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:UC="clr-namespace:AuditPracticalOperation.UContorls"
+        xmlns:local="clr-namespace:AuditPracticalOperation"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
+        Height="200" Width="300"
+        BorderThickness="1"  BorderBrush="{DynamicResource BaseBorder-Sketch}"   WindowStyle="None" 
+        AllowDrop="False"  ResizeMode="NoResize" 
+        Background="#FFEDEDED"
+        AllowsTransparency="False" 
+        WindowStartupLocation="CenterScreen"
+        TextOptions.TextFormattingMode="Display">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Image Source="pack://application:,,,/Images/chenggong.png" Stretch="Fill" Width="90" Height="90" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+            <TextBlock HorizontalAlignment="Center"  Style="{DynamicResource BasicTextBlock-Sketch}" Text="激活成功！" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="32" Foreground="#FF94C11E" Margin="0,20,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

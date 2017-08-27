@@ -117,5 +117,21 @@ namespace AuditPracticalOperation
         {
             return Regex.Replace(key, @"[^\d]*", "");
         }
+
+        private void TextBoxName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LoginExecuted(this, null);
+            }
+        }
+
+        private void TextBoxName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if ((!string.IsNullOrEmpty(TextBoxName.Text.Trim())) && TextBoxName.Text.Trim() != "请输入姓名+学号")
+            {
+                TextBoxName.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
     }
 }

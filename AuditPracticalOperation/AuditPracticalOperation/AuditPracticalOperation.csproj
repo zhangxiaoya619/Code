@@ -104,6 +104,15 @@
     <Compile Include="UContorls\UCMenu.xaml.cs">
       <DependentUpon>UCMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinActiveFail.xaml.cs">
+      <DependentUpon>WinActiveFail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinActiveSuccess.xaml.cs">
+      <DependentUpon>WinActiveSuccess.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinBuyActivationCode.xaml.cs">
+      <DependentUpon>WinBuyActivationCode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinLogin.xaml.cs">
       <DependentUpon>WinLogin.xaml</DependentUpon>
     </Compile>
@@ -160,6 +169,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UContorls\UCMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinActiveFail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinActiveSuccess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinBuyActivationCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +254,8 @@
     <EmbeddedResource Include="Images\pdf.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="Images\chenggong.png" />
+    <Resource Include="Images\shibai.png" />
     <Content Include="Images\yiwancheng.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

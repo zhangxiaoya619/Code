@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPracticalManager.cs" />
+    <Compile Include="Processer\ActivationProcessor.cs" />
     <Compile Include="Processer\LocalSerialNumProcessor.cs" />
     <Compile Include="Processer\PracticalManager.cs" />
     <Compile Include="Processer\PracticalContentProcesser.cs" />
