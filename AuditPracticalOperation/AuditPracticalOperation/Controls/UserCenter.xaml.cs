@@ -29,7 +29,7 @@ namespace AuditPracticalOperation.Controls
 
         void UserCenter_Loaded(object sender, RoutedEventArgs e)
         {
-            this.TextBlock_xuliehao.Text = "序列号：" + SingletonManager.Get<UserProcesser>().GetUser().CPUID;
+            this.TextBlock_xuliehao.Text = SingletonManager.Get<UserProcesser>().GetUser().CPUID.ToString();
         }
     }
 }
