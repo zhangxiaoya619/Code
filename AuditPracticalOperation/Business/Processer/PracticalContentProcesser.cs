@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using ViewModel;
@@ -30,6 +31,17 @@ namespace Business.Processer
             this.practicalID = practicalID;
             this.projectID = projectID;
             this.practicalManager = SingletonManager.Get<PracticalManager>();
+        }
+
+        public static void KillAllProcess()
+        {
+            while (Process.GetProcessesByName("EXCEL").Count(process => process.ProcessName == "EXCEL") > 0)
+            {
+                foreach (Process IsProcedding in Process.GetProcessesByName("EXCEL"))
+                    if (IsProcedding.ProcessName == "EXCEL")
+                        if (!IsProcedding.HasExited)
+                            IsProcedding.Kill();
+            }
         }
     }
 }

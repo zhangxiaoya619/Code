@@ -8,5 +8,7 @@ namespace ViewModel
     public interface IHelper
     {
         string HelperText { get; set; }
+        bool IsNeedShowHelper { get; }
+        string Title { get; }
     }
 }

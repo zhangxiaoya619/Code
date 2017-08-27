@@ -57,16 +57,9 @@ namespace AuditPracticalOperation.Controls
 
             if (!this.IsInDesignMode())
             {
-                if (!CheckProcess())
-                {
-                    Close(true);
-                }
-                else
-                {
-                    contentProcesser = new PracticalContentProcesser(practicalID, project.ID);
-                    container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
-                    practicalFilePath = contentProcesser.LoadContent();
-                }
+                contentProcesser = new PracticalContentProcesser(practicalID, project.ID);
+                container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
+                practicalFilePath = contentProcesser.LoadContent();
             }
         }
 
@@ -76,38 +69,6 @@ namespace AuditPracticalOperation.Controls
                 ShowHelper(f1Helper);
             else if (control && key == System.Windows.Forms.Keys.F2)
                 ShowHelper(f2Helper);
-        }
-
-        private bool CheckProcess()
-        {
-            foreach (Process IsProcedding in Process.GetProcessesByName("EXCEL"))
-            {
-                if (IsProcedding.ProcessName == "EXCEL")
-                {
-                    if (MessageBox.Show("打开实操文档需要关闭所有的EXCEL进程，请确认是否关闭所有EXCEL进程并打开实操文档？", "打开实操文档", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        KillAllProcess();
-                        return true;
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        private void KillAllProcess()
-        {
-            while (Process.GetProcessesByName("EXCEL").Count(process => process.ProcessName == "EXCEL") > 0)
-            {
-                foreach (Process IsProcedding in Process.GetProcessesByName("EXCEL"))
-                    if (IsProcedding.ProcessName == "EXCEL")
-                        if (!IsProcedding.HasExited)
-                            IsProcedding.Kill();
-            }
         }
 
         public static RoutedUICommand Back = new RoutedUICommand("Back To PracticalCenter", "BackToPracticalCenter", typeof(PracticalOperate));
@@ -183,14 +144,14 @@ namespace AuditPracticalOperation.Controls
 
         private void DucomentSaveCompleted(object sender, _DFramerCtlEvents_OnSaveCompletedEvent e)
         {
-            KillAllProcess();
+            PracticalContentProcesser.KillAllProcess();
             contentProcesser.SaveContent();
             Close(false);
         }
 
         private void ShowHelper(IHelper helper)
         {
-            if (isOpenDialog || string.IsNullOrWhiteSpace(helper.HelperText))
+            if (isOpenDialog || !helper.IsNeedShowHelper)
                 return;
 
             Helper helperWindow = new Helper(helper);

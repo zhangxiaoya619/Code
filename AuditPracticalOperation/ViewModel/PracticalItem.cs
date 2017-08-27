@@ -70,6 +70,10 @@ namespace ViewModel
 
         public string HelperText { get; set; }
 
+        public bool IsNeedShowHelper { get { return !string.IsNullOrEmpty(HelperText.Trim()); } }
+
+        public string Title { get { return "实操指引"; } }
+
         public PracticalItem()
         {
             Projects = new ObservableCollection<PracticalItemProject>();

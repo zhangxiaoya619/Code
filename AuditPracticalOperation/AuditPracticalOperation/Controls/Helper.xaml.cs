@@ -22,6 +22,7 @@ namespace AuditPracticalOperation.Controls
         public Helper(IHelper helper)
         {
             InitializeComponent();
+            this.title.Text = helper.Title;
             helperContainer.AppendText(helper.HelperText);
         }
 
@@ -43,14 +44,7 @@ namespace AuditPracticalOperation.Controls
 
         private void CloseWindow()
         {
-            try
-            {
-                this.Close();
-            }
-            catch
-            {
-
-            }
+            this.Close();
         }
     }
 }

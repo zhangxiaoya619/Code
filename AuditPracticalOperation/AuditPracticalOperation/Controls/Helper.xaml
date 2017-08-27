@@ -55,7 +55,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="20,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="帮助" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FFFFFF"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="title" Margin="20,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="帮助" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FFFFFF"/>
         <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="1">
             <Border BorderBrush="LightGray" BorderThickness="1" Margin="20">
                 <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">

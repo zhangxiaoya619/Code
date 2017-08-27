@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditPracticalOperation", "AuditPracticalOperation\AuditPracticalOperation.csproj", "{DBCD3BD3-4AF6-428E-9751-B42D25DC83D7}"
 EndProject
@@ -65,5 +65,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3F07DF18-02DD-4321-A159-040D36BD9C55} = {406287EE-51E6-4E7F-90E1-523E42BE8189}
+		{756150DD-A1C8-44D8-AAA2-8D795F5625C3} = {406287EE-51E6-4E7F-90E1-523E42BE8189}
+		{F35C3513-D15C-4033-ACCC-FFB6A21D4F68} = {406287EE-51E6-4E7F-90E1-523E42BE8189}
 	EndGlobalSection
 EndGlobal
