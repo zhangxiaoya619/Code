@@ -42,10 +42,13 @@ namespace AuditPracticalOperation.Controls
 
         private KeyboardHook keyboardHook;
 
+        private bool isOpenDialog;
+
         public PracticalOperate(IHelper f2Helper, int practicalID, PracticalItemProject project)
         {
             this.f1Helper = project;
             this.f2Helper = f2Helper;
+            this.isOpenDialog = false;
             this.keyboardHook = new KeyboardHook();
             this.keyboardHook.SetHook();
             this.keyboardHook.OnKeyUp += KeyboardHook_OnKeyUp;
@@ -67,11 +70,11 @@ namespace AuditPracticalOperation.Controls
             }
         }
 
-        private void KeyboardHook_OnKeyUp(Key key, bool shift)
+        private void KeyboardHook_OnKeyUp(System.Windows.Forms.Keys key, bool control)
         {
-            if (shift && key == Key.F1)
+            if (control && key == System.Windows.Forms.Keys.F1)
                 ShowHelper(f1Helper);
-            else if (shift && key == Key.F2)
+            else if (control && key == System.Windows.Forms.Keys.F2)
                 ShowHelper(f2Helper);
         }
 
@@ -187,12 +190,22 @@ namespace AuditPracticalOperation.Controls
 
         private void ShowHelper(IHelper helper)
         {
-            if (string.IsNullOrWhiteSpace(helper.HelperText))
+            if (isOpenDialog || string.IsNullOrWhiteSpace(helper.HelperText))
                 return;
 
             Helper helperWindow = new Helper(helper);
             helperWindow.Owner = Application.Current.MainWindow;
-            helperWindow.ShowDialog();
+            helperWindow.Show();
+
+            helperWindow.Closed += HelperWindowClosed;
+
+            isOpenDialog = true;
+        }
+
+        private void HelperWindowClosed(object sender, EventArgs e)
+        {
+            isOpenDialog = false;
+            ((Helper)sender).Closed -= HelperWindowClosed;
         }
     }
 }
