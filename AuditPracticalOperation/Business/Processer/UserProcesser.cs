@@ -30,7 +30,10 @@ namespace Business.Processer
         }
         public bool UserRegister(string ActiveCode)
         {
-            return SingletonManager.Get<ActivationProcessor>().RegistIt(ActiveCode, SingletonManager.Get<ActivationProcessor>().getRNum(user.CPUID));
+            bool issuccess = SingletonManager.Get<ActivationProcessor>().RegistIt(ActiveCode, SingletonManager.Get<ActivationProcessor>().getRNum(user.CPUID));
+            if (issuccess)
+                user.ChangePower(issuccess);
+            return issuccess;
         }
         private UserProcesser()
         {
