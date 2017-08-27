@@ -30,13 +30,13 @@ namespace Business.Processer
         }
         public bool UserRegister(string ActiveCode)
         {
-            return SingletonManager.Get<ActivationProcessor>().RegistIt(ActiveCode, SingletonManager.Get<ActivationProcessor>().getRNum(user.CPUID + user.ID));
+            return SingletonManager.Get<ActivationProcessor>().RegistIt(ActiveCode, SingletonManager.Get<ActivationProcessor>().getRNum(user.CPUID));
         }
         private UserProcesser()
         {
             user = new User();
             user.CPUID = SingletonManager.Get<LocalSerialNumProcessor>().GetCpuSerialNum();
-            user.ChangePower(SingletonManager.Get<ActivationProcessor>().BoolRegist(SingletonManager.Get<ActivationProcessor>().getRNum(user.CPUID + user.ID)));
+            user.ChangePower(SingletonManager.Get<ActivationProcessor>().BoolRegist(SingletonManager.Get<ActivationProcessor>().getRNum(user.CPUID)));
         }
     }
 }

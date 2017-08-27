@@ -50,21 +50,21 @@ namespace Business.Processer
             Microsoft.Win32.RegistryKey userRegKey = Microsoft.Win32.Registry.CurrentUser;
             try
             {
-                keynames = localRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + GetMd5(sn)).GetValueNames();
+                keynames = localRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + sn).GetValueNames();
                 foreach (string name in keynames)
                 {
                     if (name == "WhiteCode")
                     {
-                        if (localRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + GetMd5(sn)).GetValue("WhiteCode").ToString() == "BBC6D58D0953F027760A046D58D52786")
+                        if (localRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + sn).GetValue("WhiteCode").ToString() == "BBC6D58D0953F027760A046D58D52786")
                             flag = true;
                     }
                 }
-                keynames = userRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + GetMd5(sn)).GetValueNames();
+                keynames = userRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + sn).GetValueNames();
                 foreach (string name in keynames)
                 {
                     if (name == "WhiteCode")
                     {
-                        if (flag && userRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + GetMd5(sn)).GetValue("WhiteCode").ToString() == "BBC6D58D0953F027760A046D58D52786")
+                        if (flag && userRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + sn).GetValue("WhiteCode").ToString() == "BBC6D58D0953F027760A046D58D52786")
                             return true;
                     }
                 }
