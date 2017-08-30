@@ -11,9 +11,15 @@ namespace ViewModel
         {
             _isPower = ispower;
         }
-        public bool HasPower(int practicalItemID)
+        public bool HasPracticalPower(int practicalItemID)
         {
             if (practicalItemID == 0 || practicalItemID == 1 || practicalItemID == 2)
+                return true;
+            return _isPower;
+        }
+        public bool HasProofPower(int proofItemID)
+        {
+            if (proofItemID == 0 || proofItemID == 6)
                 return true;
             return _isPower;
         }
@@ -63,5 +69,7 @@ namespace ViewModel
                 RaisePropertyChanged("CPUID");
             }
         }
+
+
     }
 }

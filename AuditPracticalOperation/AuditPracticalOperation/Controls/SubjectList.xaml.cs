@@ -26,7 +26,7 @@ namespace AuditPracticalOperation.Controls
         private void OpenPracticalOperateExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             PracticalItem practicalItem = (PracticalItem)e.Parameter;
-            if (SingletonManager.Get<UserProcesser>().GetPower().HasPower(practicalItem.ID))
+            if (SingletonManager.Get<UserProcesser>().GetPower().HasPracticalPower(practicalItem.ID))
             {
                 PracticalCenter practicalCenter = new PracticalCenter(practicalItem);
                 practicalCenterContainer.Content = practicalCenter;

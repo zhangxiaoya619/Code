@@ -31,5 +31,4 @@ namespace AuditPracticalOperation.UContorls
                 OnClose();
         }
     }
-    public delegate void UserClickHandler();
 }

@@ -15,6 +15,8 @@ namespace ViewModel
         /// </summary>
         /// <param name="practicalItemID">科目ID</param>
         /// <returns>是否购买激活</returns>
-        bool HasPower(int practicalItemID);
+        bool HasPracticalPower(int practicalItemID);
+
+        bool HasProofPower(int proofItemID);
     }
 }

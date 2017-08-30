@@ -6,7 +6,7 @@
         Height="768" Width="1024"
         BorderThickness="1"  BorderBrush="{DynamicResource BaseBorder-Sketch}"   
         WindowStyle="None" 
-        WindowState="Maximized"
+        WindowState="Normal"
         AllowDrop="False"  
         ResizeMode="NoResize" 
         Background="White"
@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <uc:UCHeader x:Name="header"/>
+            <uc:UCHeader x:Name="header" MouseLeftButtonDown="header_MouseLeftButtonDown"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

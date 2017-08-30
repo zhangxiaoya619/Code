@@ -26,6 +26,31 @@ namespace AuditPracticalOperation
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
+            this.header.OnMin += header_OnMin;
+            this.header.OnMax += header_OnMax;
+            this.header.OnClose += header_OnClose;
+        }
+
+        private void header_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+        void header_OnClose()
+        {
+            this.Close();
+        }
+
+        void header_OnMax()
+        {
+            if (this.WindowState == System.Windows.WindowState.Maximized)
+                this.WindowState = System.Windows.WindowState.Normal;
+            else if (this.WindowState == System.Windows.WindowState.Normal)
+                this.WindowState = System.Windows.WindowState.Maximized;
+        }
+
+        void header_OnMin()
+        {
+            this.WindowState = System.Windows.WindowState.Minimized;
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -66,5 +91,6 @@ namespace AuditPracticalOperation
         {
             this.Close();
         }
+
     }
 }

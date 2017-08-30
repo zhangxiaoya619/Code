@@ -27,5 +27,24 @@ namespace AuditPracticalOperation.UContorls
         {
             this.UserName.Text = name;
         }
+        public event UserClickHandler OnMin;
+        public event UserClickHandler OnMax;
+        public event UserClickHandler OnClose;
+        private void BtnMin_Click(object sender, RoutedEventArgs e)
+        {
+            if (OnMin != null)
+                OnMin();
+        }
+        private void BtnMax_Click(object sender, RoutedEventArgs e)
+        {
+            if (OnMax != null)
+                OnMax();
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            if (OnClose != null)
+                OnClose();
+        }
     }
+    public delegate void UserClickHandler();
 }

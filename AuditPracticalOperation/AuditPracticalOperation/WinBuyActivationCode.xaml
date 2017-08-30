@@ -110,7 +110,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Rectangle x:Name="rectangle" Width="500" VerticalAlignment="Center" Height="40" HorizontalAlignment="Center" Stroke="{x:Null}" Fill="#FF2B9BDA"/>
-                            <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="激活科目，去学习～" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="19" Foreground="White"/>
+                            <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="激  活" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="19" Foreground="White"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True"/>

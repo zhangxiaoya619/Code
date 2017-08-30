@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              Background="#FFEDEDED"
-             d:DesignHeight="800" 
-             d:DesignWidth="1300">
+             d:DesignHeight="600" 
+             d:DesignWidth="900">
     <UserControl.Resources>
         <LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
             <GradientStop Color="#BABABA" Offset="0"/>
@@ -87,20 +87,20 @@
                     <Grid Grid.Column="0" Margin="2">
                         <Rectangle Fill="White" Stretch="Fill"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TextBlock_DonePercent" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="88" Width="110" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="96" Foreground="#FFAE69D5"/>
-                            <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="经验值" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei" FontSize="24" Foreground="Black"/>
+                            <TextBlock x:Name="TextBlock_DonePercent" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="88" Width="90" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="55" Foreground="#FFAE69D5"/>
+                            <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="经验值" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei" FontSize="24" Foreground="Black" Margin="-40,100,0,0"/>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="1" Margin="2">
                         <Rectangle Fill="White" Stretch="Fill"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="TextBlock_DoneCount" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="2" Width="110" TextAlignment="Center"  VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="96" Foreground="#FF4B96DC"/>
-                            <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="完成科目" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei" FontSize="24" Foreground="Black"/>
+                            <TextBlock x:Name="TextBlock_DoneCount" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="2" Width="90" TextAlignment="Center"  VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="55" Foreground="#FF4B96DC"/>
+                            <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="完成科目" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei" FontSize="24" Foreground="Black" Margin="-40,100,0,0"/>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="2" Margin="2">
                         <Rectangle Fill="White" Stretch="Fill"/>
-                        <Image Margin="0" Source="pack://application:,,,/Images/zhengshu.jpeg"  Width="170" Height="214" Stretch="Fill"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Image Margin="0" Source="pack://application:,,,/Images/zhengshu.jpeg"  Stretch="Uniform"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
             </Grid>
@@ -192,9 +192,11 @@
                 <Image Source="pack://application:,,,/Images/huozuohuoban.png" Stretch="Fill" />
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Rectangle Fill="#FF2B9BDA" HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="324"/>
-                    <TextBlock HorizontalAlignment="Center" Margin="50.776,13.921,50.776,83.921" Style="{DynamicResource BasicTextBlock-Sketch}" Text="历届学员推荐实习/就业" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
-                    <TextBlock HorizontalAlignment="Center" Margin="50.776,48.921" Style="{DynamicResource BasicTextBlock-Sketch}" Text="成功率100%" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
-                    <TextBlock HorizontalAlignment="Center" Margin="76.666,83.921,76.666,13.921" Style="{DynamicResource BasicTextBlock-Sketch}" Text="我们在这里等你！" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="历届学员推荐实习/就业" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
+                        <TextBlock HorizontalAlignment="Center"  Style="{DynamicResource BasicTextBlock-Sketch}" Text="成功率100%" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
+                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="我们在这里等你！" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>

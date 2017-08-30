@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ViewModel
 {
@@ -29,7 +30,7 @@ namespace ViewModel
         {
             get
             {
-                return name;
+                return Regex.Replace(name, @"\d", "").Replace(".", "");
             }
 
             set

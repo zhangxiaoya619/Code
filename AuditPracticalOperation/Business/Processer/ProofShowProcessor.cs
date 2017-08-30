@@ -27,28 +27,34 @@ namespace Business.Processer
             DirectoryInfo TheFolder = new DirectoryInfo(baseDir);
             ProofItem[] proofs = new ProofItem[TheFolder.GetDirectories().Length];
             int index = 0;
+            int powerIndex = 0;
             foreach (var item in TheFolder.GetDirectories())
             {
                 if (Directory.Exists(item.FullName))
                 {
-                    if (index == 0)
-                        proofs[index++] = new ProofItem()
-                        {
-                            IsChecked = true,
-                            Name = Regex.Replace(item.Name, @"\d", "").Replace(".", ""),
-                            Path = item.FullName,
-                            Proofs = null,
-                            Type = FileTypeEnum.Directory
-                        };
-                    else
-                        proofs[index++] = new ProofItem()
-                        {
-                            IsChecked = false,
-                            Name = Regex.Replace(item.Name, @"\d", "").Replace(".", ""),
-                            Path = item.FullName,
-                            Proofs = null,
-                            Type = FileTypeEnum.Directory
-                        };
+                    if (SingletonManager.Get<UserProcesser>().GetPower().HasProofPower(powerIndex))
+                    {
+                        if (index == 0)
+                            proofs[index++] = new ProofItem()
+                            {
+                                IsChecked = true,
+                                Name = Regex.Replace(item.Name, @"\d", "").Replace(".", ""),
+                                Path = item.FullName,
+                                Proofs = null,
+                                Type = FileTypeEnum.Directory
+                            };
+                        else
+                            proofs[index++] = new ProofItem()
+                            {
+                                IsChecked = false,
+                                Name = Regex.Replace(item.Name, @"\d", "").Replace(".", ""),
+                                Path = item.FullName,
+                                Proofs = null,
+                                Type = FileTypeEnum.Directory
+                            };
+
+                    }
+                    powerIndex++;
                 }
             }
             for (int i = 0; i < proofs.Length; i++)
