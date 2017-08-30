@@ -1,0 +1,12 @@
+﻿<Window x:Class="TestScaleImage.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:TestScaleImage.controls"
+        Title="图片预览" Height="700" Width="1000" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" 
+        AllowsTransparency="True">
+    <Grid Margin="50">
+        <local:UCImageView x:Name="imageView"/>
+    </Grid>
+</Window>
