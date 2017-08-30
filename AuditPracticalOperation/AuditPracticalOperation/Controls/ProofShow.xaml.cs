@@ -56,16 +56,25 @@ namespace AuditPracticalOperation.Controls
         private void xunhuan_Checked(object sender, RoutedEventArgs e)
         {
             ViewModel.ProofItem rootItem = (sender as RadioButton).Tag as ViewModel.ProofItem;
-            string root = rootItem.Path;
-            if (!CurrentProofDir.Path.Contains(root))
+            int index = datasource.IndexOf(rootItem);
+            if (SingletonManager.Get<UserProcesser>().GetUser().HasProofPower(index))
             {
-                queueDir.Clear();
-                queueDir.Add(rootItem);
-                CurrentProofDir = rootItem;
-                proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
+                string root = rootItem.Path;
+                if (!CurrentProofDir.Path.Contains(root))
+                {
+                    queueDir.Clear();
+                    queueDir.Add(rootItem);
+                    CurrentProofDir = rootItem;
+                    proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
+                }
+            }
+            else
+            {
+                WinBuyActivationCode winCode = new WinBuyActivationCode();
+                winCode.ShowDialog();
             }
         }
-
+        private ViewModel.ProofItem currentShowImgItem = null;
         private void ShowImg_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ViewModel.ProofItem choiseItem = (sender as Image).Tag as ViewModel.ProofItem;
@@ -92,6 +101,7 @@ namespace AuditPracticalOperation.Controls
                     case ViewModel.FileTypeEnum.Img:
                         string fileName = choiseItem.Path;
                         GridImageShow.Visibility = System.Windows.Visibility.Visible;
+                        currentShowImgItem = choiseItem;
                         imageView.LoadImage(fileName);
                         break;
                     default:
@@ -102,6 +112,8 @@ namespace AuditPracticalOperation.Controls
 
         private void ChoiseDir_Checked(object sender, RoutedEventArgs e)
         {
+            this.GridImageShow.Visibility = System.Windows.Visibility.Collapsed;
+            this.GridPdfShow.Visibility = System.Windows.Visibility.Collapsed;
             ViewModel.ProofItem choiseItem = (sender as RadioButton).Tag as ViewModel.ProofItem;
             if (choiseItem != CurrentProofDir)
             {
@@ -122,6 +134,50 @@ namespace AuditPracticalOperation.Controls
         private void pdfShow_Click(object sender, RoutedEventArgs e)
         {
             GridPdfShow.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void Grid_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (GridImageShow.Visibility == System.Windows.Visibility.Visible)
+            {
+                int index = CurrentProofDir.Proofs.IndexOf(currentShowImgItem);
+                if (index < 0)
+                    return;
+                if (e.Key == Key.Left)
+                {
+                    if (index > 0)
+                    {
+                        index -= 1;
+                        for (int i = index; i >= 0; i--)
+                        {
+                            if (CurrentProofDir.Proofs[i].Type == ViewModel.FileTypeEnum.Img)
+                            {
+                                GridImageShow.Visibility = System.Windows.Visibility.Collapsed;
+                                currentShowImgItem = CurrentProofDir.Proofs[i];
+                                imageView.LoadImage(CurrentProofDir.Proofs[i].Path);
+                                GridImageShow.Visibility = System.Windows.Visibility.Visible;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if (e.Key == Key.Right)
+                {
+                    if (index < CurrentProofDir.Proofs.Count - 1)
+                    {
+                        index += 1;
+                        for (int i = index; i < CurrentProofDir.Proofs.Count; i++)
+                        {
+                            if (CurrentProofDir.Proofs[i].Type == ViewModel.FileTypeEnum.Img)
+                            {
+                                currentShowImgItem = CurrentProofDir.Proofs[i];
+                                imageView.LoadImage(CurrentProofDir.Proofs[i].Path);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

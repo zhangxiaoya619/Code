@@ -301,7 +301,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
-            <Grid Grid.Row="1" Margin="0,10,0,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid Grid.Row="1" Margin="0,10,0,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewKeyDown="Grid_PreviewKeyDown">
                 <ListView  x:Name="proofList" Background="White"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FFEDEDED"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
