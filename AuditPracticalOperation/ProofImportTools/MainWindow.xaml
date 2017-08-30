@@ -1,0 +1,23 @@
+﻿<Window x:Class="ProofImportTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProofImportTools"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="639" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:MainWindow.OpenFolderDialog" Executed="OpenFolderDialogExecuted"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="11,10,0,10">
+            <Button Width="180" Content="选择需要导出的证据文件夹" Margin="0,0,15,0" Command="local:MainWindow.OpenFolderDialog"/>
+            <Button Width="60" Content="导出" />
+        </StackPanel>
+    </Grid>
+</Window>

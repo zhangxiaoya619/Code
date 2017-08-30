@@ -107,7 +107,7 @@ namespace AuditPracticalOperation.Controls
 
                 this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
                 {
-                    framer.Open(practicalFilePath);
+                    framer.Open(practicalFilePath, false, "Excel.Sheet", null, null);
                     return null;
                 }, null);
 

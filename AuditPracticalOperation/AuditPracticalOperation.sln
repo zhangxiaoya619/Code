@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditPracticalOperation", "AuditPracticalOperation\AuditPracticalOperation.csproj", "{DBCD3BD3-4AF6-428E-9751-B42D25DC83D7}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{63786F12-1502-4F36-918D-9EBB9B930685}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckAdobSetupOrNot", "CheckAdobSetupOrNot\CheckAdobSetupOrNot.csproj", "{BCBAF486-9BE5-4E23-8CAF-20B633A4510C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProofImportTools", "ProofImportTools\ProofImportTools.csproj", "{FAABDFB7-CB78-4276-90F0-BA15524201A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +120,16 @@ Global
 		{BCBAF486-9BE5-4E23-8CAF-20B633A4510C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BCBAF486-9BE5-4E23-8CAF-20B633A4510C}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{BCBAF486-9BE5-4E23-8CAF-20B633A4510C}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,5 +139,6 @@ Global
 		{756150DD-A1C8-44D8-AAA2-8D795F5625C3} = {406287EE-51E6-4E7F-90E1-523E42BE8189}
 		{F35C3513-D15C-4033-ACCC-FFB6A21D4F68} = {406287EE-51E6-4E7F-90E1-523E42BE8189}
 		{BCBAF486-9BE5-4E23-8CAF-20B633A4510C} = {406287EE-51E6-4E7F-90E1-523E42BE8189}
+		{FAABDFB7-CB78-4276-90F0-BA15524201A4} = {406287EE-51E6-4E7F-90E1-523E42BE8189}
 	EndGlobalSection
 EndGlobal
