@@ -124,8 +124,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="0"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/diyi.png" Stretch="Fill"/>
                     <Image Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill"/>
@@ -136,8 +136,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="0"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/dier.png" Stretch="Fill"/>
                     <Image Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill"/>
@@ -148,8 +148,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="0"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/disan.png" Stretch="Fill"/>
                     <Image Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill"/>
@@ -160,8 +160,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="4" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Image Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill"/>
@@ -170,16 +170,15 @@
                 </Grid>
                 <Grid Grid.Row="5" Margin="20,0,0,0" x:Name="ranking5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="23*"/>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="11*"/>
-                        <ColumnDefinition Width="36*"/>
-                        <ColumnDefinition Width="119*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="5" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,14,6,13"/>
-                    <Image  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill" Grid.ColumnSpan="4" Margin="16,1,29,1"/>
-                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding User_Name}" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF999999" Grid.ColumnSpan="2" Margin="0,14,0,13" />
-                    <ProgressBar Grid.Column="4" Margin="0,21,10,21" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar4" Height="8" Value="{Binding Score}" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
+                    <TextBlock Grid.Column="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="5" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Image Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill" />
+                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding User_Name}" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF999999" />
+                    <ProgressBar Grid.Column="3" Margin="0,21,10,21" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar4" Height="8" Value="{Binding Score}" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
                 </Grid>
             </Grid>
         </Grid>
