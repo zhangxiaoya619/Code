@@ -35,7 +35,16 @@ namespace AuditPracticalOperation.Controls
 
             if (!this.IsInDesignMode())
             {
-                items = SingletonManager.Get<PracticalItemProcesser>().GetHasDonePracticalItems();
+                items = new ObservableCollection<HasDonePracticalItem>();//SingletonManager.Get<PracticalItemProcesser>().GetHasDonePracticalItems();
+                for (int i = 0; i < 20; i++)
+                {
+                    items.Add(new HasDonePracticalItem()
+                        {
+                            ID = i,
+                            IsSelected = false,
+                            Name = "asda" + i
+                        });
+                }
                 practicalList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = items });
             }
         }

@@ -148,11 +148,11 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <ListView x:Name="xunhuanList" Background="Transparent" HorizontalAlignment="Center" Width="160" Margin="10,30,0,0" BorderBrush="#FFEDEDED"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView x:Name="xunhuanList" Background="Transparent" HorizontalAlignment="Center" Width="140" Margin="10,30,0,0" BorderBrush="#FFEDEDED"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel />
@@ -173,7 +173,7 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <RadioButton Content="{Binding Name}" Tag="{Binding}" Width="150" Height="30" IsChecked="{Binding IsChecked,Mode=TwoWay}" Checked="xunhuan_Checked"  GroupName="xunhuan">
+                        <RadioButton Content="{Binding Name}" Tag="{Binding}" Width="130" Height="30" IsChecked="{Binding IsChecked,Mode=TwoWay}" Checked="xunhuan_Checked"  GroupName="xunhuan">
                             <RadioButton.Style>
                                 <Style TargetType="{x:Type RadioButton}">
                                     <Setter Property="Template">
@@ -181,7 +181,7 @@
                                             <ControlTemplate TargetType="{x:Type RadioButton}">
                                                 <Grid>
                                                     <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="16" Foreground="#FF329CD7"/>
+                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF329CD7"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -211,7 +211,7 @@
                                         </Setter.Value>
                                     </Setter>
                                     <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="FontSize" Value="14"/>
                                     <Setter Property="Foreground" Value="#FF329CD7"/>
                                 </Style>
                             </RadioButton.Style>

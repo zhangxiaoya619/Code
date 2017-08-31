@@ -114,7 +114,7 @@ namespace Business.Processer
                                 break;
                             case "pdf":
                                 proof.Type = FileTypeEnum.Pdf;
-                                proof.ImgSource = AppDomain.CurrentDomain.BaseDirectory + "Images\\pdf.jpg";
+                                proof.ImgSource = AppDomain.CurrentDomain.BaseDirectory + "Images\\pdf.png";
                                 break;
                             default:
                                 break;
