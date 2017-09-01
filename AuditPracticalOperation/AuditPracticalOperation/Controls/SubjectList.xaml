@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
              xmlns:viewmodel="clr-namespace:ViewModel;assembly=ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="768" d:DesignWidth="1024">
+             d:DesignHeight="540" d:DesignWidth="700">
     <UserControl.Resources>
         <viewmodel:PracticalStateEnum x:Key="defaultState">
             Default
@@ -24,14 +24,14 @@
     <Grid>
         <Grid Background="#FFEDEDED" x:Name="subjectListContainer">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="15"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Rectangle Fill="#FFFFFF"/>
-            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="请选择报表科目" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="#FF319CD8"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="请选择报表科目" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="19" Foreground="#FF319CD8"/>
             <Border Grid.Row="2" Background="#FFFFFF">
-                <ListView x:Name="practicalList" Margin="22.5" BorderBrush="{x:Null}" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView x:Name="practicalList" Margin="10" BorderBrush="{x:Null}" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel/>
@@ -42,7 +42,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                        <Border x:Name="Bd" Padding="22.5">
+                                        <Border x:Name="Bd" Padding="16,26,0,0">
                                             <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                         </Border>
                                     </ControlTemplate>
@@ -52,7 +52,7 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <RadioButton Content="{Binding Name}" Width="220" Height="50"  GroupName="kemu" Command="controls:SubjectList.OpenPracticalOperate" CommandParameter="{Binding}">
+                            <RadioButton Content="{Binding Name}" Width="150" Height="28"  GroupName="kemu" Command="controls:SubjectList.OpenPracticalOperate" CommandParameter="{Binding}">
                                 <RadioButton.Style>
                                     <Style TargetType="{x:Type RadioButton}">
                                         <Setter Property="Template">
@@ -60,9 +60,9 @@
                                                 <ControlTemplate TargetType="{x:Type RadioButton}">
                                                     <Grid>
                                                         <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                                                        <Image x:Name="ywc" Visibility="Collapsed" Source="/Images/yiwancheng.png" Height="22" Width="22" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                                                        <Image x:Name="zzjx" Visibility="Collapsed" Source="/Images/zhengzaijingxing.png" Height="22" Width="22" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF319CD8"/>
+                                                        <Image x:Name="ywc" Visibility="Collapsed" Source="/Images/yiwancheng.png" Height="16" Width="16" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                                        <Image x:Name="zzjx" Visibility="Collapsed" Source="/Images/zhengzaijingxing.png" Height="16" Width="16" Margin="0,0,6,6" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" Width="Auto" FontFamily="Microsoft YaHei" FontSize="16" Foreground="#FF319CD8"/>
                                                     </Grid>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
@@ -81,7 +81,7 @@
                                             </Setter.Value>
                                         </Setter>
                                         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-                                        <Setter Property="FontSize" Value="18.667"/>
+                                        <Setter Property="FontSize" Value="16"/>
                                         <Setter Property="Foreground" Value="#FF319CD8"/>
                                     </Style>
                                 </RadioButton.Style>

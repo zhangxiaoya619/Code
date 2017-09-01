@@ -6,15 +6,17 @@
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
              xmlns:dsoFramer="clr-namespace:AxDSOFramer;assembly=AxInterop.DSOFramer"
              mc:Ignorable="d" 
-             d:DesignHeight="960" d:DesignWidth="1280" Loaded="UserControlLoaded" SizeChanged="WindowSizeChanged">
+             d:DesignHeight="540" 
+             d:DesignWidth="700"
+             Loaded="UserControlLoaded" SizeChanged="WindowSizeChanged">
     <UserControl.CommandBindings>
         <CommandBinding Command="controls:PracticalOperate.Back" Executed="BackExecuted"/>
         <CommandBinding Command="controls:PracticalOperate.Save" Executed="SaveExecuted"/>
     </UserControl.CommandBindings>
     <Grid Background="#FFEDEDED" x:Name="container">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Background="#FFFFFF">
@@ -23,10 +25,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                <Image Height="48" Width="48" Source="/Images/operate.png"/>
+                <Image Height="40" Width="40" Source="/Images/operate.png"/>
                 <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto" Text="{Binding Name}"/>
             </StackPanel>
-            <StackPanel Grid.Column="1" Height="30" Orientation="Horizontal">
+            <StackPanel Grid.Column="1" Height="24" Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -57,7 +59,7 @@
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
                                         <Rectangle x:Name="rectangle" Stroke="#FF289BDA" RadiusX="4" RadiusY="4" Fill="White"/>
-                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF289BDA"/>
+                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FF289BDA"/>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsFocused" Value="True"/>
@@ -70,12 +72,12 @@
                             </Setter.Value>
                         </Setter>
                         <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-                        <Setter Property="FontSize" Value="18.667"/>
+                        <Setter Property="FontSize" Value="12"/>
                         <Setter Property="Foreground" Value="#FF289BDA"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button  Content="保存并返回任务清单" Width="150"  Margin="0,0,20,0" Command="controls:PracticalOperate.Save" />
-                <Button  Content="返回任务清单" Width="150"  Margin="0,0,20,0" Command="controls:PracticalOperate.Back" />
+                <Button  Content="保存并返回任务清单" Width="120"  Margin="0,0,10,0" Command="controls:PracticalOperate.Save" />
+                <Button  Content="返回任务清单" Width="120"  Margin="0,0,10,0" Command="controls:PracticalOperate.Back" />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" x:Name="editorContainer">
@@ -87,7 +89,7 @@
                 <dsoFramer:AxFramerControl x:Name="framer" OnDocumentOpened="DocumentOpened" OnSaveCompleted="DucomentSaveCompleted"/>
             </WindowsFormsHost>
             <Grid Grid.Row="1" Background="#FFFFFF" x:Name="masker">
-                <TextBlock HorizontalAlignment="Stretch" Style="{DynamicResource BasicTextBlock-Sketch}" Text="加载中..." VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="81" TextAlignment="Center" Foreground="#FF319CD8"/>
+                <TextBlock HorizontalAlignment="Stretch" Style="{DynamicResource BasicTextBlock-Sketch}" Text="加载中..." VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="60" TextAlignment="Center" Foreground="#FF319CD8"/>
             </Grid>
         </Grid>
     </Grid>

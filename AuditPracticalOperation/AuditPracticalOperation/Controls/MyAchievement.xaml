@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:AuditPracticalOperation.Converters"
              mc:Ignorable="d" 
              Background="#FFEDEDED"
-             d:DesignHeight="600" 
-             d:DesignWidth="900">
+             d:DesignHeight="540" 
+             d:DesignWidth="700">
     <UserControl.Resources>
+        <convert:StringToImageSourceConverter x:Key="imageConverter"/>
         <LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
             <GradientStop Color="#BABABA" Offset="0"/>
             <GradientStop Color="#C7C7C7" Offset="0.5"/>
@@ -55,7 +57,7 @@
     </UserControl.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="2.8*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -65,16 +67,16 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" Margin="0,0,10,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1.3*"/>
+                    <RowDefinition Height="0.8*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Image Source="pack://application:,,,/Images/bg.png" Stretch="Fill" />
-                    <StackPanel Orientation="Horizontal"  Margin="20,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <Image  Source="pack://application:,,,/Images/touxiang1.png" Stretch="Fill" Width="100" Height="100"/>
+                    <StackPanel Orientation="Horizontal"  Margin="15,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Image  Source="pack://application:,,,/Images/touxiang1.png" Stretch="Fill" Width="80" Height="80"/>
                         <StackPanel Margin="20">
-                            <TextBlock HorizontalAlignment="Left" x:Name="TextBlock_UserName" Style="{DynamicResource BasicTextBlock-Sketch}" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="32" Text="学生姓名"/>
-                            <TextBlock HorizontalAlignment="Left" x:Name="TextBlock_UserID"  Style="{DynamicResource BasicTextBlock-Sketch}" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="21.333" Text="学生所在班级"/>
+                            <TextBlock HorizontalAlignment="Left" x:Name="TextBlock_UserName" Style="{DynamicResource BasicTextBlock-Sketch}" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="24" Text="学生姓名"/>
+                            <TextBlock HorizontalAlignment="Left" x:Name="TextBlock_UserID"  Style="{DynamicResource BasicTextBlock-Sketch}" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="19" Text="学生所在班级"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -115,68 +117,68 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Rectangle Fill="#FF2B9BDA" Stretch="Fill"/>
-                    <Path Data="M32.556919,7.5459137C32.388317,13.155273 31.348522,16.927387 30.031527,19.709999 34.058911,16.967789 37.8205,13.806376 38.374001,7.5459137z M3.3650003,7.5459137C3.9177938,13.806376 7.6801546,16.967789 11.706803,19.709999 10.389719,16.927387 9.349994,13.155274 9.1814569,7.5459137z M20.868891,2.8440046C14.533635,2.8401542 12.059054,5.4313951 12.062254,6.3923125 12.062254,7.3584399 14.532935,9.9443407 20.868891,9.9508705 27.205345,9.9443407 29.676028,7.3584399 29.676028,6.3923125 29.679327,5.4313951 27.204745,2.8401542 20.868891,2.8440046z M20.8699,0C27.67,0,31.0189,2.2226601,32.145199,4.2994399L40.0984,4.2994399C41.004502,4.2994399 41.739601,5.0272799 41.739601,5.9231601 41.739601,15.8814 35.4063,20.076799 30.3177,23.4492 26.156901,26.204399 23.6068,28.0651 23.6068,31.429701L23.6068,34.4688C27.9765,34.954399 31.1875,36.571602 31.1875,38.493401 31.1875,40.7981 26.5684,42.666698 20.8699,42.666698 15.1719,42.666698 10.5528,40.7981 10.5528,38.493401 10.5528,36.571602 13.7637,34.954399 18.133499,34.4688L18.133499,31.429701C18.133499,28.0651 15.5833,26.204399 11.4225,23.4492 6.3339804,20.076799 2.9041269E-07,15.8814 0,5.9231601 2.9041269E-07,5.0272799 0.73506629,4.2994399 1.6413205,4.2994399L9.5957206,4.2994399C10.7213,2.2226601,14.070401,0,20.8699,0z" Stretch="Uniform" Fill="White" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" RenderTransformOrigin="0.5,0.5"/>
-                    <TextBlock HorizontalAlignment="Right" Margin="0,0,20,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="排行" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="32" Foreground="White" FontWeight="Bold"/>
+                    <Path Data="M32.556919,7.5459137C32.388317,13.155273 31.348522,16.927387 30.031527,19.709999 34.058911,16.967789 37.8205,13.806376 38.374001,7.5459137z M3.3650003,7.5459137C3.9177938,13.806376 7.6801546,16.967789 11.706803,19.709999 10.389719,16.927387 9.349994,13.155274 9.1814569,7.5459137z M20.868891,2.8440046C14.533635,2.8401542 12.059054,5.4313951 12.062254,6.3923125 12.062254,7.3584399 14.532935,9.9443407 20.868891,9.9508705 27.205345,9.9443407 29.676028,7.3584399 29.676028,6.3923125 29.679327,5.4313951 27.204745,2.8401542 20.868891,2.8440046z M20.8699,0C27.67,0,31.0189,2.2226601,32.145199,4.2994399L40.0984,4.2994399C41.004502,4.2994399 41.739601,5.0272799 41.739601,5.9231601 41.739601,15.8814 35.4063,20.076799 30.3177,23.4492 26.156901,26.204399 23.6068,28.0651 23.6068,31.429701L23.6068,34.4688C27.9765,34.954399 31.1875,36.571602 31.1875,38.493401 31.1875,40.7981 26.5684,42.666698 20.8699,42.666698 15.1719,42.666698 10.5528,40.7981 10.5528,38.493401 10.5528,36.571602 13.7637,34.954399 18.133499,34.4688L18.133499,31.429701C18.133499,28.0651 15.5833,26.204399 11.4225,23.4492 6.3339804,20.076799 2.9041269E-07,15.8814 0,5.9231601 2.9041269E-07,5.0272799 0.73506629,4.2994399 1.6413205,4.2994399L9.5957206,4.2994399C10.7213,2.2226601,14.070401,0,20.8699,0z" Stretch="Uniform" Fill="White" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" RenderTransformOrigin="0.5,0.5"/>
+                    <TextBlock HorizontalAlignment="Right" Margin="0,0,20,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="排行" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="26" Foreground="White" FontWeight="Bold"/>
                 </Grid>
-                <Grid Grid.Row="1" Margin="20,0,0,0">
+                <Grid Grid.Row="1" Margin="20,0,0,0" x:Name="ranking1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"  Width="28" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/diyi.png" Stretch="Fill"/>
-                    <Image Grid.Column="1"  Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/touxiang3.png" Stretch="Fill"/>
-                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="陈昊" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF999999" />
-                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar" Height="10" Value="100" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
+                    <Image Grid.Column="0"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/diyi.png" Stretch="Fill"/>
+                    <Image Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill"/>
+                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding User_Name}" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF999999" />
+                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar" Height="8" Value="{Binding Score}" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
                 </Grid>
-                <Grid Grid.Row="2" Margin="20,0,0,0">
+                <Grid Grid.Row="2" Margin="20,0,0,0" x:Name="ranking2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"  Width="28" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/dier.png" Stretch="Fill"/>
-                    <Image Grid.Column="1"  Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/touxiang2.png" Stretch="Fill"/>
-                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="冯轲" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF999999" />
-                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar1" Height="10" Value="90" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
+                    <Image Grid.Column="0"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/dier.png" Stretch="Fill"/>
+                    <Image Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill"/>
+                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding User_Name}" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF999999" />
+                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar1" Height="8" Value="{Binding Score}" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
                 </Grid>
-                <Grid Grid.Row="3" Margin="20,0,0,0">
+                <Grid Grid.Row="3" Margin="20,0,0,0" x:Name="ranking3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"  Width="28" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/disan.png" Stretch="Fill"/>
-                    <Image Grid.Column="1"  Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/touxiang3.png" Stretch="Fill"/>
-                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="邓润如" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF999999" />
-                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar2" Height="10" Value="80" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
+                    <Image Grid.Column="0"  Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/disan.png" Stretch="Fill"/>
+                    <Image Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill"/>
+                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding User_Name}" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF999999" />
+                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar2" Height="8" Value="{Binding Score}" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
                 </Grid>
-                <Grid Grid.Row="4" Margin="20,0,0,0">
+                <Grid Grid.Row="4" Margin="20,0,0,0" x:Name="ranking4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="4" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Image Grid.Column="1"  Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/touxiang1.png" Stretch="Fill"/>
-                    <TextBlock x:Name="TextBlock_ranking" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="学生姓名" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF999999" />
-                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar3" Height="10" Value="75" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
+                    <Image Grid.Column="1"  Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill"/>
+                    <TextBlock  Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding User_Name}" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF999999" />
+                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar3" Height="8" Value="{Binding Score}" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
                 </Grid>
-                <Grid Grid.Row="5" Margin="20,0,0,0">
+                <Grid Grid.Row="5" Margin="20,0,0,0" x:Name="ranking5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="5" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Image Grid.Column="1"  Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Source="pack://application:,,,/Images/touxiang2.png" Stretch="Fill"/>
-                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="甘仁" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="#FF999999" />
-                    <ProgressBar Grid.Column="3" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar4" Height="10" Value="55" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
+                    <TextBlock Grid.Column="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="5" FontFamily="Microsoft YaHei" FontSize="18.667" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Image Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Stretch="Fill" />
+                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding User_Name}" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF999999" />
+                    <ProgressBar Grid.Column="3" Margin="0,21,10,21" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="progressBar4" Height="8" Value="{Binding Score}" Style="{DynamicResource ProgressBarStyle2}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" SmallChange="1" />
                 </Grid>
             </Grid>
         </Grid>
@@ -191,7 +193,7 @@
             <Grid Grid.Column="1">
                 <Image Source="pack://application:,,,/Images/huozuohuoban.png" Stretch="Fill" />
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Rectangle Fill="#FF2B9BDA" HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="324"/>
+                    <Rectangle Fill="#FF2B9BDA" Stretch="Fill"/>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                         <TextBlock HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="历届学员推荐实习/就业" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>
                         <TextBlock HorizontalAlignment="Center"  Style="{DynamicResource BasicTextBlock-Sketch}" Text="成功率100%" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="21.333" Foreground="White"/>

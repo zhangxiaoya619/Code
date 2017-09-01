@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="960" d:DesignWidth="1280">
+             d:DesignHeight="540" 
+             d:DesignWidth="700">
     <UserControl.Resources>
         <controls:ProjectProcessConverter x:Key="projectProcessConverter" />
         <controls:ProjectHasDoneCountConverter x:Key="projectHasDoneCountConverter" />
@@ -24,36 +25,36 @@
     <Grid>
         <Grid Background="#FFEDEDED" x:Name="projectContainer">
             <Grid.RowDefinitions>
-                <RowDefinition Height="109"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="16"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image Source="/Images/practicaltop.jpg" Stretch="UniformToFill"/>
+            <Image Source="/Images/practicaltop.jpg" Stretch="Uniform"/>
             <Grid Grid.Row="2" Background="#FFFFFF">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="170"/>
-                    <ColumnDefinition Width="170"/>
-                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Margin="20,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Name, StringFormat='当前科目：{0}'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="15" Foreground="#FF319CD8"/>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20,0,0,0">
-                    <Image Height="48" Width="48" Source="/Images/practicalsy.png"/>
-                    <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Projects.Count, StringFormat='共{0}项任务清单'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Name, StringFormat='当前科目：{0}'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="11" Foreground="#FF319CD8"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5,0,0,0">
+                    <Image Height="40" Width="40" Source="/Images/practicalsy.png"/>
+                    <TextBlock Margin="5,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Projects.Count, StringFormat='共{0}项任务清单'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="10px" Foreground="#949494" Width="Auto"/>
                 </StackPanel>
-                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="20,0,0,0">
-                    <Image Height="48" Width="48" Source="/Images/practicalywc.png"/>
-                    <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource hasDone},StringFormat='已完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="5,0,0,0">
+                    <Image Height="40" Width="40" Source="/Images/practicalywc.png"/>
+                    <TextBlock Margin="5,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource hasDone},StringFormat='已完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="10px" Foreground="#949494" Width="Auto"/>
                 </StackPanel>
-                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="20,0,0,0">
-                    <Image Height="48" Width="48" Source="/Images/practicalwwc.png"/>
-                    <TextBlock Margin="10,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource dontHasDone},StringFormat='未完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#949494" Width="Auto"/>
+                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="5,0,0,0">
+                    <Image Height="40" Width="40" Source="/Images/practicalwwc.png"/>
+                    <TextBlock Margin="5,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource dontHasDone},StringFormat='未完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="10px" Foreground="#949494" Width="Auto"/>
                 </StackPanel>
-                <Grid Grid.Column="4" Height="26" Margin="0,0,40,0">
+                <Grid Grid.Column="4" Height="26" Margin="10,0,10,0">
                     <ProgressBar Maximum="100" Minimum="0" Value="{Binding Path=., Converter={StaticResource projectProcessConverter}}">
                         <ProgressBar.Resources>
                             <LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
@@ -116,7 +117,7 @@
                     <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectProcessConverter}, StringFormat='已完成{0}%'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#FFFF6800" HorizontalAlignment="Center"/>
                 </Grid>
                 <StackPanel Grid.Column="5" Orientation="Horizontal">
-                    <Button Content="返回科目" Width="100" Height="30" Command="controls:PracticalCenter.Back">
+                    <Button Margin="10,0,0,0" Content="返回科目" Width="80" Height="24" Command="controls:PracticalCenter.Back">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Template">
@@ -147,7 +148,7 @@
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>
                                                 <Rectangle x:Name="rectangle" Stroke="#FF289BDA" RadiusX="4" RadiusY="4" Fill="White"/>
-                                                <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF289BDA"/>
+                                                <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FF289BDA"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsFocused" Value="True"/>
@@ -160,7 +161,7 @@
                                     </Setter.Value>
                                 </Setter>
                                 <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-                                <Setter Property="FontSize" Value="18.667"/>
+                                <Setter Property="FontSize" Value="12"/>
                                 <Setter Property="Foreground" Value="#FF289BDA"/>
                             </Style>
                         </Button.Style>
@@ -190,13 +191,13 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="70">
+                            <Grid Height="38">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Width="18" Height="18" Margin="0,0,15,0" Source="/Images/yiwanchengblue.png" Stretch="UniformToFill">
+                                <Image Width="16" Height="16" Margin="0,0,15,0" Source="/Images/yiwanchengblue.png" Stretch="Uniform">
                                     <Image.Style>
                                         <Style TargetType="Image">
                                             <Style.Triggers>
@@ -207,7 +208,7 @@
                                         </Style>
                                     </Image.Style>
                                 </Image>
-                                <Image Width="18" Height="18" Margin="0,0,15,0" Source="/Images/zhengzaijingxing.png" Stretch="UniformToFill">
+                                <Image Width="16" Height="16" Margin="0,0,15,0" Source="/Images/zhengzaijingxing.png" Stretch="UniformToFill">
                                     <Image.Style>
                                         <Style TargetType="Image">
                                             <Style.Triggers>
@@ -218,7 +219,7 @@
                                         </Style>
                                     </Image.Style>
                                 </Image>
-                                <TextBlock Grid.Column="1" Style="{DynamicResource BasicTextBlock-Sketch}" FontFamily="Microsoft YaHei" FontSize="16" Foreground="#FF9C9C9C" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <TextBlock Grid.Column="1" Style="{DynamicResource BasicTextBlock-Sketch}" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FF9C9C9C" VerticalAlignment="Center" HorizontalAlignment="Left">
                                     <TextBlock.Text>
                                         <MultiBinding Converter="{StaticResource projectNumNameConverter}">
                                             <Binding Path="ID"/>
@@ -226,7 +227,7 @@
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
-                                <Button Grid.Column="2" Width="100" Height="30" Margin="20,0,20,0" Command="controls:PracticalCenter.Operate" CommandParameter="{Binding}">
+                                <Button Grid.Column="2" Width="80" Height="24" Margin="20,0,20,0" Command="controls:PracticalCenter.Operate" CommandParameter="{Binding}">
                                     <Button.Style>
                                         <Style TargetType="Button">
                                             <Setter Property="Template">
@@ -260,7 +261,7 @@
                                                                 </VisualStateGroup>
                                                             </VisualStateManager.VisualStateGroups>
                                                             <Rectangle x:Name="rectangle" Stroke="#FF289BDA" RadiusX="4" RadiusY="4" Fill="#FF329CD7"/>
-                                                            <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="去完成" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FFFFFF"/>
+                                                            <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Style="{DynamicResource BasicTextBlock-Sketch}" Text="去完成" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FFFFFF"/>
                                                         </Grid>
                                                         <ControlTemplate.Triggers>
                                                             <DataTrigger Binding="{Binding IsDone}" Value="True">
@@ -273,7 +274,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                             <Setter Property="FontFamily" Value="Microsoft YaHei"/>
-                                            <Setter Property="FontSize" Value="18.667"/>
+                                            <Setter Property="FontSize" Value="12"/>
                                             <Setter Property="Foreground" Value="#FF289BDA"/>
                                         </Style>
                                     </Button.Style>
@@ -285,6 +286,6 @@
                 </ListView>
             </Border>
         </Grid>
-        <ContentControl x:Name="operateContainer" Visibility="Collapsed"/>
+        <ContentControl x:Name="operateContainer" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,5"/>
     </Grid>
 </UserControl>

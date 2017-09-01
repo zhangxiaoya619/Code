@@ -110,6 +110,9 @@
     <Compile Include="UContorls\UCHeader.xaml.cs">
       <DependentUpon>UCHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UContorls\UCImageView.xaml.cs">
+      <DependentUpon>UCImageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UContorls\UCLoginHeader.xaml.cs">
       <DependentUpon>UCLoginHeader.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UContorls\UCHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UContorls\UCImageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,19 +267,31 @@
     <Resource Include="Images\guanyuwomen.png" />
     <Resource Include="Images\xianshangkefu.png" />
     <Resource Include="Images\bg.png" />
-    <Resource Include="Images\touxiang1.png" />
+    <Content Include="Images\pdf.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\touxiang1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\cpa.jpeg" />
     <Resource Include="Images\huozuohuoban.png" />
     <Resource Include="Images\dier.png" />
     <Resource Include="Images\disan.png" />
     <Resource Include="Images\diyi.png" />
-    <Resource Include="Images\touxiang2.png" />
-    <Resource Include="Images\touxiang3.png" />
-    <EmbeddedResource Include="Images\pdf.jpg">
+    <Content Include="Images\touxiang2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
+    <Content Include="Images\touxiang3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\chenggong.png" />
     <Resource Include="Images\shibai.png" />
+    <Content Include="Images\xuanzhuan01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\xuanzhuan02.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\yiwancheng.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -386,9 +405,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Images\file.png">
+    <Content Include="Images\file.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
