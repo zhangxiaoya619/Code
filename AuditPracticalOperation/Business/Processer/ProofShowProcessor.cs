@@ -12,13 +12,11 @@ namespace Business.Processer
     [Singleton]
     public class ProofShowProcessor
     {
-        private ProofShowProcessor()
-        {
+        IProofManager proofManager;
 
-        }
         public IList<ProofItem> GetProofItems()
         {
-            return GetProofItemsFromFiles().ToList();
+            return proofManager.GetProofs();
         }
 
         private ProofItem[] GetProofItemsFromFiles()
@@ -130,6 +128,11 @@ namespace Business.Processer
                 }
                 current.Proofs = proofs;
             }
+        }
+
+        private ProofShowProcessor()
+        {
+            proofManager = SingletonManager.Get<ProofManager>();
         }
     }
 }

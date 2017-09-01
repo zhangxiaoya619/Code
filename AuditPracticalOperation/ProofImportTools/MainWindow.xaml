@@ -5,19 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProofImportTools"
         mc:Ignorable="d"
-        Title="MainWindow" Height="639" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="200" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindow.OpenFolderDialog" Executed="OpenFolderDialogExecuted"/>
+        <CommandBinding Command="local:MainWindow.ImportProof" CanExecute="CommandBinding_CanExecute" Executed="ImportProofExecuted"/>
     </Window.CommandBindings>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="11,10,0,10">
+        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Width="180" Content="选择需要导出的证据文件夹" Margin="0,0,15,0" Command="local:MainWindow.OpenFolderDialog"/>
-            <Button Width="60" Content="导出" />
+            <Button Width="60" Content="导出" Command="local:MainWindow.ImportProof"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -45,6 +45,7 @@
     <Compile Include="IPower.cs" />
     <Compile Include="PracticalItem.cs" />
     <Compile Include="PracticalItemProject.cs" />
+    <Compile Include="ProofFileFolder.cs" />
     <Compile Include="ProofItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

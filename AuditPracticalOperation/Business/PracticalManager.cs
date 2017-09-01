@@ -5,8 +5,9 @@ using System.Text;
 using ViewModel;
 using System.IO;
 using System.Xml;
+using Business.Processer;
 
-namespace Business.Processer
+namespace Business
 {
     [Singleton]
     public class PracticalManager : IPracticalManager

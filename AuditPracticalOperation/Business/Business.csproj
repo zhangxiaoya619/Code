@@ -44,10 +44,12 @@
   <ItemGroup>
     <Compile Include="IPracticalManager.cs" />
     <Compile Include="Processer\ActivationProcessor.cs" />
+    <Compile Include="IProofManager.cs" />
     <Compile Include="Processer\LocalSerialNumProcessor.cs" />
-    <Compile Include="Processer\PracticalManager.cs" />
+    <Compile Include="PracticalManager.cs" />
     <Compile Include="Processer\PracticalContentProcesser.cs" />
     <Compile Include="Processer\PracticalItemProcesser.cs" />
+    <Compile Include="ProofManager.cs" />
     <Compile Include="Processer\ProofShowProcessor.cs" />
     <Compile Include="Processer\UserProcesser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
