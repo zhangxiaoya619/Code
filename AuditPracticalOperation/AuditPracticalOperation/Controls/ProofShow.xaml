@@ -182,7 +182,7 @@
                                             <ControlTemplate TargetType="{x:Type RadioButton}">
                                                 <Grid>
                                                     <Rectangle x:Name="rectangle" Stroke="#FF319CD8" RadiusX="4" RadiusY="4" Fill="#FFFFFF"/>
-                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="14" Foreground="#FF329CD7"/>
+                                                    <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Height="Auto" Margin="0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{TemplateBinding Content}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FF329CD7"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -302,7 +302,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
-            <Grid Grid.Row="1" Margin="0,10,0,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewKeyDown="Grid_PreviewKeyDown">
+            <Grid Grid.Row="1" Margin="0,10,0,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <ListView  x:Name="proofList" Background="White"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FFEDEDED"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -336,27 +336,12 @@
                                     <RowDefinition Height="28"/>
                                 </Grid.RowDefinitions>
                                 <Image Grid.Row="0" Source="{Binding ImgSource,Converter={StaticResource imageConverter}}" Tag="{Binding}" Stretch="Uniform"  MouseLeftButtonDown="ShowImg_MouseLeftButtonDown"/>
-                                <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="12" VerticalAlignment="Center" Content="{Binding Name,Converter={StaticResource longStrConverter}}" Tag="{Binding}"/>
+                                <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="10" VerticalAlignment="Center" Content="{Binding Name,Converter={StaticResource longStrConverter}}" Tag="{Binding}"/>
                             </Grid>
 
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-                <Grid x:Name="GridImageShow" Background="Transparent" Visibility="Collapsed">
-                    <Rectangle  Fill="#7F000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <local:UCImageView x:Name="imageView" />
-                </Grid>
-                <Grid x:Name="GridPdfShow" Background="Transparent" Visibility="Collapsed">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="0.9*"/>
-                        <RowDefinition Height="0.05*"/>
-                    </Grid.RowDefinitions>
-                    <Button Content="close" Style="{DynamicResource ButtonStyle5}" Width="40" Height="40" Click="pdfShow_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,-10,0"/>
-                    <WindowsFormsHost x:Name="winFormHost" Grid.Row="1" Margin="0,0,0,0" >
-                    </WindowsFormsHost>
-                </Grid>
             </Grid>
         </Grid>
     </Grid>

@@ -19,12 +19,14 @@ namespace AuditPracticalOperation.UContorls
         public PDFReader()
         {
             InitializeComponent();
-            this.axAcroPDF1.Disposed += AxAcroPDF1_Disposed;
+            this.axAcroPDF1.setPageMode("thumbs");
+            this.axAcroPDF1.setPageMode("none");
         }
 
-        private void AxAcroPDF1_Disposed(object sender, EventArgs e)
+        public void PDFDispose()
         {
             SingletonManager.Get<ProofShowProcessor>().DeleteProofTempFile(tempFilePath);
+            this.axAcroPDF1.Dispose();
         }
 
         public void AdobeReaderControl(ProofItem choiseItem)

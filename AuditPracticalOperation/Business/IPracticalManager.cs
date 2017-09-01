@@ -19,5 +19,7 @@ namespace Business
         PracticalItem[] GetAllPractical();
 
         HasDonePracticalItem[] GetHasDonePractical();
+
+        void DeleteContent(string filePath);
     }
 }

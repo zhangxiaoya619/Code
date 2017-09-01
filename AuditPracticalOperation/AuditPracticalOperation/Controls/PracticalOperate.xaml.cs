@@ -52,6 +52,7 @@ namespace AuditPracticalOperation.Controls
             this.keyboardHook = new KeyboardHook();
             this.keyboardHook.SetHook();
             this.keyboardHook.OnKeyUp += KeyboardHook_OnKeyUp;
+            Application.Current.Exit += Current_Exit;
 
             InitializeComponent();
 
@@ -61,6 +62,11 @@ namespace AuditPracticalOperation.Controls
                 container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
                 practicalFilePath = contentProcesser.LoadContent();
             }
+        }
+
+        private void Current_Exit(object sender, ExitEventArgs e)
+        {
+            Close(true);
         }
 
         private void KeyboardHook_OnKeyUp(System.Windows.Forms.Keys key, bool control)
@@ -94,6 +100,12 @@ namespace AuditPracticalOperation.Controls
 
             if (OnBacked != null)
                 OnBacked();
+
+            PracticalContentProcesser.KillAllProcess();
+
+            contentProcesser.DeleteContent();
+
+            Application.Current.Exit -= Current_Exit;
         }
 
         private void UserControlLoaded(object sender, RoutedEventArgs e)
@@ -117,16 +129,7 @@ namespace AuditPracticalOperation.Controls
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            _isFramerDirty = true;
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
-            {
-                if (framer != null && _isFramerDirty)
-                {
-                    framer.Activate();
-                }
-                return null;
-            }, null);
-            framer.Activate();
+            ExcelReActive();
         }
 
         private void DocumentOpened(object sender, _DFramerCtlEvents_OnDocumentOpenedEvent e)
@@ -167,6 +170,22 @@ namespace AuditPracticalOperation.Controls
         {
             isOpenDialog = false;
             ((Helper)sender).Closed -= HelperWindowClosed;
+
+            ExcelReActive();
+        }
+
+        private void ExcelReActive()
+        {
+            _isFramerDirty = true;
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
+            {
+                if (framer != null && _isFramerDirty)
+                {
+                    framer.Activate();
+                }
+                return null;
+            }, null);
+            framer.Activate();
         }
     }
 }

@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "references", "references", 
 	ProjectSection(SolutionItems) = preProject
 		libs\AxInterop.DSOFramer.dll = libs\AxInterop.DSOFramer.dll
 		libs\Interop.DSOFramer.dll = libs\Interop.DSOFramer.dll
+		AuditPracticalOperation\SlidingImages.xaml = AuditPracticalOperation\SlidingImages.xaml
+		AuditPracticalOperation\SlidingImages.xaml.cs = AuditPracticalOperation\SlidingImages.xaml.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{63786F12-1502-4F36-918D-9EBB9B930685}"

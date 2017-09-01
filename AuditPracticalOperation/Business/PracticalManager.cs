@@ -23,6 +23,11 @@ namespace Business
         private int practicalCount;
         private long[] practicalContentBufferLength;
 
+        public void DeleteContent(string filePath)
+        {
+            File.Delete(filePath);
+        }
+
         public string LoadContentByPractialID(int practicalID)
         {
             FileStream fs = null;

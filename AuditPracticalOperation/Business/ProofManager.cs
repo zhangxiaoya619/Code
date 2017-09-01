@@ -32,7 +32,7 @@ namespace Business.Processer
             return ConvertToProofItems(GetProofFileFolderRoot());
         }
 
-        private IList<ProofItem> ConvertToProofItems(ProofFileFolder root)
+        private IList<ProofItem> ConvertToProofItems(ProofFileFolder root, ProofItem parent = null)
         {
             IList<ProofItem> proofs = new List<ProofItem>();
 
@@ -43,9 +43,9 @@ namespace Business.Processer
                 proof.Name = root.Folders[i].Name;
                 proof.ImgSource = GetImageSource(proof);
                 proof.Proofs = new ObservableCollection<ProofItem>();
-                proof.Path = GetProofTempFilePath(proof);
+                proof.Parent = parent;
 
-                IList<ProofItem> children = ConvertToProofItems(root.Folders[i]);
+                IList<ProofItem> children = ConvertToProofItems(root.Folders[i], proof);
 
                 for (int j = 0; j < children.Count; j++)
                     proof.Proofs.Add(children[j]);
@@ -61,7 +61,6 @@ namespace Business.Processer
                 proof.StartIndex = root.Files[i].StartIndex;
                 proof.Length = root.Files[i].Length;
                 proof.ImgSource = GetImageSource(proof);
-                proof.Path = GetProofTempFilePath(proof);
                 proofs.Add(proof);
             }
 
@@ -255,8 +254,8 @@ namespace Business.Processer
                     datFs.Read(buffer, 0, buffer.Length);
                     tempFs.Write(buffer, 0, buffer.Length);
                 }
-                string tmp = tempFileName.Replace(@"\\", @"\");
-                return tmp;
+
+                return tempFileName;
             }
             catch
             {

@@ -87,8 +87,14 @@
     <Compile Include="Controls\Helper.xaml.cs">
       <DependentUpon>Helper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImageView.xaml.cs">
+      <DependentUpon>ImageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MyAchievement.xaml.cs">
       <DependentUpon>MyAchievement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PDFView.xaml.cs">
+      <DependentUpon>PDFView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PracticalOperate.xaml.cs">
       <DependentUpon>PracticalOperate.xaml</DependentUpon>
@@ -96,27 +102,26 @@
     <Compile Include="Controls\ProofShow.xaml.cs">
       <DependentUpon>ProofShow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProofWindow.xaml.cs">
+      <DependentUpon>ProofWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserCenter.xaml.cs">
       <DependentUpon>UserCenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BufferToImageSourceConverter.cs" />
     <Compile Include="Converters\LongStrToShortStrConverter.cs" />
     <Compile Include="Converters\StringToImageSourceConverter.cs" />
-    <Compile Include="UContorls\CanvasWithPhoto.cs" />
+    <Compile Include="Controls\SlidingImages.xaml.cs">
+      <DependentUpon>SlidingImages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UContorls\PDFReader.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UContorls\PDFReader.Designer.cs">
       <DependentUpon>PDFReader.cs</DependentUpon>
     </Compile>
-    <Compile Include="UContorls\SlidingImages.xaml.cs">
-      <DependentUpon>SlidingImages.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UContorls\UCHeader.xaml.cs">
       <DependentUpon>UCHeader.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UContorls\UCImageView.xaml.cs">
-      <DependentUpon>UCImageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UContorls\UCLoginHeader.xaml.cs">
       <DependentUpon>UCLoginHeader.xaml</DependentUpon>
@@ -144,6 +149,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ImageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MyAchievement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,11 +161,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\PDFView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PracticalOperate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProofShow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProofWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,15 +201,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UContorls\SlidingImages.xaml">
+    <Page Include="Controls\SlidingImages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UContorls\UCHeader.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UContorls\UCImageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

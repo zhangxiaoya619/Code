@@ -26,6 +26,11 @@ namespace Business.Processer
             practicalManager.SetPracticalProjectDone(practicalID, projectID);
         }
 
+        public void DeleteContent()
+        {
+            practicalManager.DeleteContent(filePath);
+        }
+
         public PracticalContentProcesser(int practicalID, int projectID)
         {
             this.practicalID = practicalID;

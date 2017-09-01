@@ -14,6 +14,8 @@ namespace ViewModel
         private bool isChecked;
         private ObservableCollection<ProofItem> proofs;
 
+        public ProofItem Parent { get; set; }
+
         public string Name
         {
             get
@@ -98,21 +100,15 @@ namespace ViewModel
         {
             proofs = new ObservableCollection<ProofItem>();
         }
-        private string path;
-        public string Path
+
+        public bool Contains(ProofItem child)
         {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                if (path != value)
-                {
-                    path = value;
-                    RaisePropertyChanged("Path");
-                }
-            }
+            if (child.Parent == null)
+                return false;
+            else if (child.Parent == this)
+                return true;
+            else
+                return Contains(child.Parent);
         }
     }
     public enum FileTypeEnum
