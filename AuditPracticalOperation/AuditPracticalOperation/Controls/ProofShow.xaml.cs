@@ -55,41 +55,41 @@ namespace AuditPracticalOperation.Controls
 
         private void xunhuan_Checked(object sender, RoutedEventArgs e)
         {
-            ViewModel.ProofItem rootItem = (sender as RadioButton).Tag as ViewModel.ProofItem;
-            int index = datasource.IndexOf(rootItem);
-            if (SingletonManager.Get<UserProcesser>().GetUser().HasProofPower(index))
-            {
-                string root = rootItem.Path;
-                if (!CurrentProofDir.Path.Contains(root))
-                {
-                    queueDir.Clear();
-                    queueDir.Add(rootItem);
-                    CurrentProofDir = rootItem;
-                    proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
-                }
-            }
-            else
-            {
-                WinBuyActivationCode winCode = new WinBuyActivationCode();
-                winCode.ShowDialog();
-            }
+            //ViewModel.ProofItem rootItem = (sender as RadioButton).Tag as ViewModel.ProofItem;
+            //int index = datasource.IndexOf(rootItem);
+            //if (SingletonManager.Get<UserProcesser>().GetUser().HasProofPower(index))
+            //{
+            //    string root = rootItem.Path;
+            //    if (!CurrentProofDir.Path.Contains(root))
+            //    {
+            //        queueDir.Clear();
+            //        queueDir.Add(rootItem);
+            //        CurrentProofDir = rootItem;
+            //        proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
+            //    }
+            //}
+            //else
+            //{
+            //    WinBuyActivationCode winCode = new WinBuyActivationCode();
+            //    winCode.ShowDialog();
+            //}
         }
 
         private void ChoiseDir_Checked(object sender, RoutedEventArgs e)
         {
-            this.GridImageShow.Visibility = System.Windows.Visibility.Collapsed;
-            this.GridPdfShow.Visibility = System.Windows.Visibility.Collapsed;
-            ViewModel.ProofItem choiseItem = (sender as RadioButton).Tag as ViewModel.ProofItem;
-            if (choiseItem != CurrentProofDir)
-            {
-                CurrentProofDir = choiseItem;
-                for (int i = queueDir.ToArray().Length - 1; i >= 0; i--)
-                {
-                    if (queueDir[i].Path.Contains(CurrentProofDir.Path) && queueDir[i] != CurrentProofDir)
-                        queueDir.RemoveAt(i);
-                }
-                proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
-            }
+            //this.GridImageShow.Visibility = System.Windows.Visibility.Collapsed;
+            //this.GridPdfShow.Visibility = System.Windows.Visibility.Collapsed;
+            //ViewModel.ProofItem choiseItem = (sender as RadioButton).Tag as ViewModel.ProofItem;
+            //if (choiseItem != CurrentProofDir)
+            //{
+            //    CurrentProofDir = choiseItem;
+            //    for (int i = queueDir.ToArray().Length - 1; i >= 0; i--)
+            //    {
+            //        if (queueDir[i].Path.Contains(CurrentProofDir.Path) && queueDir[i] != CurrentProofDir)
+            //            queueDir.RemoveAt(i);
+            //    }
+            //    proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
+            //}
         }
 
 
