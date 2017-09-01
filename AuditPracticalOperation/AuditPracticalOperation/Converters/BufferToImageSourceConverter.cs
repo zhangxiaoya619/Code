@@ -14,12 +14,12 @@ namespace AuditPracticalOperation.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             BitmapImage bmp = null;
-
             try
             {
                 bmp = new BitmapImage();
                 bmp.BeginInit();
                 bmp.StreamSource = new MemoryStream((byte[])value);
+                
                 bmp.EndInit();
             }
             catch

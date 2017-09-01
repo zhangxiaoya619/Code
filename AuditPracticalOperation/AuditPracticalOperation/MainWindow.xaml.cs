@@ -68,10 +68,10 @@ namespace AuditPracticalOperation
             switch (index)
             {
                 case 0:
-                    myMainChild.Child = new SubjectList();
+                    myMainChild.Child = SingletonManager.Get<SubjectList>();//new SubjectList();
                     break;
                 case 1:
-                    myMainChild.Child = new ProofShow();
+                    myMainChild.Child = SingletonManager.Get<ProofShow>();// new ProofShow();
                     break;
                 case 2:
                     myMainChild.Child = new GainExport();

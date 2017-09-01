@@ -205,13 +205,13 @@ namespace Business.Processer
                 {
                     for (int j = 0; j < folderFileCountArray[i]; j++)
                     {
-                        buffer = new byte[sizeof(int)];
+                        buffer = new byte[sizeof(long)];
                         idxFs.Read(buffer, 0, buffer.Length);
-                        _folders[i].Files[j].StartIndex = BitConverter.ToInt32(buffer, 0);
+                        _folders[i].Files[j].StartIndex = BitConverter.ToInt64(buffer, 0);
 
-                        buffer = new byte[sizeof(int)];
+                        buffer = new byte[sizeof(long)];
                         idxFs.Read(buffer, 0, buffer.Length);
-                        _folders[i].Files[j].Length = BitConverter.ToInt32(buffer, 0);
+                        _folders[i].Files[j].Length = BitConverter.ToInt64(buffer, 0);
                     }
                 }
 
@@ -255,8 +255,8 @@ namespace Business.Processer
                     datFs.Read(buffer, 0, buffer.Length);
                     tempFs.Write(buffer, 0, buffer.Length);
                 }
-
-                return tempFileName;
+                string tmp = tempFileName.Replace(@"\\", @"\");
+                return tmp;
             }
             catch
             {
