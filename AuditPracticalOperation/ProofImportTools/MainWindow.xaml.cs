@@ -47,22 +47,23 @@ namespace ProofImportTools
 
             try
             {
-                //using (System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog())
-                //{
-                //    fbd.ShowNewFolderButton = false;
+                using (System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog())
+                {
+                    fbd.ShowNewFolderButton = false;
 
-                //    if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                //      proofFileFolder = GetFolder(fbd.SelectedPath);
-                //}
-
-                int index = 0;
-                proofFileFolder = GetFolder(@"D:\外单\GitHub\AuditPracticalOperation\资料\Proofs", ref index);
+                    if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        int index = 0;
+                        proofFileFolder = GetFolder(fbd.SelectedPath, ref index);
+                    }
+                }
             }
             catch
             {
                 MessageBox.Show("读取失败。");
             }
         }
+
 
         private ProofFileFolder GetFolder(string folderPath, ref int index, int parentIndex = -1)
         {

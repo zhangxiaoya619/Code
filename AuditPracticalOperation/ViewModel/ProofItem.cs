@@ -98,6 +98,22 @@ namespace ViewModel
         {
             proofs = new ObservableCollection<ProofItem>();
         }
+        private string path;
+        public string Path
+        {
+            get
+            {
+                return path;
+            }
+            set
+            {
+                if (path != value)
+                {
+                    path = value;
+                    RaisePropertyChanged("Path");
+                }
+            }
+        }
     }
     public enum FileTypeEnum
     {

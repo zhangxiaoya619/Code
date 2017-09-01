@@ -43,6 +43,7 @@ namespace Business.Processer
                 proof.Name = root.Folders[i].Name;
                 proof.ImgSource = GetImageSource(proof);
                 proof.Proofs = new ObservableCollection<ProofItem>();
+                proof.Path = GetProofTempFilePath(proof);
 
                 IList<ProofItem> children = ConvertToProofItems(root.Folders[i]);
 
@@ -60,7 +61,7 @@ namespace Business.Processer
                 proof.StartIndex = root.Files[i].StartIndex;
                 proof.Length = root.Files[i].Length;
                 proof.ImgSource = GetImageSource(proof);
-
+                proof.Path = GetProofTempFilePath(proof);
                 proofs.Add(proof);
             }
 

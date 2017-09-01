@@ -11,6 +11,7 @@
              d:DesignWidth="700">
     <UserControl.Resources>
         <convert:BufferToImageSourceConverter x:Key="imageConverter"/>
+        <convert:RootLongStrToShortStrConverter x:Key="rootlongStrConverter"/>
         <convert:LongStrToShortStrConverter x:Key="longStrConverter"/>
         <Style x:Key="ButtonStyle5" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -173,7 +174,7 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <RadioButton Content="{Binding Name}" Tag="{Binding}" Width="130" Height="30" IsChecked="{Binding IsChecked,Mode=TwoWay}" Checked="xunhuan_Checked"  GroupName="xunhuan">
+                        <RadioButton Content="{Binding Name,Converter={StaticResource rootlongStrConverter}}" Tag="{Binding}" Width="130" Height="30" IsChecked="{Binding IsChecked,Mode=TwoWay}" Checked="xunhuan_Checked"  GroupName="xunhuan">
                             <RadioButton.Style>
                                 <Style TargetType="{x:Type RadioButton}">
                                     <Setter Property="Template">

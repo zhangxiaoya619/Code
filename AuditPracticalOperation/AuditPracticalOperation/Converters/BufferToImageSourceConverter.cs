@@ -19,7 +19,7 @@ namespace AuditPracticalOperation.Converters
             {
                 bmp = new BitmapImage();
                 bmp.BeginInit();
-                bmp.StreamSource = new MemoryStream((byte)value);
+                bmp.StreamSource = new MemoryStream((byte[])value);
                 bmp.EndInit();
             }
             catch

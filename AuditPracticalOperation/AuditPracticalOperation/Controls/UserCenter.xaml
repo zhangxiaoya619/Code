@@ -64,7 +64,7 @@
         <Grid Grid.Row="3" Background="White" Margin="0,0,5,5">
             <StackPanel Orientation="Horizontal">
                 <Grid Width="110"  Margin="0,6,0,0">
-                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Source="pack://application:,,,/Images/guanyuwomen.png" Stretch="Fill"/>
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Source="pack://application:,,,/Images/kechengshezhi.png" Stretch="Fill"/>
                 </Grid>
                 <Rectangle Fill="#FFEDEDED" HorizontalAlignment="Stretch"  Margin="0,0,0,0" VerticalAlignment="Stretch" Width="2"/>
                 <StackPanel Orientation="Horizontal">
@@ -77,7 +77,7 @@
                     <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="CPA的职业判断" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FFB3B3B3" Height="20"/>
                     <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="投行实务" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FFB3B3B3" Height="20"/>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="30,5,0,0">
+                    <StackPanel Orientation="Vertical" Margin="100,5,0,0">
                         <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="EXCEL在财务、审计中的应用" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FFB3B3B3" Height="20" Margin="0,23,0,0"/>
                         <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="CPA《会计》实务精讲" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FFB3B3B3" Height="20"/>
                         <TextBlock HorizontalAlignment="Left" Style="{DynamicResource BasicTextBlock-Sketch}" Text="CPA《经济法》实务精讲" VerticalAlignment="Top" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FFB3B3B3"  Height="20"/>
