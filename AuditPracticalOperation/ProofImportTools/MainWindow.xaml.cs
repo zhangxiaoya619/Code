@@ -64,6 +64,7 @@ namespace ProofImportTools
             }
         }
 
+
         private ProofFileFolder GetFolder(string folderPath, ref int index, int parentIndex = -1)
         {
             ProofFileFolder proofFileFolder = new ProofFileFolder();
@@ -96,6 +97,7 @@ namespace ProofImportTools
                         proofFile.FileType = FileTypeEnum.Pdf; break;
                     default: throw new Exception("未知文件格式");
                 }
+                proofFile.Length = File.ReadAllBytes(file).Length;
                 proofFileFolder.Files.Add(proofFile);
             }
 

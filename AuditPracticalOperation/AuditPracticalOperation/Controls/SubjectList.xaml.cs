@@ -12,9 +12,10 @@ namespace AuditPracticalOperation.Controls
     /// <summary>
     /// PracticalCenter.xaml 的交互逻辑
     /// </summary>
+    [Singleton]
     public partial class SubjectList : UserControl
     {
-        public SubjectList()
+        private SubjectList()
         {
             InitializeComponent();
 

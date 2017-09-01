@@ -102,7 +102,7 @@
                     </Grid>
                     <Grid Grid.Column="2" Margin="2">
                         <Rectangle Fill="White" Stretch="Fill"/>
-                        <Image Margin="0" Source="pack://application:,,,/Images/zhengshu.jpeg"  Stretch="Uniform"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Image Margin="0" Source="pack://application:,,,/Images/zhengshu.jpg"  Stretch="Uniform"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
             </Grid>

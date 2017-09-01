@@ -276,6 +276,9 @@
     <Resource Include="Images\guanyuwomen.png" />
     <Resource Include="Images\xianshangkefu.png" />
     <Resource Include="Images\bg.png" />
+    <Content Include="Images\kechengshezhi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\pdf.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -358,7 +361,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\yonghuzhinan.png" />
-    <Resource Include="Images\zhengshu.jpeg" />
+    <Content Include="Images\zhengshu.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\zhengzaijingxing.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
