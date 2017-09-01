@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:AuditPracticalOperation.Controls"
+             xmlns:local="clr-namespace:AuditPracticalOperation.UContorls"
              mc:Ignorable="d" 
              d:DesignHeight="540" 
              d:DesignWidth="700">
@@ -31,7 +32,7 @@
                 <RowDefinition Height="16"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image Source="/Images/practicaltop.jpg" Stretch="Uniform"/>
+            <local:SlidingImages/>
             <Grid Grid.Row="2" Background="#FFFFFF">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
