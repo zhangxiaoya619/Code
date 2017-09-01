@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -24,9 +25,13 @@ namespace AuditPracticalOperation.UContorls
             InitializeComponent();
         }
         public event UserClickHandler OnClose;
-        public void LoadImage(string path)
+        public void LoadImage(byte[] imageSource)
         {
-            BitmapImage image = new BitmapImage(new Uri(path));
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = new MemoryStream(imageSource);
+            image.EndInit();
+
             img.Source = image;
         }
         Point dragStart;

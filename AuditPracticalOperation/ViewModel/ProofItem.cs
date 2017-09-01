@@ -9,8 +9,7 @@ namespace ViewModel
     public class ProofItem : ViewModelBase
     {
         private string name;
-        private string path;
-        private string _imageSource = null;
+        private byte[] _imageSource = null;
         private FileTypeEnum type;
         private bool isChecked;
         private ObservableCollection<ProofItem> proofs;
@@ -30,22 +29,7 @@ namespace ViewModel
                 }
             }
         }
-        public string Path
-        {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                if (path != value)
-                {
-                    path = value;
-                    RaisePropertyChanged("Path");
-                }
-            }
-        }
-        public string ImgSource
+        public byte[] ImgSource
         {
             get
             {
@@ -76,6 +60,9 @@ namespace ViewModel
                 }
             }
         }
+
+        public long StartIndex { get; set; }
+        public long Length { get; set; }
 
         public bool IsChecked
         {

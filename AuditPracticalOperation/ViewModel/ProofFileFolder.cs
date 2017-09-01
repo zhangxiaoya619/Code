@@ -48,9 +48,17 @@ namespace ViewModel
 
         private FileTypeEnum fileType;
 
+        private long startIndex;
+
+        private long length;
+
         public string Path { get { return path; } set { path = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Path")); } }
 
         public string Name { get { return name; } set { name = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Path")); } }
+
+        public long StartIndex { get { return startIndex; } set { startIndex = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("StartIndex")); } }
+
+        public long Length { get { return length; } set { length = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Length")); } }
 
         public FileTypeEnum FileType { get { return fileType; } set { fileType = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("FileType")); } }
     }

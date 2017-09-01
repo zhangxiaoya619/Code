@@ -9,5 +9,9 @@ namespace Business.Processer
     internal interface IProofManager
     {
         IList<ProofItem> GetProofs();
+
+        string GetProofTempFilePath(ProofItem proof);
+
+        void DeleteProofTempFile(string tempFilePath);
     }
 }

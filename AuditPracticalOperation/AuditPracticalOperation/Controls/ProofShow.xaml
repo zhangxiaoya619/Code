@@ -10,7 +10,7 @@
              d:DesignHeight="540" 
              d:DesignWidth="700">
     <UserControl.Resources>
-        <convert:StringToImageSourceConverter x:Key="imageConverter"/>
+        <convert:BufferToImageSourceConverter x:Key="imageConverter"/>
         <convert:LongStrToShortStrConverter x:Key="longStrConverter"/>
         <Style x:Key="ButtonStyle5" TargetType="{x:Type Button}">
             <Setter Property="Template">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ViewModel;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace Business.Processer
 {
@@ -18,6 +19,8 @@ namespace Business.Processer
 
         private readonly string proofDatFileName;
 
+        private const int BUFFER_LENGTH = 1000;
+
         private ProofManager()
         {
             proofIndexFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PROOF_INDEX_FILE_NAME);
@@ -26,11 +29,83 @@ namespace Business.Processer
 
         public IList<ProofItem> GetProofs()
         {
+            return ConvertToProofItems(GetProofFileFolderRoot());
+        }
+
+        private IList<ProofItem> ConvertToProofItems(ProofFileFolder root)
+        {
+            IList<ProofItem> proofs = new List<ProofItem>();
+
+            for (int i = 0; i < root.Folders.Count; i++)
+            {
+                ProofItem proof = new ProofItem();
+                proof.Type = FileTypeEnum.Directory;
+                proof.Name = root.Folders[i].Name;
+                proof.ImgSource = GetImageSource(proof);
+                proof.Proofs = new ObservableCollection<ProofItem>();
+
+                IList<ProofItem> children = ConvertToProofItems(root.Folders[i]);
+
+                for (int j = 0; j < children.Count; j++)
+                    proof.Proofs.Add(children[j]);
+
+                proofs.Add(proof);
+            }
+
+            for (int i = 0; i < root.Files.Count; i++)
+            {
+                ProofItem proof = new ProofItem();
+                proof.Type = root.Files[i].FileType;
+                proof.Name = root.Files[i].Name;
+                proof.StartIndex = root.Files[i].StartIndex;
+                proof.Length = root.Files[i].Length;
+                proof.ImgSource = GetImageSource(proof);
+
+                proofs.Add(proof);
+            }
+
+            return proofs;
+        }
+
+        private byte[] GetImageSource(ProofItem proof)
+        {
+            switch (proof.Type)
+            {
+                case FileTypeEnum.Directory:
+                case FileTypeEnum.Word:
+                case FileTypeEnum.Excel:
+                    return File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "Images\\file.png");
+                case FileTypeEnum.Pdf:
+                    return File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "Images\\pdf.png");
+                case FileTypeEnum.Img:
+                    FileStream datFs = null;
+                    try
+                    {
+                        datFs = new FileStream(proofDatFileName, FileMode.Open, FileAccess.Read);
+                        byte[] buffer = new byte[proof.Length];
+                        datFs.Position = proof.StartIndex;
+                        datFs.Read(buffer, 0, buffer.Length);
+                        return buffer;
+                    }
+                    catch
+                    {
+                        throw new Exception("获取证据失败。");
+                    }
+                    finally
+                    {
+                        if (datFs != null)
+                            datFs.Dispose();
+                    }
+                default: throw new Exception("获取证据失败。");
+            }
+        }
+
+        private ProofFileFolder GetProofFileFolderRoot()
+        {
             Dictionary<int, ProofFileFolder> folders = new Dictionary<int, ProofFileFolder>();
             IList<ProofFileFolder> _folders = new List<ProofFileFolder>();
 
             FileStream idxFs = null;
-            FileStream datFs = null;
             byte[] buffer = null;
 
             int[] folderFileCountArray = null;
@@ -40,7 +115,6 @@ namespace Business.Processer
             try
             {
                 idxFs = new FileStream(proofIndexFileName, FileMode.Open, FileAccess.Read);
-                datFs = new FileStream(proofDatFileName, FileMode.Open, FileAccess.Read);
 
                 buffer = new byte[sizeof(int)];
                 idxFs.Read(buffer, 0, buffer.Length);
@@ -71,6 +145,7 @@ namespace Business.Processer
                     buffer = new byte[sizeof(int)];
                     idxFs.Read(buffer, 0, buffer.Length);
                     _folders[i].Index = BitConverter.ToInt32(buffer, 0);
+                    folders.Add(_folders[i].Index, _folders[i]);
                 }
 
                 for (int i = 0; i < folderFileCountArray.Length; i++)
@@ -90,7 +165,7 @@ namespace Business.Processer
                 for (int i = 0; i < folderFileCountArray.Length; i++)
                 {
                     fileNameLengthArray[i] = new int[folderFileCountArray[i]];
-                    for (int j = 0; i < folderFileCountArray[i]; j++)
+                    for (int j = 0; j < folderFileCountArray[i]; j++)
                     {
                         buffer = new byte[sizeof(int)];
                         idxFs.Read(buffer, 0, buffer.Length);
@@ -126,9 +201,28 @@ namespace Business.Processer
                 }
 
                 for (int i = 0; i < folderFileCountArray.Length; i++)
-                    folders.Add(_folders[i].Index, _folders[i]);
+                {
+                    for (int j = 0; j < folderFileCountArray[i]; j++)
+                    {
+                        buffer = new byte[sizeof(int)];
+                        idxFs.Read(buffer, 0, buffer.Length);
+                        _folders[i].Files[j].StartIndex = BitConverter.ToInt32(buffer, 0);
 
-                return null;
+                        buffer = new byte[sizeof(int)];
+                        idxFs.Read(buffer, 0, buffer.Length);
+                        _folders[i].Files[j].Length = BitConverter.ToInt32(buffer, 0);
+                    }
+                }
+
+                for (int i = 0; i < folderFileCountArray.Length; i++)
+                {
+                    if (_folders[i].ParentIndex == -1)
+                        continue;
+
+                    folders[_folders[i].ParentIndex].Folders.Add(_folders[i]);
+                }
+
+                return folders[0];
             }
             catch
             {
@@ -138,10 +232,48 @@ namespace Business.Processer
             {
                 if (idxFs != null)
                     idxFs.Dispose();
+            }
+        }
 
+        public string GetProofTempFilePath(ProofItem proof)
+        {
+            FileStream datFs = null;
+            FileStream tempFs = null;
+            byte[] buffer;
+
+            try
+            {
+                string tempFileName = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".pdf");
+                datFs = new FileStream(proofDatFileName, FileMode.Open, FileAccess.Read);
+                tempFs = new FileStream(tempFileName, FileMode.Create, FileAccess.Write);
+                datFs.Position = proof.StartIndex;
+
+                while (tempFs.Position < proof.Length)
+                {
+                    buffer = new byte[proof.Length - tempFs.Position > BUFFER_LENGTH ? BUFFER_LENGTH : proof.Length - tempFs.Position];
+                    datFs.Read(buffer, 0, buffer.Length);
+                    tempFs.Write(buffer, 0, buffer.Length);
+                }
+
+                return tempFileName;
+            }
+            catch
+            {
+                throw new Exception("证据打开失败。");
+            }
+            finally
+            {
                 if (datFs != null)
                     datFs.Dispose();
+
+                if (tempFs != null)
+                    tempFs.Dispose();
             }
+        }
+
+        public void DeleteProofTempFile(string tempFilePath)
+        {
+            File.Delete(tempFilePath);
         }
     }
 }

@@ -99,6 +99,7 @@
     <Compile Include="Controls\UserCenter.xaml.cs">
       <DependentUpon>UserCenter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BufferToImageSourceConverter.cs" />
     <Compile Include="Converters\LongStrToShortStrConverter.cs" />
     <Compile Include="Converters\StringToImageSourceConverter.cs" />
     <Compile Include="UContorls\PDFReader.cs">
