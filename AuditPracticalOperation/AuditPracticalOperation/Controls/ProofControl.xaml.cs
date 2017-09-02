@@ -51,6 +51,11 @@ namespace AuditPracticalOperation.Controls
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
+
+        public void Close()
+        {
             if (container.Content != null && container.Content is PDFView)
                 ((PDFView)container.Content).PDFDispose();
 

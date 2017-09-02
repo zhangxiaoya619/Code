@@ -73,7 +73,7 @@ namespace AuditPracticalOperation.Controls
             }
         }
 
-        private void ImageScrollViewer_OnSetSize(MouseWheelEventArgs e)
+        private void ImageScrollViewer_OnSetSize(ImageScrollViewer viewer, MouseWheelEventArgs e)
         {
             Point point = e.GetPosition(img);
 
@@ -87,6 +87,9 @@ namespace AuditPracticalOperation.Controls
                 img.Width -= 50;
                 img.Height -= 50;
             }
+
+            viewer.ScrollToHorizontalOffset((img.Width - viewer.ViewportWidth) / 2);
+            viewer.ScrollToVerticalOffset((img.Height - viewer.ViewportHeight) / 2);
         }
 
         private void BtnRight_Click(object sender, RoutedEventArgs e)
@@ -124,7 +127,7 @@ namespace AuditPracticalOperation.Controls
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             if (OnSetSize != null)
-                OnSetSize(e);
+                OnSetSize(this, e);
 
             e.Handled = true;
         }
@@ -146,7 +149,7 @@ namespace AuditPracticalOperation.Controls
         }
     }
 
-    public delegate void SetSizeHandler(MouseWheelEventArgs e);
+    public delegate void SetSizeHandler(ImageScrollViewer viewer, MouseWheelEventArgs e);
     public delegate void ImageScroolViewerOnMouseDown(ImageScrollViewer viewer, MouseEventArgs e);
     public delegate void ImageScroolViewerOnMouseMove(ImageScrollViewer viewer, MouseEventArgs e);
 }

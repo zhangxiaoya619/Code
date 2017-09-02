@@ -43,6 +43,7 @@ namespace AuditPracticalOperation.Controls
             datasource = SingletonManager.Get<ProofShowProcessor>().GetProofItems();
             queueDir.Add(datasource[0]);
             CurrentProofDir = datasource[0];
+            CurrentProofDir.IsChecked = true;
             xunhuanList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = datasource });
             dirList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = queueDir });
             proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
@@ -56,6 +57,9 @@ namespace AuditPracticalOperation.Controls
             {
                 if (!CurrentProofDir.Contains(rootItem))
                 {
+                    if (container.Content != null && container.Content is ProofControl)
+                        ((ProofControl)container.Content).Close();
+
                     queueDir.Clear();
                     queueDir.Add(rootItem);
                     CurrentProofDir = rootItem;
@@ -107,7 +111,7 @@ namespace AuditPracticalOperation.Controls
                     case ViewModel.FileTypeEnum.Img:
                         currentShowImgItem = choiseItem;
                         ProofControl proofControl = new ProofControl(CurrentProofDir, CurrentProofDir.Proofs.IndexOf(choiseItem));
-                        proofControl.OnClose += ProofControl_OnClose; 
+                        proofControl.OnClose += ProofControl_OnClose;
                         container.Content = proofControl;
                         break;
                     default:
