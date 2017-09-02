@@ -74,6 +74,7 @@ namespace Common
                 if (OnKeyUp != null && (wParam == Win32Api.WM_KEYUP || wParam == Win32Api.WM_SYSKEYUP))
                 {
                     OnKeyUp((Keys)keyData, control);
+                    return 0;
                 }
                 if (OnKeyDown != null && (wParam == Win32Api.WM_KEYDOWN || wParam == Win32Api.WM_SYSKEYDOWN))
                 {
