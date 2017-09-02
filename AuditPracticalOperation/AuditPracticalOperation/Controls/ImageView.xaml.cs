@@ -21,8 +21,8 @@ namespace AuditPracticalOperation.Controls
     public partial class ImageView : UserControl
     {
         private const double SCROLL_SPEED = 50;
-        private const double MAX_WIDTH = 3000;
-        private const double MAX_HEIGHT = 3000;
+        private const double MAX_WIDTH = 6000;
+        private const double MAX_HEIGHT = 6000;
         private const double SCALE = 1.3;
 
         private double MIN_HEIGHT;
@@ -34,6 +34,9 @@ namespace AuditPracticalOperation.Controls
         private Point orign;
         private double xOffset;
         private double yOffset;
+
+        private double xScale;
+        private double yScale;
 
         public ImageView(byte[] imageSource)
         {
@@ -61,8 +64,8 @@ namespace AuditPracticalOperation.Controls
 
                     bmp.EndInit();
 
-                    img.Width = MIN_WIDTH;
-                    img.Height = MIN_HEIGHT;
+                    imgContainer.Width = MIN_WIDTH;
+                    imgContainer.Height = MIN_HEIGHT;
                     img.Source = bmp;
                     isFirstLoad = false;
                 }
@@ -75,21 +78,30 @@ namespace AuditPracticalOperation.Controls
 
         private void ImageScrollViewer_OnSetSize(ImageScrollViewer viewer, MouseWheelEventArgs e)
         {
-            Point point = e.GetPosition(img);
+            Point point = e.GetPosition(imgContainer);
 
-            if (e.Delta > 0 && img.Width + SCROLL_SPEED <= MAX_WIDTH && img.Height + SCROLL_SPEED <= MAX_HEIGHT)
-            {
-                img.Width += 50;
-                img.Height += 50;
-            }
-            else if (e.Delta < 0 && img.Width - SCROLL_SPEED >= MIN_WIDTH && img.Height - SCROLL_SPEED >= MIN_HEIGHT)
-            {
-                img.Width -= 50;
-                img.Height -= 50;
-            }
+            xScale = point.X / imgContainer.Width;
+            yScale = point.Y / imgContainer.Height;
 
-            viewer.ScrollToHorizontalOffset((img.Width - viewer.ViewportWidth) / 2);
-            viewer.ScrollToVerticalOffset((img.Height - viewer.ViewportHeight) / 2);
+            if (e.Delta > 0 && (imgContainer.Width + SCROLL_SPEED <= MAX_WIDTH || imgContainer.Height + SCROLL_SPEED <= MAX_HEIGHT))
+            {
+                imgContainer.Width += SCROLL_SPEED;
+                imgContainer.Height += SCROLL_SPEED;
+            }
+            else if (e.Delta < 0 && (imgContainer.Width - SCROLL_SPEED >= MIN_WIDTH || imgContainer.Height - SCROLL_SPEED >= MIN_HEIGHT))
+            {
+                imgContainer.Width -= SCROLL_SPEED;
+                imgContainer.Height -= SCROLL_SPEED;
+            }
+        }
+
+        private void Viewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (((ImageScrollViewer)sender).ScrollableWidth > 0)
+                ((ImageScrollViewer)sender).ScrollToHorizontalOffset(((ImageScrollViewer)sender).ScrollableWidth * xScale);
+
+            if (((ImageScrollViewer)sender).ScrollableHeight > 0)
+                ((ImageScrollViewer)sender).ScrollToVerticalOffset(((ImageScrollViewer)sender).ScrollableHeight * yScale);
         }
 
         private void BtnRight_Click(object sender, RoutedEventArgs e)
