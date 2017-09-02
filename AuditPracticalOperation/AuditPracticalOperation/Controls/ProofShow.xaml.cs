@@ -36,7 +36,6 @@ namespace AuditPracticalOperation.Controls
             this.Loaded += ProofShow_Loaded;
             this.keyboardHook = new KeyboardHook();
             this.keyboardHook.SetHook();
-            this.keyboardHook.OnKeyDown += keyboardHook_OnKeyDown;
         }
 
         private void keyboardHook_OnKeyDown(System.Windows.Forms.Keys key)
@@ -135,6 +134,7 @@ namespace AuditPracticalOperation.Controls
                         currentShowImgItem = choiseItem;
                         ProofControl proofControl = new ProofControl(CurrentProofDir, CurrentProofDir.Proofs.IndexOf(choiseItem));
                         proofControl.OnClose += ProofControl_OnClose;
+                        this.keyboardHook.OnKeyDown += keyboardHook_OnKeyDown;
                         container.Content = proofControl;
                         break;
                     default:
@@ -145,6 +145,7 @@ namespace AuditPracticalOperation.Controls
 
         private void ProofControl_OnClose(ProofControl proofControl)
         {
+            this.keyboardHook.OnKeyDown -= keyboardHook_OnKeyDown;
             proofControl.OnClose -= ProofControl_OnClose;
             container.Content = null;
         }
