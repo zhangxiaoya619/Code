@@ -37,6 +37,7 @@ namespace AuditPracticalOperation.Controls
 
         private double xScale;
         private double yScale;
+        private bool isScroll;
 
         public ImageView(byte[] imageSource)
         {
@@ -87,16 +88,23 @@ namespace AuditPracticalOperation.Controls
             {
                 imgContainer.Width += SCROLL_SPEED;
                 imgContainer.Height += SCROLL_SPEED;
+                isScroll = true;
             }
             else if (e.Delta < 0 && (imgContainer.Width - SCROLL_SPEED >= MIN_WIDTH || imgContainer.Height - SCROLL_SPEED >= MIN_HEIGHT))
             {
                 imgContainer.Width -= SCROLL_SPEED;
                 imgContainer.Height -= SCROLL_SPEED;
+                isScroll = true;
             }
         }
 
         private void Viewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
+            if (!isScroll)
+                return;
+
+            isScroll = false;
+
             if (((ImageScrollViewer)sender).ScrollableWidth > 0)
                 ((ImageScrollViewer)sender).ScrollToHorizontalOffset(((ImageScrollViewer)sender).ScrollableWidth * xScale);
 
