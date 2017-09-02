@@ -16,6 +16,7 @@ namespace Common
         Win32Api.HookProc KeyboardHookDelegate;
 
         public event KeyUpHandler OnKeyUp;
+        public event KeyDownHandler OnKeyDown;
 
         protected const byte VK_LSHIFT = 0xA0;
         protected const byte VK_RSHIFT = 0xA1;
@@ -71,7 +72,14 @@ namespace Common
 
 
                 if (OnKeyUp != null && (wParam == Win32Api.WM_KEYUP || wParam == Win32Api.WM_SYSKEYUP))
+                {
                     OnKeyUp((Keys)keyData, control);
+                }
+                if (OnKeyDown != null && (wParam == Win32Api.WM_KEYDOWN || wParam == Win32Api.WM_SYSKEYDOWN))
+                {
+                    OnKeyDown((Keys)keyData);
+                    return 0;
+                }
             }
 
             return Win32Api.CallNextHookEx(hHook, nCode, wParam, lParam);
@@ -79,4 +87,5 @@ namespace Common
     }
 
     public delegate void KeyUpHandler(Keys key, bool control);
+    public delegate void KeyDownHandler(Keys key);
 }

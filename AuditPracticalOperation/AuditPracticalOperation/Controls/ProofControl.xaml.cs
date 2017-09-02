@@ -58,7 +58,7 @@ namespace AuditPracticalOperation.Controls
                 OnClose(this);
         }
 
-        private void BtnLast_Click(object sender, RoutedEventArgs e)
+        public void BtnLast_Click(object sender, RoutedEventArgs e)
         {
             int old = selectIndex;
 
@@ -74,7 +74,7 @@ namespace AuditPracticalOperation.Controls
             LoadControl(proof.Proofs[selectIndex]);
         }
 
-        private void BtnNext_Click(object sender, RoutedEventArgs e)
+        public void BtnNext_Click(object sender, RoutedEventArgs e)
         {
             int old = selectIndex;
 
