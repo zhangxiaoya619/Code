@@ -58,6 +58,6 @@ namespace ViewModel
 
         public bool IsNeedShowHelper { get { return !string.IsNullOrEmpty(HelperText.Trim()); } }
 
-        public string Title { get { return "差异说明"; } }
+        public string Title { get { return "实操说明"; } }
     }
 }

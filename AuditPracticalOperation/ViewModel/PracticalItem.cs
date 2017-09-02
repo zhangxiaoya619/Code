@@ -73,7 +73,17 @@ namespace ViewModel
 
         public bool IsNeedShowHelper { get { return !string.IsNullOrEmpty(HelperText.Trim()); } }
 
-        public string Title { get { return "实操指引"; } }
+        public string Title { get { return "差异说明"; } }
+
+        public void UpdateState()
+        {
+            if (Projects.Count(item => item.IsDone) == 0)
+                State = PracticalStateEnum.Default;
+            else if (Projects.Count(item => item.IsDone) < Projects.Count)
+                State = PracticalStateEnum.OnWorking;
+            else
+                State = PracticalStateEnum.HasDone;
+        }
 
         public PracticalItem()
         {

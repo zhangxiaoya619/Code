@@ -11,8 +11,8 @@ namespace Business.Processer
     {
         private IPracticalManager practicalManager;
         private int practicalID;
-        private int projectID;
         private string filePath;
+        private PracticalItemProject project;
 
         public string LoadContent()
         {
@@ -23,7 +23,8 @@ namespace Business.Processer
         public void SaveContent()
         {
             practicalManager.SaveContent(practicalID, filePath);
-            practicalManager.SetPracticalProjectDone(practicalID, projectID);
+            practicalManager.SetPracticalProjectDone(practicalID, project.ID);
+            project.IsDone = true;
         }
 
         public void DeleteContent()
@@ -31,10 +32,10 @@ namespace Business.Processer
             practicalManager.DeleteContent(filePath);
         }
 
-        public PracticalContentProcesser(int practicalID, int projectID)
+        public PracticalContentProcesser(int practicalID, PracticalItemProject project)
         {
             this.practicalID = practicalID;
-            this.projectID = projectID;
+            this.project = project;
             this.practicalManager = SingletonManager.Get<PracticalManager>();
         }
 

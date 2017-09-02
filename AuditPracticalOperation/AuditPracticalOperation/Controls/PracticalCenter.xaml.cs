@@ -29,6 +29,8 @@ namespace AuditPracticalOperation.Controls
 
             if (!this.IsInDesignMode())
                 projectContainer.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = practicalItem });
+
+            UpdateProcessBar();
         }
 
         public static RoutedUICommand Back = new RoutedUICommand("Back To SubjectList", "BackToSubjectList", typeof(PracticalCenter));
@@ -79,27 +81,18 @@ namespace AuditPracticalOperation.Controls
             operateContainer.Content = null;
             projectContainer.Visibility = Visibility.Visible;
             operateContainer.Visibility = Visibility.Collapsed;
+
+            practicalItem.UpdateState();
+
+            UpdateProcessBar();
         }
-    }
 
-    public class ProjectProcessConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        private void UpdateProcessBar()
         {
-            if (Utils.IsInDesignMode())
-                return 0;
-
-            PracticalItem item = (PracticalItem)value;
-
-            if (item.Projects.Count > 0)
-                return (int)Math.Ceiling(item.Projects.Count(project => project.IsDone) * 1f / item.Projects.Count * 100);
+            if (practicalItem.Projects.Count == 0)
+                processBar.Value = 0;
             else
-                return 0;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+                processBar.Value = (int)Math.Ceiling(practicalItem.Projects.Count(project => project.IsDone) * 1f / practicalItem.Projects.Count * 100);
         }
     }
 

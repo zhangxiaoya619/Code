@@ -9,7 +9,6 @@
              d:DesignHeight="540" 
              d:DesignWidth="700">
     <UserControl.Resources>
-        <controls:ProjectProcessConverter x:Key="projectProcessConverter" />
         <controls:ProjectHasDoneCountConverter x:Key="projectHasDoneCountConverter" />
         <controls:ProjectNumNameConverter x:Key="projectNumNameConverter"/>
         <controls:ProjectHasDoneCountEnumType x:Key="hasDone" >
@@ -56,7 +55,7 @@
                     <TextBlock Margin="5,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectHasDoneCountConverter}, ConverterParameter={StaticResource dontHasDone},StringFormat='未完成{0}项'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="10px" Foreground="#949494" Width="Auto"/>
                 </StackPanel>
                 <Grid Grid.Column="4" Height="26" Margin="10,0,10,0">
-                    <ProgressBar Maximum="100" Minimum="0" Value="{Binding Path=., Converter={StaticResource projectProcessConverter}}">
+                    <ProgressBar x:Name="processBar" Maximum="100" Minimum="0">
                         <ProgressBar.Resources>
                             <LinearGradientBrush x:Key="ProgressBarBackground" EndPoint="1,0" StartPoint="0,0">
                                 <GradientStop Color="#BABABA" Offset="0"/>
@@ -115,7 +114,7 @@
                             </Style>
                         </ProgressBar.Style>
                     </ProgressBar>
-                    <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=., Converter={StaticResource projectProcessConverter}, StringFormat='已完成{0}%'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#FFFF6800" HorizontalAlignment="Center"/>
+                    <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Text="{Binding Path=Value, ElementName=processBar, StringFormat='已完成{0}%'}" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12px" Foreground="#FFFF6800" HorizontalAlignment="Center"/>
                 </Grid>
                 <StackPanel Grid.Column="5" Orientation="Horizontal">
                     <Button Margin="10,0,0,0" Content="返回科目" Width="80" Height="24" Command="controls:PracticalCenter.Back">

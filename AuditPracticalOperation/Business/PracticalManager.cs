@@ -164,7 +164,7 @@ namespace Business
 
                 foreach (XmlNode node in practicalNode.ChildNodes)
                 {
-                    if (node.Attributes["id"].Value == practicalID.ToString())
+                    if (node.Attributes["id"].Value == projectID.ToString())
                     {
                         projectNode = node;
                         break;
@@ -394,12 +394,7 @@ namespace Business
                         projectItem.IsDone = ExistPract(practicalItem.ID) && Convert.ToBoolean(project.Attributes["hasdone"].Value);
                     }
 
-                    if (practicalItem.Projects.Count(item => item.IsDone) == 0)
-                        practicalItem.State = PracticalStateEnum.Default;
-                    else if (practicalItem.Projects.Count(item => item.IsDone) < practicalItem.Projects.Count)
-                        practicalItem.State = PracticalStateEnum.OnWorking;
-                    else
-                        practicalItem.State = PracticalStateEnum.HasDone;
+                    practicalItem.UpdateState();
                 }
             }
             catch

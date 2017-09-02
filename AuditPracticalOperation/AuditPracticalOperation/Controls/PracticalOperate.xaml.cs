@@ -58,7 +58,7 @@ namespace AuditPracticalOperation.Controls
 
             if (!this.IsInDesignMode())
             {
-                contentProcesser = new PracticalContentProcesser(practicalID, project.ID);
+                contentProcesser = new PracticalContentProcesser(practicalID, project);
                 container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
                 practicalFilePath = contentProcesser.LoadContent();
             }
