@@ -67,6 +67,7 @@ namespace AuditPracticalOperation.Controls
             isFirstLoad = false;
             queueDir = new ObservableCollection<ViewModel.ProofItem>();
             datasource = SingletonManager.Get<ProofShowProcessor>().GetProofItems();
+            datasource[0].IsChecked = true;
             queueDir.Add(datasource[0]);
             CurrentProofDir = datasource[0];
             xunhuanList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = datasource });
