@@ -1,6 +1,7 @@
 ﻿using AuditPracticalOperation.UContorls;
 using Business;
 using Business.Processer;
+using Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,10 +29,35 @@ namespace AuditPracticalOperation.Controls
         private IList<ViewModel.ProofItem> datasource;
         private ViewModel.ProofItem CurrentProofDir = null;
         private ObservableCollection<ViewModel.ProofItem> queueDir = null;
+        private KeyboardHook keyboardHook;
         private ProofShow()
         {
             InitializeComponent();
             this.Loaded += ProofShow_Loaded;
+            this.keyboardHook = new KeyboardHook();
+            this.keyboardHook.SetHook();
+            this.keyboardHook.OnKeyDown += keyboardHook_OnKeyDown;
+        }
+
+        private void keyboardHook_OnKeyDown(System.Windows.Forms.Keys key)
+        {
+            if (container.Content != null)
+            {
+                if (key == System.Windows.Forms.Keys.Left)
+                {
+                    this.Dispatcher.BeginInvoke((Action)delegate
+                    {
+                        (container.Content as ProofControl).BtnLast_Click(this, null);
+                    });
+                }
+                else if (key == System.Windows.Forms.Keys.Right)
+                {
+                    this.Dispatcher.BeginInvoke((Action)delegate
+                    {
+                        (container.Content as ProofControl).BtnNext_Click(this, null);
+                    });
+                }
+            }
         }
 
         private void ProofShow_Loaded(object sender, RoutedEventArgs e)
@@ -41,6 +67,7 @@ namespace AuditPracticalOperation.Controls
             isFirstLoad = false;
             queueDir = new ObservableCollection<ViewModel.ProofItem>();
             datasource = SingletonManager.Get<ProofShowProcessor>().GetProofItems();
+            datasource[0].IsChecked = true;
             queueDir.Add(datasource[0]);
             CurrentProofDir = datasource[0];
             CurrentProofDir.IsChecked = true;
