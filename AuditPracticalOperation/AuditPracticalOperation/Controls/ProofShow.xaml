@@ -344,5 +344,6 @@
                 </ListView>
             </Grid>
         </Grid>
+        <ContentControl Grid.Column="1" x:Name="container"/>
     </Grid>
 </UserControl>

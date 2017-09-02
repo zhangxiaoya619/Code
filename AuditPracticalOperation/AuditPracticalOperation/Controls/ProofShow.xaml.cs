@@ -75,11 +75,12 @@ namespace AuditPracticalOperation.Controls
             if (choiseItem != CurrentProofDir)
             {
                 CurrentProofDir = choiseItem;
-                for (int i = queueDir.ToArray().Length - 1; i >= 0; i--)
-                {
-                    if (queueDir[i].Contains(CurrentProofDir) && queueDir[i] != CurrentProofDir)
-                        queueDir.RemoveAt(i);
-                }
+
+                int index = queueDir.IndexOf(CurrentProofDir);
+
+                while (index != queueDir.Count - 1)
+                    queueDir.RemoveAt(queueDir.Count - 1);
+
                 proofList.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = CurrentProofDir.Proofs });
             }
         }
@@ -105,13 +106,20 @@ namespace AuditPracticalOperation.Controls
                     case ViewModel.FileTypeEnum.Pdf:
                     case ViewModel.FileTypeEnum.Img:
                         currentShowImgItem = choiseItem;
-                        ProofWindow window = new ProofWindow(CurrentProofDir, CurrentProofDir.Proofs.IndexOf(choiseItem));
-                        window.ShowDialog();
+                        ProofControl proofControl = new ProofControl(CurrentProofDir, CurrentProofDir.Proofs.IndexOf(choiseItem));
+                        proofControl.OnClose += ProofControl_OnClose; 
+                        container.Content = proofControl;
                         break;
                     default:
                         break;
                 }
             }
+        }
+
+        private void ProofControl_OnClose(ProofControl proofControl)
+        {
+            proofControl.OnClose -= ProofControl_OnClose;
+            container.Content = null;
         }
     }
 }

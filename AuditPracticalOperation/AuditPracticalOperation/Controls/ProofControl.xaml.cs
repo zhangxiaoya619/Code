@@ -18,12 +18,14 @@ namespace AuditPracticalOperation.Controls
     /// <summary>
     /// ProofWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ProofWindow : Window
+    public partial class ProofControl : UserControl
     {
         private int selectIndex;
         private ProofItem proof;
 
-        public ProofWindow(ProofItem proof, int selectIndex)
+        public event Action<ProofControl> OnClose;
+
+        public ProofControl(ProofItem proof, int selectIndex)
         {
             InitializeComponent();
 
@@ -47,33 +49,13 @@ namespace AuditPracticalOperation.Controls
             }
         }
 
-        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                BtnMax_Click(null, null);
-                return;
-            }
-
-            this.DragMove();
-        }
-
-        private void BtnMin_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        private void BtnMax_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.WindowState == WindowState.Normal)
-                this.WindowState = WindowState.Maximized;
-            else if (this.WindowState == WindowState.Maximized || this.WindowState == WindowState.Minimized)
-                this.WindowState = WindowState.Normal;
-        }
-
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (container.Content != null && container.Content is PDFView)
+                ((PDFView)container.Content).PDFDispose();
+
+            if (OnClose != null)
+                OnClose(this);
         }
 
         private void BtnLast_Click(object sender, RoutedEventArgs e)
@@ -106,12 +88,6 @@ namespace AuditPracticalOperation.Controls
                 return;
 
             LoadControl(proof.Proofs[selectIndex]);
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            if (container.Content != null && container.Content is PDFView)
-                ((PDFView)container.Content).PDFDispose();
         }
     }
 }

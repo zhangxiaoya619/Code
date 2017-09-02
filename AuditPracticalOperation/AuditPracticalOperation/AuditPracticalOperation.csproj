@@ -102,8 +102,8 @@
     <Compile Include="Controls\ProofShow.xaml.cs">
       <DependentUpon>ProofShow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ProofWindow.xaml.cs">
-      <DependentUpon>ProofWindow.xaml</DependentUpon>
+    <Compile Include="Controls\ProofControl.xaml.cs">
+      <DependentUpon>ProofControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\UserCenter.xaml.cs">
       <DependentUpon>UserCenter.xaml</DependentUpon>
@@ -173,7 +173,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ProofWindow.xaml">
+    <Page Include="Controls\ProofControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

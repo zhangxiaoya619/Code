@@ -1,13 +1,14 @@
-﻿<Window x:Class="AuditPracticalOperation.Controls.ProofWindow"
+﻿<UserControl x:Class="AuditPracticalOperation.Controls.ProofControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AuditPracticalOperation.Controls"
         mc:Ignorable="d"
-        Background="{x:Null}"
-        Title="ProofWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowState="Normal" WindowStyle="None" Closed="Window_Closed" BorderBrush="{x:Null}">
-    <Window.Resources>
+        Background="#FF1E1E1E"
+        d:DesignHeight="540"
+        d:DesignWidth="700">
+    <UserControl.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Red"/>
         </Style>
@@ -16,33 +17,15 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="MouseOver">
-                                        <Storyboard>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
-                                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
-                                            </ColorAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
-                                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
-                                            </ColorAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled"/>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
                             <Rectangle Fill="Transparent"/>
                             <Path x:Name="path" Data="M24,73.7799987792969L72,73.7799987792969 72,85.7799987792969 24,85.7799987792969 24,73.7799987792969z" Stretch="Uniform" Fill="#FF9BA5AF" Width="12" Height="12" Margin="9,13,9,5" RenderTransformOrigin="0.5,0.5"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True"/>
                             <Trigger Property="IsDefaulted" Value="True"/>
-                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Fill" TargetName="path" Value="White"/>
+                            </Trigger>
                             <Trigger Property="IsPressed" Value="True"/>
                             <Trigger Property="IsEnabled" Value="False"/>
                         </ControlTemplate.Triggers>
@@ -128,27 +111,17 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Window.Resources>
+    </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Rectangle Fill="Black" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
-        <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right"  Width="90">
-            <Button x:Name="BtnMin" Click="BtnMin_Click" Content="Button" Style="{DynamicResource ButtonStyle3}" Width="30"/>
-            <Button x:Name="BtnMax" Click="BtnMax_Click" Content="Button" Style="{DynamicResource ButtonStyle4}" Width="30"/>
-            <Button x:Name="BtnClose" Click="BtnClose_Click" Content="Button" Style="{DynamicResource ButtonStyle5}" Width="30"/>
-        </StackPanel>
-        <Rectangle Fill="#FF1E1E1E" Grid.Row="1"/>
-        <Grid Grid.Row="1">
+        <Button x:Name="BtnClose" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="15" Click="BtnClose_Click" Content="Button" Style="{DynamicResource ButtonStyle5}" Width="30"/>
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <ContentControl Grid.ColumnSpan="3" x:Name="container" />
-            <Button Grid.Column="0"  HorizontalAlignment="Right" Height="60" Width="60" Click="BtnLast_Click">
+            <ContentControl Grid.ColumnSpan="3" x:Name="container" Margin="50,50,50,0"/>
+            <Button Grid.Column="0"  HorizontalAlignment="Center" Height="30" Width="30" Click="BtnLast_Click">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Template">
@@ -199,7 +172,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Grid.Column="2" HorizontalAlignment="Left"  Height="60" Width="60" Click="BtnNext_Click">
+            <Button Grid.Column="2" HorizontalAlignment="Left"  Height="30" Width="30" Click="BtnNext_Click">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Template">
@@ -252,4 +225,4 @@
             </Button>
         </Grid>
     </Grid>
-</Window>
+</UserControl>

@@ -199,7 +199,6 @@
             </Image>
         </local:ImageScrollViewer>
         <Grid Grid.Row="1">
-            <Rectangle Fill="Black" Opacity="0.7"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Width="60" Height="40" Click="BtnLeft_Click"  Style="{DynamicResource ButtonStyle15}">
                     <Path Stroke="blue" StrokeThickness="2" Fill="blue" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" Width="30" Height="30" Data="{StaticResource pathData}">
