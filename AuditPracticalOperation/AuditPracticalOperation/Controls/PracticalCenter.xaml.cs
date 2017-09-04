@@ -45,13 +45,20 @@ namespace AuditPracticalOperation.Controls
         {
             if (!CheckProcess())
                 return;
-
-            PracticalItemProject project = (PracticalItemProject)e.Parameter;
-            PracticalOperate practicalOperate = new PracticalOperate(practicalItem, practicalItem.ID, project);
-            operateContainer.Content = practicalOperate;
-            practicalOperate.OnBacked += PracticalOperate_OnBacked;
-            projectContainer.Visibility = Visibility.Collapsed;
-            operateContainer.Visibility = Visibility.Visible;
+            
+            try
+            {
+                PracticalItemProject project = (PracticalItemProject)e.Parameter;
+                PracticalOperate practicalOperate = new PracticalOperate(practicalItem, practicalItem.ID, project);
+                operateContainer.Content = practicalOperate;
+                practicalOperate.OnBacked += PracticalOperate_OnBacked;
+                projectContainer.Visibility = Visibility.Collapsed;
+                operateContainer.Visibility = Visibility.Visible;
+            }
+            catch
+            {
+                MessageBox.Show("EXCEL控件加载失败，原因可能是没有正确安装Microsoft Office。");
+            }
         }
 
         private bool CheckProcess()
