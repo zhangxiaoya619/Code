@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "references", "references", 
 	ProjectSection(SolutionItems) = preProject
 		libs\AxInterop.DSOFramer.dll = libs\AxInterop.DSOFramer.dll
 		libs\Interop.DSOFramer.dll = libs\Interop.DSOFramer.dll
-		AuditPracticalOperation\SlidingImages.xaml = AuditPracticalOperation\SlidingImages.xaml
-		AuditPracticalOperation\SlidingImages.xaml.cs = AuditPracticalOperation\SlidingImages.xaml.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckAdobSetupOrNot", "CheckAdobSetupOrNot\CheckAdobSetupOrNot.csproj", "{BCBAF486-9BE5-4E23-8CAF-20B633A4510C}"

@@ -60,7 +60,7 @@ namespace AuditPracticalOperation.Controls
             {
                 contentProcesser = new PracticalContentProcesser(practicalID, project);
                 container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
-                //practicalFilePath = contentProcesser.LoadContent();
+                practicalFilePath = contentProcesser.LoadContent();
             }
         }
 
@@ -138,7 +138,7 @@ namespace AuditPracticalOperation.Controls
                         framer.CreateNew("Excel.sheet");
                         framer.Close();
 
-                        System.Threading.Thread.Sleep(500);
+                        System.Threading.Thread.Sleep(1000);
 
                         this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
                         {
