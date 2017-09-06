@@ -60,7 +60,7 @@ namespace AuditPracticalOperation.Controls
             {
                 contentProcesser = new PracticalContentProcesser(practicalID, project);
                 container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
-                practicalFilePath = contentProcesser.LoadContent();
+                //practicalFilePath = contentProcesser.LoadContent();
             }
         }
 
@@ -112,18 +112,43 @@ namespace AuditPracticalOperation.Controls
         {
             if (!isInit)
             {
+                isInit = true;
                 framer.Menubar = false;
                 framer.Titlebar = false;
                 framer.BorderStyle = DSOFramer.dsoBorderStyle.dsoBorderNone;
                 masker.Height = editorContainer.ActualHeight;
 
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
-                {
-                    framer.Open(practicalFilePath, false, "Excel.Sheet", null, null);
-                    return null;
-                }, null);
+                //this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
+                //{
+                //    framer.Open(practicalFilePath, false, "Excel.Sheet", null, null);
+                //    return null;
+                //}, null);
 
-                isInit = true;
+                try
+                {
+                    framer.Open(practicalFilePath);
+                }
+                catch
+                {
+                    PracticalContentProcesser.KillAllProcess();
+
+                    System.Threading.ThreadPool.QueueUserWorkItem((state) =>
+                    {
+
+                        framer.CreateNew("Excel.sheet");
+                        framer.Close();
+
+                        System.Threading.Thread.Sleep(500);
+
+                        this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
+                        {
+                            framer.CreateNew("Excel.sheet");
+                            framer.Close();
+                            framer.Open(practicalFilePath);
+                            return null;
+                        }, null);
+                    });
+                }
             }
         }
 
