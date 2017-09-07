@@ -217,7 +217,7 @@ namespace PracticalExportTools
 
                 for (int i = 0; i < files.Count; i++)
                 {
-                    string filePath = System.IO.Path.Combine(exportFolder, files[i].Name + ".xls");
+                    string filePath = System.IO.Path.Combine(exportFolder, string.Format("{0}-{1}-{2}.xls", files[i].Name, student.Name, student.ID));
                     FileStream writeFs = null;
                     try
                     {

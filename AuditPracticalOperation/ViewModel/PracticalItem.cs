@@ -83,6 +83,8 @@ namespace ViewModel
                 State = PracticalStateEnum.OnWorking;
             else
                 State = PracticalStateEnum.HasDone;
+
+            RaisePropertyChanged("Projects");
         }
 
         public PracticalItem()

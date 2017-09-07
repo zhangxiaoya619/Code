@@ -10,6 +10,7 @@ using System.Windows;
 using System.Diagnostics;
 using Business;
 using Business.Processer;
+using System.Collections.Generic;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -22,8 +23,11 @@ namespace AuditPracticalOperation.Controls
 
         private PracticalItem practicalItem;
 
+        private bool isOpenDialog;
+
         public PracticalCenter(PracticalItem practicalItem)
         {
+            isOpenDialog = false;
             this.practicalItem = practicalItem;
             InitializeComponent();
 
@@ -40,12 +44,44 @@ namespace AuditPracticalOperation.Controls
                 OnBacked();
         }
 
+        public static RoutedUICommand F1HelpDialog = new RoutedUICommand("Show F1 Help", "ShowF1Help", typeof(PracticalCenter));
+        private void F1HelpDialogExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!practicalItem.IsNeedShowHelper)
+                return;
+
+            Helper helperWindow = new Helper(practicalItem);
+            helperWindow.Owner = Application.Current.MainWindow;
+            helperWindow.Closed += HelperWindowClosed;
+            isOpenDialog = true;
+            helperWindow.ShowDialog();
+        }
+
+        public static RoutedUICommand F2HelpDialog = new RoutedUICommand("Show F2 Help", "ShowF2Help", typeof(PracticalCenter));
+        private void F2HelpDialogExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!((IHelper)e.Parameter).IsNeedShowHelper)
+                return;
+
+            Helper helperWindow = new Helper((IHelper)e.Parameter);
+            helperWindow.Owner = Application.Current.MainWindow;
+            helperWindow.Closed += HelperWindowClosed;
+            isOpenDialog = true;
+            helperWindow.ShowDialog();
+        }
+
+        private void HelperWindowClosed(object sender, EventArgs e)
+        {
+            isOpenDialog = false;
+            ((Helper)sender).Closed -= HelperWindowClosed;
+        }
+
         public static RoutedCommand Operate = new RoutedUICommand("Open PracticalOperate", "OpenPracticalOperate", typeof(PracticalCenter));
         private void OperateExcuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (!CheckProcess())
                 return;
-            
+
             try
             {
                 PracticalItemProject project = (PracticalItemProject)e.Parameter;
@@ -101,6 +137,11 @@ namespace AuditPracticalOperation.Controls
             else
                 processBar.Value = (int)Math.Ceiling(practicalItem.Projects.Count(project => project.IsDone) * 1f / practicalItem.Projects.Count * 100);
         }
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !isOpenDialog && (e.Parameter == null ? true : ((IHelper)e.Parameter).IsNeedShowHelper);
+        }
     }
 
     public class ProjectHasDoneCountConverter : IValueConverter
@@ -110,15 +151,15 @@ namespace AuditPracticalOperation.Controls
             if (Utils.IsInDesignMode())
                 return 0;
 
-            PracticalItem item = (PracticalItem)value;
+           IList<PracticalItemProject> projects = (IList<PracticalItemProject>)value;
             ProjectHasDoneCountEnumType type = (ProjectHasDoneCountEnumType)parameter;
 
             switch (type)
             {
                 case ProjectHasDoneCountEnumType.HasDone:
-                    return item.Projects.Count(project => project.IsDone);
+                    return projects.Count(project => project.IsDone);
                 case ProjectHasDoneCountEnumType.DontHasDone:
-                    return item.Projects.Count - item.Projects.Count(project => project.IsDone);
+                    return projects.Count - projects.Count(project => project.IsDone);
                 default: throw new NotSupportedException();
             }
         }

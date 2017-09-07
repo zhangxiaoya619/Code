@@ -52,11 +52,14 @@ namespace AuditPracticalOperation.Controls
         public static RoutedUICommand Export = new RoutedUICommand("Export the selected has done", "Export", typeof(SubjectList));
         private void ExportExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
-            sfd.Filter = "作业文件|*.prac";
+            System.Windows.Forms.FolderBrowserDialog sfd = new System.Windows.Forms.FolderBrowserDialog();
 
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                SingletonManager.Get<PracticalItemProcesser>().ExportPractical(sfd.FileName, items.Where(item => item.IsSelected).ToArray());
+            {
+                string fileName = System.IO.Path.Combine(sfd.SelectedPath,
+               string.Format("{0}-{1}.prac", SingletonManager.Get<UserProcesser>().GetUser().Name, SingletonManager.Get<UserProcesser>().GetUser().ID));
+                SingletonManager.Get<PracticalItemProcesser>().ExportPractical(fileName, items.Where(item => item.IsSelected).ToArray());
+            }
         }
 
         private void CheckAllCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)

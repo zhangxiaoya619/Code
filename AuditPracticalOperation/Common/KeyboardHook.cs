@@ -30,6 +30,7 @@ namespace Common
         /// </summary>
         public void SetHook()
         {
+            isSetHook = true;
 
             KeyboardHookDelegate = new Win32Api.HookProc(KeyboardHookProc);
 
@@ -41,11 +42,15 @@ namespace Common
 
         }
 
+        private bool isSetHook = false;
+
         /// <summary>
         /// 卸载键盘钩子
         /// </summary>
         public void UnHook()
         {
+            if (!isSetHook)
+                return;
 
             Win32Api.UnhookWindowsHookEx(hHook);
 

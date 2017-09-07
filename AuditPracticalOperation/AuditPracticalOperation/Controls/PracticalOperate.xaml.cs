@@ -50,7 +50,7 @@ namespace AuditPracticalOperation.Controls
             this.f2Helper = f2Helper;
             this.isOpenDialog = false;
             this.keyboardHook = new KeyboardHook();
-            this.keyboardHook.SetHook();
+            //this.keyboardHook.SetHook();
             this.keyboardHook.OnKeyUp += KeyboardHook_OnKeyUp;
             Application.Current.Exit += Current_Exit;
 
