@@ -88,10 +88,6 @@ namespace Common
                 else
                     return false;
             }
-            catch
-            {
-                return false;
-            }
             finally
             {
 

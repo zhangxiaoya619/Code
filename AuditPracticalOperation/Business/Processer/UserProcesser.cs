@@ -38,8 +38,10 @@ namespace Business.Processer
         private UserProcesser()
         {
             user = new User();
-            user.CPUID = SingletonManager.Get<LocalSerialNumProcessor>().GetCpuSerialNum();
-            user.ChangePower(SingletonManager.Get<ActivationProcessor>().BoolRegist(SingletonManager.Get<ActivationProcessor>().getRNum(user.CPUID)));
+            user.CPUID = SingletonManager.Get<LocalSerialNumProcessor>().GetCpuSerialNum();//zxy
+            //user.CPUID = "123";
+            user.ChangePower(SingletonManager.Get<ActivationProcessor>().BoolRegist(SingletonManager.Get<ActivationProcessor>().getRNum(user.CPUID)));//zxy
+            //user.ChangePower(false);
         }
     }
 }

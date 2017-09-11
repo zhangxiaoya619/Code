@@ -11,6 +11,7 @@ using System.Diagnostics;
 using Business;
 using Business.Processer;
 using System.Collections.Generic;
+using Log;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -82,19 +83,12 @@ namespace AuditPracticalOperation.Controls
             if (!CheckProcess())
                 return;
 
-            try
-            {
-                PracticalItemProject project = (PracticalItemProject)e.Parameter;
-                PracticalOperate practicalOperate = new PracticalOperate(practicalItem, practicalItem.ID, project);
-                operateContainer.Content = practicalOperate;
-                practicalOperate.OnBacked += PracticalOperate_OnBacked;
-                projectContainer.Visibility = Visibility.Collapsed;
-                operateContainer.Visibility = Visibility.Visible;
-            }
-            catch
-            {
-                MessageBox.Show("EXCEL控件加载失败，原因可能是没有正确安装Microsoft Office。");
-            }
+            PracticalItemProject project = (PracticalItemProject)e.Parameter;
+            PracticalOperate practicalOperate = new PracticalOperate(practicalItem, practicalItem.ID, project);
+            operateContainer.Content = practicalOperate;
+            practicalOperate.OnBacked += PracticalOperate_OnBacked;
+            projectContainer.Visibility = Visibility.Collapsed;
+            operateContainer.Visibility = Visibility.Visible;
         }
 
         private bool CheckProcess()
@@ -151,7 +145,7 @@ namespace AuditPracticalOperation.Controls
             if (Utils.IsInDesignMode())
                 return 0;
 
-           IList<PracticalItemProject> projects = (IList<PracticalItemProject>)value;
+            IList<PracticalItemProject> projects = (IList<PracticalItemProject>)value;
             ProjectHasDoneCountEnumType type = (ProjectHasDoneCountEnumType)parameter;
 
             switch (type)

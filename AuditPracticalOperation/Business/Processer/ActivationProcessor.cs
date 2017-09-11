@@ -70,10 +70,6 @@ namespace Business.Processer
                 }
                 return false;
             }
-            catch
-            {
-                return false;
-            }
             finally
             {
                 localRegKey.Close();

@@ -1,4 +1,5 @@
 ﻿using Common;
+using Log;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,7 +23,15 @@ namespace AuditPracticalOperation
                 Process.GetCurrentProcess().Kill();
             }
 
+            DispatcherUnhandledException += OnDispatcherUnhandledException;
+
             base.OnStartup(e);
+        }
+
+        private void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            LogHelper.LogError(e.Exception);
+            MessageBox.Show("未知程序错误。");
         }
     }
 }

@@ -58,15 +58,8 @@ namespace AuditPracticalOperation.Controls
             {
                 string fileName = System.IO.Path.Combine(sfd.SelectedPath,
                string.Format("{0}-{1}.prac", SingletonManager.Get<UserProcesser>().GetUser().Name, SingletonManager.Get<UserProcesser>().GetUser().ID));
-                try
-                {
-                    SingletonManager.Get<PracticalItemProcesser>().ExportPractical(fileName, items.Where(item => item.IsSelected).ToArray());
-                    MessageBox.Show("导出成功。");
-                }
-                catch
-                {
-                    MessageBox.Show("导出失败。");
-                }
+                SingletonManager.Get<PracticalItemProcesser>().ExportPractical(fileName, items.Where(item => item.IsSelected).ToArray());
+                MessageBox.Show("导出成功。");
             }
         }
 

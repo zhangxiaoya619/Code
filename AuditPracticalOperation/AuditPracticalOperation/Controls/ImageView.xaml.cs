@@ -57,23 +57,16 @@ namespace AuditPracticalOperation.Controls
             if (isFirstLoad)
             {
                 BitmapImage bmp = null;
-                try
-                {
-                    bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.StreamSource = new MemoryStream(imageSource);
+                bmp = new BitmapImage();
+                bmp.BeginInit();
+                bmp.StreamSource = new MemoryStream(imageSource);
 
-                    bmp.EndInit();
+                bmp.EndInit();
 
-                    imgContainer.Width = MIN_WIDTH;
-                    imgContainer.Height = MIN_HEIGHT;
-                    img.Source = bmp;
-                    isFirstLoad = false;
-                }
-                catch
-                {
-                    throw new Exception("图片加载失败。");
-                }
+                imgContainer.Width = MIN_WIDTH;
+                imgContainer.Height = MIN_HEIGHT;
+                img.Source = bmp;
+                isFirstLoad = false;
             }
         }
 

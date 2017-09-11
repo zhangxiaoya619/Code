@@ -72,10 +72,6 @@ namespace Business
                     }
                 }
             }
-            catch
-            {
-                throw new Exception("实操文件加载失败。");
-            }
             finally
             {
                 if (fs != null)
@@ -107,10 +103,6 @@ namespace Business
                     readFs.Read(buffer, 0, buffer.Length);
                     writeFs.Write(buffer, 0, buffer.Length);
                 }
-            }
-            catch
-            {
-                throw new Exception("保存失败。");
             }
             finally
             {
@@ -190,10 +182,6 @@ namespace Business
                 byte[] buffer = UTF8Encoding.UTF8.GetBytes(writer.GetStringBuilder().ToString());
                 File.WriteAllText(practicalProcessFileName, string.Join(" ", buffer.Select(item => item.ToString()).ToArray()));
             }
-            catch
-            {
-                throw new Exception("保存失败。");
-            }
             finally
             {
                 if (writer != null)
@@ -220,10 +208,6 @@ namespace Business
                 document.Save(writer);
                 byte[] buffer = UTF8Encoding.UTF8.GetBytes(writer.GetStringBuilder().ToString());
                 File.WriteAllText(practicalProcessFileName, string.Join(" ", buffer.Select(item => item.ToString()).ToArray()));
-            }
-            catch
-            {
-                throw new Exception("保存失败。");
             }
             finally
             {
@@ -352,10 +336,6 @@ namespace Business
 
                 LoadProcess(items);
             }
-            catch
-            {
-                throw new Exception("题库加载错误。");
-            }
             finally
             {
                 if (fs != null)
@@ -368,74 +348,61 @@ namespace Business
         {
             if (!File.Exists(practicalProcessFileName))
                 return;
-            try
+
+            XmlDocument document = new XmlDocument();
+
+            using (StringReader reader = new StringReader(UTF8Encoding.UTF8.GetString(File.ReadAllText(practicalProcessFileName).Split(' ').Select(item => Convert.ToByte(item)).ToArray())))
+                document.Load(reader);
+
+            foreach (XmlNode practical in document.SelectSingleNode("process"))
             {
-                XmlDocument document = new XmlDocument();
+                int practicalId = Convert.ToInt32(practical.Attributes["id"].Value);
+                PracticalItem practicalItem = items.SingleOrDefault(item => item.ID == practicalId);
 
-                using (StringReader reader = new StringReader(UTF8Encoding.UTF8.GetString(File.ReadAllText(practicalProcessFileName).Split(' ').Select(item => Convert.ToByte(item)).ToArray())))
-                    document.Load(reader);
+                if (practicalItem == null)
+                    continue;
 
-                foreach (XmlNode practical in document.SelectSingleNode("process"))
+                foreach (XmlNode project in practical.ChildNodes)
                 {
-                    int practicalId = Convert.ToInt32(practical.Attributes["id"].Value);
-                    PracticalItem practicalItem = items.SingleOrDefault(item => item.ID == practicalId);
+                    int projectId = Convert.ToInt32(project.Attributes["id"].Value);
+                    PracticalItemProject projectItem = practicalItem.Projects.SingleOrDefault(item => item.ID == projectId);
 
                     if (practicalItem == null)
                         continue;
 
-                    foreach (XmlNode project in practical.ChildNodes)
-                    {
-                        int projectId = Convert.ToInt32(project.Attributes["id"].Value);
-                        PracticalItemProject projectItem = practicalItem.Projects.SingleOrDefault(item => item.ID == projectId);
-
-                        if (practicalItem == null)
-                            continue;
-
-                        projectItem.IsDone = ExistPract(practicalItem.ID) && Convert.ToBoolean(project.Attributes["hasdone"].Value);
-                    }
-
-                    practicalItem.UpdateState();
+                    projectItem.IsDone = ExistPract(practicalItem.ID) && Convert.ToBoolean(project.Attributes["hasdone"].Value);
                 }
-            }
-            catch
-            {
-                throw new Exception("完成进度读取失败。");
+
+                practicalItem.UpdateState();
             }
         }
 
         public HasDonePracticalItem[] GetHasDonePractical()
         {
-            try
+            string[] files = Directory.GetFiles(practicalFileFolder);
+            PracticalItem[] items = GetAllPractical();
+            IList<HasDonePracticalItem> hasDoneItems = new List<HasDonePracticalItem>();
+
+            for (int i = 0; i < files.Length; i++)
             {
-                string[] files = Directory.GetFiles(practicalFileFolder);
-                PracticalItem[] items = GetAllPractical();
-                IList<HasDonePracticalItem> hasDoneItems = new List<HasDonePracticalItem>();
+                if (!files[i].Contains("pracd"))
+                    continue;
 
-                for (int i = 0; i < files.Length; i++)
-                {
-                    if (!files[i].Contains("pracd"))
-                        continue;
+                int id = Convert.ToInt32(Path.GetFileNameWithoutExtension(files[i]));
 
-                    int id = Convert.ToInt32(Path.GetFileNameWithoutExtension(files[i]));
+                if (items[id].State != PracticalStateEnum.HasDone)
+                    continue;
 
-                    if (items[id].State != PracticalStateEnum.HasDone)
-                        continue;
+                HasDonePracticalItem hasDoneItem = new HasDonePracticalItem();
 
-                    HasDonePracticalItem hasDoneItem = new HasDonePracticalItem();
+                hasDoneItem.ID = id;
+                hasDoneItem.Name = items[id].Name;
+                hasDoneItem.IsSelected = false;
 
-                    hasDoneItem.ID = id;
-                    hasDoneItem.Name = items[id].Name;
-                    hasDoneItem.IsSelected = false;
-
-                    hasDoneItems.Add(hasDoneItem);
-                }
-
-                return hasDoneItems.OrderBy(item => item.ID).ToArray();
+                hasDoneItems.Add(hasDoneItem);
             }
-            catch
-            {
-                throw new Exception("获取完成结果失败。");
-            }
+
+            return hasDoneItems.OrderBy(item => item.ID).ToArray();
         }
 
         public void ExportPractical(string fileName, HasDonePracticalItem[] hasDonePracticalItems)
@@ -507,10 +474,6 @@ namespace Business
                     }
                 }
                 #endregion
-            }
-            catch
-            {
-                throw new Exception("导出失败。");
             }
             finally
             {

@@ -281,6 +281,10 @@
       <Project>{f59c5777-2bb6-49e4-b1a5-55f1b9266d44}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Log\Log.csproj">
+      <Project>{a3f2f533-3cec-43d4-8c8d-52075d308b2a}</Project>
+      <Name>Log</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{17eb8aaf-31bb-426f-82bf-69da6fac2d32}</Project>
       <Name>ViewModel</Name>

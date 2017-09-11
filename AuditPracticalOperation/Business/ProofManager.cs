@@ -87,10 +87,6 @@ namespace Business.Processer
                         datFs.Read(buffer, 0, buffer.Length);
                         return buffer;
                     }
-                    catch
-                    {
-                        throw new Exception("获取证据失败。");
-                    }
                     finally
                     {
                         if (datFs != null)
@@ -224,10 +220,6 @@ namespace Business.Processer
 
                 return folders[0];
             }
-            catch
-            {
-                throw new Exception("获取证据失败。");
-            }
             finally
             {
                 if (idxFs != null)
@@ -256,10 +248,6 @@ namespace Business.Processer
                 }
 
                 return tempFileName;
-            }
-            catch
-            {
-                throw new Exception("证据打开失败。");
             }
             finally
             {

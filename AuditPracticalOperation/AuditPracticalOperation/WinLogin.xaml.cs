@@ -32,8 +32,8 @@ namespace AuditPracticalOperation
 
         void WinLogin_Loaded(object sender, RoutedEventArgs e)
         {
-            currentName = ConfigurationManager.AppSettings["UserName"];
-            currentID = ConfigurationManager.AppSettings["UserID"];
+            currentName = ConfigurationManager.AppSettings["UserName"];//zxy
+            currentID = ConfigurationManager.AppSettings["UserID"];//yzxy
             string text = currentName + currentID;
             if (!string.IsNullOrEmpty(text))
             {
@@ -43,6 +43,8 @@ namespace AuditPracticalOperation
         }
         private void AccessAppSettings(string key, string value)
         {
+            //return;//zxy
+
             //获取Configuration对象
             Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             //根据Key读取<add>元素的Value
