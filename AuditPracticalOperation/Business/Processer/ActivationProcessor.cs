@@ -3,80 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
 
 namespace Business.Processer
 {
     [Singleton]
     public class ActivationProcessor
     {
-        private bool White = true;
-        private bool Code = false;
         private ActivationProcessor()
         {
-
+            
         }
-        #region Register
-        public bool RegistIt(string currentCode, string realCode)
-        {
-            if (!string.IsNullOrEmpty(realCode))
-            {
-                if (currentCode.TrimEnd().Equals(realCode.TrimEnd()))
-                {
-                    Microsoft.Win32.RegistryKey retkey =
-                         Microsoft.Win32.Registry.CurrentUser.
-                         OpenSubKey("software", true).CreateSubKey("WhiteCode").
-                         CreateSubKey("WhiteCode.ini").
-                         CreateSubKey(currentCode.TrimEnd());
-                    retkey.SetValue("WhiteCode", "BBC6D58D0953F027760A046D58D52786");
-
-                    retkey = Microsoft.Win32.Registry.LocalMachine.
-                        OpenSubKey("software", true).CreateSubKey("WhiteCode").
-                         CreateSubKey("WhiteCode.ini").
-                         CreateSubKey(currentCode.TrimEnd());
-                    retkey.SetValue("WhiteCode", "BBC6D58D0953F027760A046D58D52786");
-
-                    return White;
-                }
-                else return Code;
-            }
-            else return Code;
-        }
-
-        public bool BoolRegist(string sn)
-        {
-            string[] keynames;
-            bool flag = false;
-            Microsoft.Win32.RegistryKey localRegKey = Microsoft.Win32.Registry.LocalMachine;
-            Microsoft.Win32.RegistryKey userRegKey = Microsoft.Win32.Registry.CurrentUser;
-            try
-            {
-                keynames = localRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + sn).GetValueNames();
-                foreach (string name in keynames)
-                {
-                    if (name == "WhiteCode")
-                    {
-                        if (localRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + sn).GetValue("WhiteCode").ToString() == "BBC6D58D0953F027760A046D58D52786")
-                            flag = true;
-                    }
-                }
-                keynames = userRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + sn).GetValueNames();
-                foreach (string name in keynames)
-                {
-                    if (name == "WhiteCode")
-                    {
-                        if (flag && userRegKey.OpenSubKey("software\\WhiteCode\\WhiteCode.ini\\" + sn).GetValue("WhiteCode").ToString() == "BBC6D58D0953F027760A046D58D52786")
-                            return true;
-                    }
-                }
-                return false;
-            }
-            finally
-            {
-                localRegKey.Close();
-                userRegKey.Close();
-            }
-        }
-
+        
         public string GetMd5(object text)
         {
             string path = text.ToString();
@@ -88,7 +26,6 @@ namespace Business.Processer
             string md5result = BitConverter.ToString(byteResult).Replace("-", "");
             return md5result;
         }
-        #endregion
 
         #region code
         /// <summary>

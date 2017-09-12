@@ -32,8 +32,8 @@ namespace AuditPracticalOperation
 
         void WinLogin_Loaded(object sender, RoutedEventArgs e)
         {
-            currentName = ConfigurationManager.AppSettings["UserName"];//zxy
-            currentID = ConfigurationManager.AppSettings["UserID"];//yzxy
+            currentName = SingletonManager.Get<UserProcesser>().GetSavedUserName();
+            currentID = SingletonManager.Get<UserProcesser>().GetSavedUserID();
             string text = currentName + currentID;
             if (!string.IsNullOrEmpty(text))
             {
@@ -41,21 +41,7 @@ namespace AuditPracticalOperation
             }
             header.OnClose += header_OnClose;
         }
-        private void AccessAppSettings(string key, string value)
-        {
-            //return;//zxy
-
-            //获取Configuration对象
-            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            //根据Key读取<add>元素的Value
-            string name = config.AppSettings.Settings[key].Value;
-            //写入<add>元素的Value
-            config.AppSettings.Settings[key].Value = value;
-            //一定要记得保存，写不带参数的config.Save()也可以
-            config.Save(ConfigurationSaveMode.Modified);
-            //刷新，否则程序读取的还是之前的值（可能已装入内存）
-            System.Configuration.ConfigurationManager.RefreshSection("appSettings");
-        }
+       
         void header_OnClose()
         {
             this.Close();
@@ -90,16 +76,12 @@ namespace AuditPracticalOperation
             }
             string id = RemoveNotNumber(TextBoxName.Text.Trim());
             string name = RemoveNumber(TextBoxName.Text.Trim());
+
             if (id != currentID)
-            {
                 currentID = id;
-                AccessAppSettings("UserID", id);
-            }
             if (name != currentName)
-            {
                 currentName = name;
-                AccessAppSettings("UserName", name);
-            }
+
             SingletonManager.Get<UserProcesser>().UserLogin(name, id);
             MainWindow main = new MainWindow();
             Application.Current.MainWindow = main;
