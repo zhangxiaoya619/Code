@@ -101,7 +101,7 @@ namespace AuditPracticalOperation.Controls
             if (OnBacked != null)
                 OnBacked();
 
-            PracticalContentProcesser.KillAllProcess();
+            contentProcesser.KillAllProcess();
 
             contentProcesser.DeleteContent();
 
@@ -132,7 +132,7 @@ namespace AuditPracticalOperation.Controls
                 }
                 catch
                 {
-                    PracticalContentProcesser.KillAllProcess();
+                    contentProcesser.KillAllProcess();
 
                     System.Threading.ThreadPool.QueueUserWorkItem((state) =>
                     {
@@ -174,7 +174,7 @@ namespace AuditPracticalOperation.Controls
 
         private void DucomentSaveCompleted(object sender, _DFramerCtlEvents_OnSaveCompletedEvent e)
         {
-            PracticalContentProcesser.KillAllProcess();
+            contentProcesser.KillAllProcess();
             contentProcesser.SaveContent();
             Close(false);
         }

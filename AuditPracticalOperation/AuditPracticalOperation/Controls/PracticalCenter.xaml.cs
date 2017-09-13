@@ -80,36 +80,12 @@ namespace AuditPracticalOperation.Controls
         public static RoutedCommand Operate = new RoutedUICommand("Open PracticalOperate", "OpenPracticalOperate", typeof(PracticalCenter));
         private void OperateExcuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!CheckProcess())
-                return;
-
             PracticalItemProject project = (PracticalItemProject)e.Parameter;
             PracticalOperate practicalOperate = new PracticalOperate(practicalItem, practicalItem.ID, project);
             operateContainer.Content = practicalOperate;
             practicalOperate.OnBacked += PracticalOperate_OnBacked;
             projectContainer.Visibility = Visibility.Collapsed;
             operateContainer.Visibility = Visibility.Visible;
-        }
-
-        private bool CheckProcess()
-        {
-            foreach (Process IsProcedding in Process.GetProcessesByName("EXCEL"))
-            {
-                if (IsProcedding.ProcessName == "EXCEL")
-                {
-                    if (MessageBox.Show("打开实操文档需要关闭所有的EXCEL进程，请确认是否关闭所有EXCEL进程并打开实操文档？", "打开实操文档", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        PracticalContentProcesser.KillAllProcess();
-                        return true;
-                    }
-                }
-            }
-
-            return true;
         }
 
         private void PracticalOperate_OnBacked()

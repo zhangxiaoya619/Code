@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace AuditPracticalOperation
 {
@@ -17,18 +18,11 @@ namespace AuditPracticalOperation
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (!OfficeOperator.IsInstall())
-            {
-                MessageBox.Show("本程序依赖于Microsoft Office，请先安装Microsoft Office。");
-                Process.GetCurrentProcess().Kill();
-            }
-
             DispatcherUnhandledException += OnDispatcherUnhandledException;
-
             base.OnStartup(e);
         }
 
-        private void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             LogHelper.LogError(e.Exception);
             MessageBox.Show("未知程序错误。");

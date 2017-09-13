@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using ViewModel;
 
 namespace Business.Processer
@@ -39,14 +42,34 @@ namespace Business.Processer
             this.practicalManager = SingletonManager.Get<PracticalManager>();
         }
 
-        public static void KillAllProcess()
+        public void KillAllProcess()
         {
-            while (Process.GetProcessesByName("EXCEL").Count(process => process.ProcessName == "EXCEL") > 0)
+            Process tool = new Process();
+            tool.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "handle.exe");
+            tool.StartInfo.Arguments = filePath + " /accepteula";
+            tool.StartInfo.UseShellExecute = false;
+            tool.StartInfo.RedirectStandardOutput = true;
+            tool.Start();
+            tool.WaitForExit();
+            string outputTool = tool.StandardOutput.ReadToEnd();
+
+            string matchPattern = @"(?<=\s+pid:\s+)\b(\d+)\b(?=\s+)";
+            foreach (Match match in Regex.Matches(outputTool, matchPattern))
             {
-                foreach (Process IsProcedding in Process.GetProcessesByName("EXCEL"))
-                    if (IsProcedding.ProcessName == "EXCEL")
-                        if (!IsProcedding.HasExited)
-                            IsProcedding.Kill();
+                Process.GetProcessById(int.Parse(match.Value)).Kill();
+
+                while (true)
+                {
+                    try
+                    {
+                        Process.GetProcessById(int.Parse(match.Value));
+                        Thread.Sleep(100);
+                    }
+                    catch
+                    {
+                        break;
+                    }
+                }
             }
         }
     }
