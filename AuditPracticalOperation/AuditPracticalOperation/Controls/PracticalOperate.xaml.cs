@@ -96,12 +96,13 @@ namespace AuditPracticalOperation.Controls
             keyboardHook.UnHook();
 
             if (isDispose)
+            {
                 framer.Dispose();
+                contentProcesser.KillAllProcess();
+            }
 
             if (OnBacked != null)
                 OnBacked();
-
-            contentProcesser.KillAllProcess();
 
             contentProcesser.DeleteContent();
 
