@@ -14,17 +14,24 @@ namespace Business.Processer
 
         public string GetCpuSerialNum()
         {
-            string cpuInfo = "";//cpu序列号 
-            ManagementClass mc = new ManagementClass("Win32_Processor");
-            ManagementObjectCollection moc = mc.GetInstances();
-            foreach (ManagementObject mo in moc)
+            try
             {
-                cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
-                break;
+                string cpuInfo = "";//cpu序列号 
+                ManagementClass mc = new ManagementClass("Win32_Processor");
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+                    break;
+                }
+                moc = null;
+                mc = null;
+                return cpuInfo;
             }
-            moc = null;
-            mc = null;
-            return cpuInfo;
+            catch
+            {
+                return "abcdefghijklmnop";
+            }
         }
 
         private LocalSerialNumProcessor()

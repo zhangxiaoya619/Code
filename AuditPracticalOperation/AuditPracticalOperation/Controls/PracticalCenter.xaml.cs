@@ -1,17 +1,13 @@
-﻿using System;
+﻿using Common.Utils;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Linq;
-using ViewModel;
 using System.Windows.Input;
-using Common.Utils;
-using System.Windows;
-using System.Diagnostics;
-using Business;
-using Business.Processer;
-using System.Collections.Generic;
-using Log;
+using ViewModel;
 
 namespace AuditPracticalOperation.Controls
 {
