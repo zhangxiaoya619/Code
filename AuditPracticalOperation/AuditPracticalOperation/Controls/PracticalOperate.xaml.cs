@@ -18,6 +18,7 @@ using AxDSOFramer;
 using System.Windows.Threading;
 using System.Diagnostics;
 using Common;
+using System.Threading;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -98,6 +99,7 @@ namespace AuditPracticalOperation.Controls
             if (isDispose)
             {
                 framer.Dispose();
+                Thread.Sleep(500);
                 contentProcesser.KillAllProcess();
             }
 
@@ -176,6 +178,7 @@ namespace AuditPracticalOperation.Controls
         private void DucomentSaveCompleted(object sender, _DFramerCtlEvents_OnSaveCompletedEvent e)
         {
             contentProcesser.KillAllProcess();
+            Thread.Sleep(500);
             contentProcesser.SaveContent();
             Close(false);
         }
