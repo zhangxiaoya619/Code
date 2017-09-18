@@ -46,9 +46,10 @@ namespace Business.Processer
         {
             Process tool = new Process();
             tool.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "handle.exe");
-            tool.StartInfo.Arguments = filePath + " /accepteula";
-            tool.StartInfo.UseShellExecute = false;
+            tool.StartInfo.Arguments = filePath;
             tool.StartInfo.RedirectStandardOutput = true;
+            tool.StartInfo.CreateNoWindow = true;
+            tool.StartInfo.UseShellExecute = false;
             tool.Start();
             tool.WaitForExit();
             string outputTool = tool.StandardOutput.ReadToEnd();
@@ -56,20 +57,10 @@ namespace Business.Processer
             string matchPattern = @"(?<=\s+pid:\s+)\b(\d+)\b(?=\s+)";
             foreach (Match match in Regex.Matches(outputTool, matchPattern))
             {
-                Process.GetProcessById(int.Parse(match.Value)).Kill();
-
-                while (true)
-                {
-                    try
-                    {
-                        Process.GetProcessById(int.Parse(match.Value));
-                        Thread.Sleep(100);
-                    }
-                    catch
-                    {
-                        break;
-                    }
-                }
+                Process process = Process.GetProcessById(int.Parse(match.Value));
+                process.Kill();
+                Thread.Sleep(1000);
+                break;
             }
         }
     }
