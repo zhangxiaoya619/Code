@@ -120,7 +120,7 @@ namespace AuditPracticalOperation.Controls
                 framer.Titlebar = false;
                 framer.BorderStyle = DSOFramer.dsoBorderStyle.dsoBorderNone;
                 framer.ActivationPolicy = DSOFramer.dsoActivationPolicy.dsoCompDeactivateOnLostFocus | DSOFramer.dsoActivationPolicy.dsoIPDeactivateOnCompDeactive;
-                framer.FrameHookPolicy = DSOFramer.dsoFrameHookPolicy.dsoSetOnFirstOpen;
+                //framer.FrameHookPolicy = DSOFramer.dsoFrameHookPolicy.dsoSetOnFirstOpen;
                 masker.Height = editorContainer.ActualHeight;
 
                 //this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
@@ -131,7 +131,7 @@ namespace AuditPracticalOperation.Controls
 
                 try
                 {
-                    framer.Open(practicalFilePath);
+                    framer.Open(practicalFilePath, false, "Excel.sheet", "", "");
                 }
                 catch
                 {
@@ -139,7 +139,6 @@ namespace AuditPracticalOperation.Controls
 
                     System.Threading.ThreadPool.QueueUserWorkItem((state) =>
                     {
-
                         framer.CreateNew("Excel.sheet");
                         framer.Close();
 
@@ -147,9 +146,7 @@ namespace AuditPracticalOperation.Controls
 
                         this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
                         {
-                            framer.CreateNew("Excel.sheet");
-                            framer.Close();
-                            framer.Open(practicalFilePath);
+                            framer.Open(practicalFilePath, false, "Excel.sheet", "", "");
                             return null;
                         }, null);
                     });

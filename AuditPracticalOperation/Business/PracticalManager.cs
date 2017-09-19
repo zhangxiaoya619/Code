@@ -33,7 +33,7 @@ namespace Business
             FileStream fs = null;
             FileStream tempFs = null;
             byte[] buffer = null;
-            string tempPracticalFilePath = Path.Combine(Path.GetTempPath(), string.Format("{0}.xls", Guid.NewGuid().ToString()));
+            string tempPracticalFilePath = Path.Combine(Path.GetTempPath(), string.Format("{0}.xls", DateTime.Now.ToString("yyyyMMddHHmmss")));
 
             try
             {

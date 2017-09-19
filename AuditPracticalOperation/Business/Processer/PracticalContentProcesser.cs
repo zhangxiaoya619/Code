@@ -44,23 +44,12 @@ namespace Business.Processer
 
         public void KillAllProcess()
         {
-            Process tool = new Process();
-            tool.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "handle.exe");
-            tool.StartInfo.Arguments = filePath;
-            tool.StartInfo.RedirectStandardOutput = true;
-            tool.StartInfo.CreateNoWindow = true;
-            tool.StartInfo.UseShellExecute = false;
-            tool.Start();
-            tool.WaitForExit();
-            string outputTool = tool.StandardOutput.ReadToEnd();
-
-            string matchPattern = @"(?<=\s+pid:\s+)\b(\d+)\b(?=\s+)";
-            foreach (Match match in Regex.Matches(outputTool, matchPattern))
+            while (Process.GetProcessesByName("EXCEL").Count(process => process.ProcessName == "EXCEL") > 0)
             {
-                Process process = Process.GetProcessById(int.Parse(match.Value));
-                process.Kill();
-                Thread.Sleep(1000);
-                break;
+                foreach (Process IsProcedding in Process.GetProcessesByName("EXCEL"))
+                    if (IsProcedding.ProcessName == "EXCEL")
+                        if (!IsProcedding.HasExited)
+                            IsProcedding.Kill();
             }
         }
     }
