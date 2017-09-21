@@ -113,6 +113,12 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                    <TextBlock HorizontalAlignment="Left" Background="Transparent" Text="软件版本号：" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FFB3B3B3" Height="20" Margin="0,0,0,0"/>
+                    <TextBlock HorizontalAlignment="Center" Width="30" Text="2.5" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="12" Foreground="#FFB3B3B3" Height="20" Margin="0,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

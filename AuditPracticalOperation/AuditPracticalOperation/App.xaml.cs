@@ -26,6 +26,7 @@ namespace AuditPracticalOperation
         {
             LogHelper.LogError(e.Exception);
             MessageBox.Show("未知程序错误。");
+            Process.GetCurrentProcess().Kill();
         }
     }
 }
