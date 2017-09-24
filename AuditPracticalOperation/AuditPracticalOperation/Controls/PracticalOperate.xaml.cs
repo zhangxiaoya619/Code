@@ -120,7 +120,7 @@ namespace AuditPracticalOperation.Controls
                 framer.Titlebar = false;
                 framer.BorderStyle = DSOFramer.dsoBorderStyle.dsoBorderNone;
                 framer.ActivationPolicy = DSOFramer.dsoActivationPolicy.dsoCompDeactivateOnLostFocus | DSOFramer.dsoActivationPolicy.dsoIPDeactivateOnCompDeactive;
-                //framer.FrameHookPolicy = DSOFramer.dsoFrameHookPolicy.dsoSetOnFirstOpen;
+                framer.FrameHookPolicy = DSOFramer.dsoFrameHookPolicy.dsoSetOnFirstOpen;
                 masker.Height = editorContainer.ActualHeight;
 
                 //this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)
