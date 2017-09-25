@@ -7,6 +7,45 @@
              d:DesignHeight="60" d:DesignWidth="800">
 
     <UserControl.Resources>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle Fill="Transparent"/>
+                            <Path x:Name="path" Data="F1M-515.802,331.242C-515.789,329.857,-515.923,328.495,-516.128,327.172L-510.578,322.745C-512.008,317.424,-514.756,312.655,-518.482,308.812L-525.111,311.322C-527.209,309.586,-529.594,308.195,-532.179,307.198L-533.233,300.195C-535.788,299.515 -538.464,299.107 -541.237,299.086 -544.006,299.07 -546.686,299.44 -549.259,300.088L-550.396,307.078C-552.989,308.052,-555.398,309.403,-557.514,311.117L-564.117,308.526C-567.886,312.318,-570.696,317.047,-572.198,322.354L-566.702,326.846C-566.924,328.172 -567.071,329.531 -567.083,330.919 -567.093,332.318 -566.962,333.672 -566.752,335.005L-572.311,339.427C-570.872,344.742,-568.124,349.518,-564.398,353.354L-557.769,350.851C-555.674,352.581,-553.284,353.971,-550.698,354.976L-549.656,361.976C-547.092,362.659 -544.416,363.065 -541.647,363.086 -538.875,363.096 -536.198,362.729 -533.63,362.086L-532.482,355.088C-529.891,354.114,-527.484,352.763,-525.362,351.062L-518.771,353.651C-514.998,349.851,-512.192,345.12,-510.687,339.82L-516.182,335.333C-515.959,333.997,-515.814,332.643,-515.802,331.242z M-541.53,344.336C-548.84,344.292 -554.737,338.318 -554.689,331 -554.641,323.68 -548.673,317.784 -541.354,317.833 -534.035,317.88 -528.139,323.851 -528.187,331.172 -528.235,338.495 -534.205,344.385 -541.53,344.336z" Stretch="Uniform" Fill="#FF9BA5AF" Width="14" Height="14" Margin="0,5,0,0"  RenderTransformOrigin="0.5,0.5"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="ButtonStyle3" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -131,13 +170,13 @@
         <Image Margin="10,0,0,0" Width="60" HorizontalAlignment="Left" Source="pack://application:,,,/Images/nav_01.png" Stretch="Fill"/>
         <Rectangle Fill="#FFFCFDFE" HorizontalAlignment="Left" Height="40" Margin="80,0,0,0" VerticalAlignment="Center" Width="2"/>
         <TextBlock HorizontalAlignment="Left" Margin="95,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="注册会计师行业后备人才实训基地" VerticalAlignment="Center" FontFamily="Microsoft YaHei" FontSize="22" Foreground="White" />
-            <StackPanel x:Name="student_name" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,120,0">
+            <StackPanel x:Name="student_name" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,160,0">
                 <Image Margin="0,-8,0,0" Source="pack://application:,,,/Images/raw_1501471037.png" Stretch="Fill" Width="30" Height="30"/>
                 <TextBlock x:Name="UserName" Width="70" TextAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="学员姓名" VerticalAlignment="Center" FontFamily="Microsoft YaHei" Foreground="#FFFEFEFE"/>
             </StackPanel>
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,8,6,0">
             <StackPanel  Orientation="Horizontal"  Width="150"  Margin="0,0,0,0">
-                <Button HorizontalAlignment="Left" Height="30" Width="60" Content="设置" Click="Button_Click"/>
+                <Button HorizontalAlignment="Left" Height="30" Width="30" VerticalAlignment="Top" Content="设置" Click="Button_Click"  Style="{DynamicResource ButtonStyle2}" Margin="0,0,5,0"/>
                 <Button x:Name="BtnMin" Click="BtnMin_Click" Content="Button" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" Style="{DynamicResource ButtonStyle3}" VerticalAlignment="Top" Width="30"/>
                 <Button x:Name="BtnMax" Click="BtnMax_Click" Content="Button" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" Style="{DynamicResource ButtonStyle4}" VerticalAlignment="Top" Width="30"/>
                 <Button x:Name="BtnClose" Click="BtnClose_Click" Content="Button" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" Style="{DynamicResource ButtonStyle5}" VerticalAlignment="Top" Width="30"/>

@@ -45,6 +45,11 @@ namespace AuditPracticalOperation.Controls
                 SetBinding(DataContextProperty, new Binding(".") { Source = SingletonManager.Get<ConfigProcesser>().GetConfig() });
             }
         }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 
     public class OfficeTypeConverter : IValueConverter
