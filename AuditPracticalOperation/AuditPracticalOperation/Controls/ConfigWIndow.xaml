@@ -1,0 +1,28 @@
+﻿<Window x:Class="AuditPracticalOperation.Controls.ConfigWIndow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AuditPracticalOperation.Controls"
+        xmlns:collection="clr-namespace:System.Collections;assembly=mscorlib"
+        mc:Ignorable="d"
+        xmlns:model="clr-namespace:ViewModel;assembly=ViewModel"
+        Title="ConfigWIndow" Height="300" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:OfficeTypeConverter x:Key="officeTypeConverter"/>
+        <collection:ArrayList x:Key="officeArray">
+            <model:OfficeTypeEnum>NormalMode</model:OfficeTypeEnum>
+            <model:OfficeTypeEnum>CompatibilityMode</model:OfficeTypeEnum>
+        </collection:ArrayList>
+    </Window.Resources>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25">
+        <TextBlock TextAlignment="Center" VerticalAlignment="Center">Office模式：</TextBlock>
+        <ComboBox Width="150" ItemsSource="{StaticResource officeArray}" SelectedValue="{Binding OfficeType}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource officeTypeConverter}}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </StackPanel>
+</Window>

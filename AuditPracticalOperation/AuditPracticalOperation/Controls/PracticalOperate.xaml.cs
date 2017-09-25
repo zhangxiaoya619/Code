@@ -19,6 +19,7 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using Common;
 using System.Threading;
+using Business;
 
 namespace AuditPracticalOperation.Controls
 {
@@ -90,6 +91,21 @@ namespace AuditPracticalOperation.Controls
             framer.Save();
         }
 
+        public static RoutedUICommand Menu = new RoutedUICommand("Set the Window Menu", "SetWindowMenu", typeof(PracticalOperate));
+        private void MenuExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (((Button)e.OriginalSource).Content.ToString() == "隐藏菜单")
+            {
+                ((MainWindow)Application.Current.MainWindow).SetMenu(false);
+                ((Button)e.OriginalSource).Content = "显示菜单";
+            }
+            else
+            {
+                ((MainWindow)Application.Current.MainWindow).SetMenu(true);
+                ((Button)e.OriginalSource).Content = "隐藏菜单";
+            }
+        }
+
         private void Close(bool isDispose)
         {
             framer.Close();
@@ -106,6 +122,8 @@ namespace AuditPracticalOperation.Controls
             if (OnBacked != null)
                 OnBacked();
 
+            ((MainWindow)Application.Current.MainWindow).SetMenu(true);
+
             contentProcesser.DeleteContent();
 
             Application.Current.Exit -= Current_Exit;
@@ -120,7 +138,10 @@ namespace AuditPracticalOperation.Controls
                 framer.Titlebar = false;
                 framer.BorderStyle = DSOFramer.dsoBorderStyle.dsoBorderNone;
                 framer.ActivationPolicy = DSOFramer.dsoActivationPolicy.dsoCompDeactivateOnLostFocus | DSOFramer.dsoActivationPolicy.dsoIPDeactivateOnCompDeactive;
-                //framer.FrameHookPolicy = DSOFramer.dsoFrameHookPolicy.dsoSetOnFirstOpen;
+
+                if (SingletonManager.Get<ConfigProcesser>().GetConfig().OfficeType == OfficeTypeEnum.CompatibilityMode)
+                    framer.FrameHookPolicy = DSOFramer.dsoFrameHookPolicy.dsoSetOnFirstOpen;
+
                 masker.Height = editorContainer.ActualHeight;
 
                 //this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (DispatcherOperationCallback)delegate (object o)

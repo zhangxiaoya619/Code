@@ -39,6 +39,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="GainItem.cs" />
     <Compile Include="HasDonePracticalItem.cs" />
     <Compile Include="IHelper.cs" />

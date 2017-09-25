@@ -12,6 +12,7 @@
     <UserControl.CommandBindings>
         <CommandBinding Command="controls:PracticalOperate.Back" Executed="BackExecuted"/>
         <CommandBinding Command="controls:PracticalOperate.Save" Executed="SaveExecuted"/>
+        <CommandBinding Command="controls:PracticalOperate.Menu" Executed="MenuExecuted"/>
     </UserControl.CommandBindings>
     <Grid Background="#FFEDEDED" x:Name="container">
         <Grid.RowDefinitions>
@@ -76,8 +77,9 @@
                         <Setter Property="Foreground" Value="#FF289BDA"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button  Content="保存并返回任务清单" Width="120"  Margin="0,0,10,0" Command="controls:PracticalOperate.Save" />
-                <Button  Content="返回任务清单" Width="120"  Margin="0,0,10,0" Command="controls:PracticalOperate.Back" />
+                <Button Content="隐藏菜单" Width="120"  Margin="0,0,10,0" Command="controls:PracticalOperate.Menu"/>
+                <Button Content="保存并返回任务清单" Width="120"  Margin="0,0,10,0" Command="controls:PracticalOperate.Save" />
+                <Button Content="返回任务清单" Width="120"  Margin="0,0,10,0" Command="controls:PracticalOperate.Back" />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" x:Name="editorContainer">

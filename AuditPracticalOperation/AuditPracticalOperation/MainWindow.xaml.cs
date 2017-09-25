@@ -92,5 +92,12 @@ namespace AuditPracticalOperation
             this.Close();
         }
 
+        public void SetMenu(bool isMenuShow)
+        {
+            Visibility visibility = isMenuShow ? Visibility.Visible : Visibility.Collapsed;
+
+            Menu.Visibility = visibility;
+            header.Visibility = visibility;
+        }
     }
 }

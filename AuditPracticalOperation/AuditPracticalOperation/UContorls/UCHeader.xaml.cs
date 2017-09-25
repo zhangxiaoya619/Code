@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AuditPracticalOperation.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,13 @@ namespace AuditPracticalOperation.UContorls
         {
             if (OnClose != null)
                 OnClose();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigWIndow config = new ConfigWIndow();
+            config.Owner = Application.Current.MainWindow;
+            config.ShowDialog();
         }
     }
     public delegate void UserClickHandler();

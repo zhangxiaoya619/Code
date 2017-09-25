@@ -136,7 +136,8 @@
                 <TextBlock x:Name="UserName" Width="70" TextAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0" Style="{DynamicResource BasicTextBlock-Sketch}" Text="学员姓名" VerticalAlignment="Center" FontFamily="Microsoft YaHei" Foreground="#FFFEFEFE"/>
             </StackPanel>
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,8,6,0">
-            <StackPanel  Orientation="Horizontal"  Width="90"  Margin="0,0,0,0">
+            <StackPanel  Orientation="Horizontal"  Width="150"  Margin="0,0,0,0">
+                <Button HorizontalAlignment="Left" Height="30" Width="60" Content="设置" Click="Button_Click"/>
                 <Button x:Name="BtnMin" Click="BtnMin_Click" Content="Button" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" Style="{DynamicResource ButtonStyle3}" VerticalAlignment="Top" Width="30"/>
                 <Button x:Name="BtnMax" Click="BtnMax_Click" Content="Button" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" Style="{DynamicResource ButtonStyle4}" VerticalAlignment="Top" Width="30"/>
                 <Button x:Name="BtnClose" Click="BtnClose_Click" Content="Button" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" Style="{DynamicResource ButtonStyle5}" VerticalAlignment="Top" Width="30"/>

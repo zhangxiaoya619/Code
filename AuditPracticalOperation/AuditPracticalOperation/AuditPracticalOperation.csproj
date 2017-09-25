@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ConfigWIndow.xaml.cs">
+      <DependentUpon>ConfigWIndow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GainExport.xaml.cs">
       <DependentUpon>GainExport.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <DependentUpon>WinLogin.xaml</DependentUpon>
     </Compile>
     <Page Include="ControlDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ConfigWIndow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
