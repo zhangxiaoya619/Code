@@ -73,12 +73,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PracticalFileAutograph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PracticalProjectEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PracticalFileAutograph.xaml.cs">
+      <DependentUpon>PracticalFileAutograph.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PracticalProjectEditor.xaml.cs">
       <DependentUpon>PracticalProjectEditor.xaml</DependentUpon>
     </Compile>

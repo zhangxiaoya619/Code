@@ -37,6 +37,15 @@ namespace PracticalImportTools
                 list.SetBinding(ItemsControl.ItemsSourceProperty, new Binding(".") { Source = files, Mode = BindingMode.OneWay });
         }
 
+        public static RoutedUICommand Autograph = new RoutedUICommand("Config the Autograph", "Autograph", typeof(MainWindow));
+
+        private void AutographExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            PracticalFileAutograph practicalFileAutograph = new PracticalFileAutograph((PracticalFile)e.Parameter);
+            practicalFileAutograph.Owner = this;
+            practicalFileAutograph.ShowDialog();
+        }
+
         public static RoutedUICommand OpenFileDialog = new RoutedUICommand("Open the File Dialog", "OpenFileDialog", typeof(MainWindow));
 
         private void OpenFileDialogExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -447,6 +456,7 @@ namespace PracticalImportTools
         private string path = string.Empty;
         private bool isLast;
         private ObservableCollection<PracticalProject> projects;
+        private ObservableCollection<Autograph> autographs;
 
         public int Index
         {
@@ -523,6 +533,20 @@ namespace PracticalImportTools
             }
         }
 
+        public ObservableCollection<Autograph> Autographs
+        {
+            get
+            {
+                return autographs;
+            }
+            set
+            {
+                autographs = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Autographs"));
+            }
+        }
+
         private string helperText = string.Empty;
 
         public string HelperText { get { return helperText; } set { helperText = value; } }
@@ -532,6 +556,7 @@ namespace PracticalImportTools
         public PracticalFile()
         {
             projects = new ObservableCollection<PracticalProject>();
+            autographs = new ObservableCollection<Autograph>();
         }
     }
 
@@ -596,6 +621,59 @@ namespace PracticalImportTools
         public string PracticalName { get; set; }
 
         public string Title { get { return PracticalName + "-" + content; } }
+    }
+
+    public class Autograph : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private string sheetName;
+        private int rowIndex;
+        private int colIndex;
+
+        public string SheetName
+        {
+            get
+            {
+                return sheetName;
+            }
+
+            set
+            {
+                sheetName = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("SheetName"));
+            }
+        }
+
+        public int RowIndex
+        {
+            get
+            {
+                return rowIndex;
+            }
+
+            set
+            {
+                rowIndex = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("RowIndex"));
+            }
+        }
+
+        public int ColIndex
+        {
+            get
+            {
+                return colIndex;
+            }
+
+            set
+            {
+                colIndex = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("ColIndex"));
+            }
+        }
     }
 
     public class PracticalFileNumConverter : IValueConverter

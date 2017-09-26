@@ -21,6 +21,7 @@
         <CommandBinding Command="local:MainWindow.ImportPracticalFile" CanExecute="AfterLoadCanExecute" Executed="ImportPracticalFileExecuted"/>
         <CommandBinding Command="local:MainWindow.LoadPracticalFile" CanExecute="BeforeLoadCanExecute" Executed="LoadPracticalFileExecuted"/>
         <CommandBinding Command="local:MainWindow.HelperEdit" Executed="HelperEditExcuted"/>
+        <CommandBinding Command="local:MainWindow.Autograph" Executed="AutographExecuted"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -47,7 +48,7 @@
                                     <ColumnDefinition Width="40" />
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="4*"/>
-                                    <ColumnDefinition Width="255"/>
+                                    <ColumnDefinition Width="325"/>
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000" BorderThickness="1,1,0,1">
                                     <TextBlock FontFamily="Microsoft YaHei" Text="序号" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -116,7 +117,7 @@
                             <ColumnDefinition Width="40" />
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="255"/>
+                            <ColumnDefinition Width="325"/>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#000000">
                             <TextBlock FontFamily="Microsoft YaHei" Text="{Binding Index, Converter={StaticResource practicalFileNumConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -177,7 +178,8 @@
                                 </Style>
                             </Border.Style>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Width="60" Height="25" Content="F2提示" VerticalAlignment="Center" Command="local:MainWindow.HelperEdit" Tag="{StaticResource f2}" CommandParameter="{Binding}" Margin="0,0,15,0"/>
+                                <Button Width="60" Height="25" Content="签名设置" VerticalAlignment="Center" Margin="0,0,15,0" Command="local:MainWindow.Autograph"  CommandParameter="{Binding}"/>
+                                <Button Width="60" Height="25" Content="实操指引" VerticalAlignment="Center" Command="local:MainWindow.HelperEdit" Tag="{StaticResource f2}" CommandParameter="{Binding}" Margin="0,0,15,0"/>
                                 <Button Width="60" Height="25" Content="任务清单" VerticalAlignment="Center" Command="local:MainWindow.OpenPracticalProject" CommandParameter="{Binding}" Margin="0,0,15,0"/>
                                 <Button Width="60" Height="25" Content="删除" VerticalAlignment="Center" Command="local:MainWindow.DeletePracticalFile" CommandParameter="{Binding Index}"/>
                             </StackPanel>

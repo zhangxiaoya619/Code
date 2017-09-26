@@ -31,7 +31,12 @@ namespace PracticalImportTools
             editor.AppendText(helper.HelperText);
 
             title.Text = helper.Title;
-            header.Text = string.Format("{0}提示", helperType);
+
+            switch (helperType)
+            {
+                case HelperTypeEnum.F1: header.Text = "差异说明"; break;
+                case HelperTypeEnum.F2: header.Text = "实操指引"; break;
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
