@@ -145,6 +145,14 @@ namespace PracticalImportTools
                 fs.Write(buffer, 0, buffer.Length);
                 #endregion
 
+                #region 写模板签名个数
+                for (int i = 0; i < files.Count; i++)
+                {
+                    buffer = BitConverter.GetBytes(files[i].Autographs.Count);
+                    fs.Write(buffer, 0, buffer.Length);
+                }
+                #endregion
+
                 #region 写任务清单个数
                 for (int i = 0; i < files.Count; i++)
                 {
@@ -225,6 +233,23 @@ namespace PracticalImportTools
                     fs.Write(projectF2BufferArray[i], 0, projectF2BufferArray[i].Length);
                 #endregion
 
+                #region 写模板签名位置
+                for (int i = 0; i < files.Count; i++)
+                {
+                    for (int j = 0; j < files[i].Autographs.Count; j++)
+                    {
+                        buffer = BitConverter.GetBytes(UTF8Encoding.UTF8.GetByteCount(files[i].Autographs[j].SheetName));
+                        fs.Write(buffer, 0, buffer.Length);
+                        buffer = UTF8Encoding.UTF8.GetBytes(files[i].Autographs[j].SheetName);
+                        fs.Write(buffer, 0, buffer.Length);
+                        buffer = BitConverter.GetBytes(files[i].Autographs[j].RowIndex);
+                        fs.Write(buffer, 0, buffer.Length);
+                        buffer = BitConverter.GetBytes(files[i].Autographs[j].ColIndex);
+                        fs.Write(buffer, 0, buffer.Length);
+                    }
+                }
+                #endregion
+
                 #region 写模板名
                 for (int i = 0; i < files.Count; i++)
                     fs.Write(fileNameBufferArray[i], 0, fileNameBufferArray[i].Length);
@@ -281,6 +306,7 @@ namespace PracticalImportTools
             int[][] practicalProjectF1BufferLengthArray = null;
             int[] practicalProjectF2BufferLengthArray = null;
             int[] practicalNameBufferLength = null;
+            int[] practicalAutographCount = null;
             long[] practicalContentBufferLength = null;
 
             try
@@ -294,10 +320,18 @@ namespace PracticalImportTools
                 practicalProjectF1BufferLengthArray = new int[items.Length][];
                 practicalProjectF2BufferLengthArray = new int[items.Length];
                 practicalNameBufferLength = new int[items.Length];
+                practicalAutographCount = new int[items.Length];
                 practicalContentBufferLength = new long[items.Length];
 
                 for (int i = 0; i < items.Length; i++)
                     items[i] = new PracticalFile();
+
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[sizeof(int)];
+                    fs.Read(buffer, 0, buffer.Length);
+                    practicalAutographCount[i] = BitConverter.ToInt32(buffer, 0);
+                }
 
                 for (int i = 0; i < items.Length; i++)
                 {
@@ -375,6 +409,25 @@ namespace PracticalImportTools
                     buffer = new byte[practicalProjectF2BufferLengthArray[i]];
                     fs.Read(buffer, 0, buffer.Length);
                     items[i].HelperText = UTF8Encoding.UTF8.GetString(buffer);
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalAutographCount[i]; j++)
+                    {
+                        Autograph autograph = new Autograph();
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        buffer = new byte[BitConverter.ToInt32(buffer, 0)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        autograph.SheetName = UTF8Encoding.UTF8.GetString(buffer);
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        autograph.RowIndex = BitConverter.ToInt32(buffer, 0);
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        autograph.ColIndex = BitConverter.ToInt32(buffer, 0);
+                        items[i].Autographs.Add(autograph);
+                    }
                 }
                 for (int i = 0; i < items.Length; i++)
                 {

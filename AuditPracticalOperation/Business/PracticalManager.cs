@@ -28,7 +28,7 @@ namespace Business
             File.Delete(filePath);
         }
 
-        public string LoadContentByPractialID(int practicalID)
+        public string LoadContentByPractialID(int practicalID, IList<Autograph> autographs)
         {
             FileStream fs = null;
             FileStream tempFs = null;
@@ -81,15 +81,19 @@ namespace Business
                     tempFs.Dispose();
             }
 
+            Writegraphs(autographs, tempPracticalFilePath);
+
             return tempPracticalFilePath;
         }
 
-        public void SaveContent(int practicalID, string filePath)
+        public void SaveContent(int practicalID, string filePath, IList<Autograph> autographs)
         {
             FileStream readFs = null;
             FileStream writeFs = null;
             byte[] buffer = null;
             string fileName = Path.Combine(practicalFileFolder, practicalID + ".pracd");
+
+            Writegraphs(autographs, filePath);
 
             try
             {
@@ -115,6 +119,11 @@ namespace Business
                 if (File.Exists(filePath))
                     File.Delete(filePath);
             }
+        }
+
+        private void Writegraphs(IList<Autograph> autographs, string filePath)
+        {
+
         }
 
         public void SetPracticalProjectDone(int practicalID, int projectID)
@@ -228,6 +237,7 @@ namespace Business
             int[][] practicalProjectContentBufferLengthArray = null;
             int[][] practicalProjectF1BufferLengthArray = null;
             int[] practicalProjectF2BufferLengthArray = null;
+            int[] practicalAutographCount = null;
             int[] practicalNameBufferLength = null;
 
             try
@@ -241,10 +251,18 @@ namespace Business
                 practicalProjectF1BufferLengthArray = new int[items.Length][];
                 practicalProjectF2BufferLengthArray = new int[items.Length];
                 practicalNameBufferLength = new int[items.Length];
+                practicalAutographCount = new int[items.Length];
                 practicalContentBufferLength = new long[items.Length];
 
                 for (int i = 0; i < items.Length; i++)
                     items[i] = new PracticalItem();
+
+                for (int i = 0; i < items.Length; i++)
+                {
+                    buffer = new byte[sizeof(int)];
+                    fs.Read(buffer, 0, buffer.Length);
+                    practicalAutographCount[i] = BitConverter.ToInt32(buffer, 0);
+                }
 
                 for (int i = 0; i < items.Length; i++)
                 {
@@ -322,6 +340,25 @@ namespace Business
                     buffer = new byte[practicalProjectF2BufferLengthArray[i]];
                     fs.Read(buffer, 0, buffer.Length);
                     items[i].HelperText = UTF8Encoding.UTF8.GetString(buffer);
+                }
+                for (int i = 0; i < items.Length; i++)
+                {
+                    for (int j = 0; j < practicalAutographCount[i]; j++)
+                    {
+                        Autograph autograph = new Autograph();
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        buffer = new byte[BitConverter.ToInt32(buffer, 0)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        autograph.SheetName = UTF8Encoding.UTF8.GetString(buffer);
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        autograph.RowIndex = BitConverter.ToInt32(buffer, 0);
+                        buffer = new byte[sizeof(int)];
+                        fs.Read(buffer, 0, buffer.Length);
+                        autograph.ColIndex = BitConverter.ToInt32(buffer, 0);
+                        items[i].Autographs.Add(autograph);
+                    }
                 }
                 for (int i = 0; i < items.Length; i++)
                 {

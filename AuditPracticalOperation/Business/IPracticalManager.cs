@@ -8,9 +8,9 @@ namespace Business
 {
     internal interface IPracticalManager
     {
-        string LoadContentByPractialID(int practicalID);
+        string LoadContentByPractialID(int practicalID, IList<Autograph> autographs);
 
-        void SaveContent(int practicalID, string filePath);
+        void SaveContent(int practicalID, string filePath, IList<Autograph> autographs);
 
         void SetPracticalProjectDone(int practicalID, int projectID);
 

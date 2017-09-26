@@ -69,6 +69,8 @@ namespace ViewModel
             }
         }
 
+        public ObservableCollection<Autograph> Autographs { get; set; }
+
         public string HelperText { get; set; }
 
         public bool IsNeedShowHelper { get { return !string.IsNullOrEmpty(HelperText.Trim()); } }
@@ -90,6 +92,7 @@ namespace ViewModel
         public PracticalItem()
         {
             Projects = new ObservableCollection<PracticalItemProject>();
+            Autographs = new ObservableCollection<Autograph>();
         }
     }
 

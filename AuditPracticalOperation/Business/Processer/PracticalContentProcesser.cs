@@ -16,16 +16,17 @@ namespace Business.Processer
         private int practicalID;
         private string filePath;
         private PracticalItemProject project;
+        private IList<Autograph> autographs;
 
         public string LoadContent()
         {
-            filePath = practicalManager.LoadContentByPractialID(practicalID);
+            filePath = practicalManager.LoadContentByPractialID(practicalID, autographs);
             return filePath;
         }
 
         public void SaveContent()
         {
-            practicalManager.SaveContent(practicalID, filePath);
+            practicalManager.SaveContent(practicalID, filePath, autographs);
             practicalManager.SetPracticalProjectDone(practicalID, project.ID);
             project.IsDone = true;
         }
@@ -35,10 +36,11 @@ namespace Business.Processer
             practicalManager.DeleteContent(filePath);
         }
 
-        public PracticalContentProcesser(int practicalID, PracticalItemProject project)
+        public PracticalContentProcesser(int practicalID, IList<Autograph> autographs, PracticalItemProject project)
         {
             this.practicalID = practicalID;
             this.project = project;
+            this.autographs = autographs;
             this.practicalManager = SingletonManager.Get<PracticalManager>();
         }
 

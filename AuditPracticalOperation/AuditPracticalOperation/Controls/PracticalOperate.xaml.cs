@@ -46,7 +46,7 @@ namespace AuditPracticalOperation.Controls
 
         private bool isOpenDialog;
 
-        public PracticalOperate(IHelper f2Helper, int practicalID, PracticalItemProject project)
+        public PracticalOperate(IHelper f2Helper, IList<Autograph> autographs, int practicalID, PracticalItemProject project)
         {
             this.f1Helper = project;
             this.f2Helper = f2Helper;
@@ -60,7 +60,7 @@ namespace AuditPracticalOperation.Controls
 
             if (!this.IsInDesignMode())
             {
-                contentProcesser = new PracticalContentProcesser(practicalID, project);
+                contentProcesser = new PracticalContentProcesser(practicalID, autographs, project);
                 container.SetBinding(Panel.DataContextProperty, new Binding(".") { Source = project });
                 practicalFilePath = contentProcesser.LoadContent();
             }
