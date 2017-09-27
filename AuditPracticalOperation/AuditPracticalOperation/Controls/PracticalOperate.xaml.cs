@@ -122,7 +122,8 @@ namespace AuditPracticalOperation.Controls
             if (OnBacked != null)
                 OnBacked();
 
-            ((MainWindow)Application.Current.MainWindow).SetMenu(true);
+            if (Application.Current.MainWindow != null)
+                ((MainWindow)Application.Current.MainWindow).SetMenu(true);
 
             contentProcesser.DeleteContent();
 

@@ -6,6 +6,9 @@ using ViewModel;
 using System.IO;
 using System.Xml;
 using Business.Processer;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.POIFS.FileSystem;
 
 namespace Business
 {
@@ -123,7 +126,34 @@ namespace Business
 
         private void Writegraphs(IList<Autograph> autographs, string filePath)
         {
+            User user = SingletonManager.Get<UserProcesser>().GetUser();
+            FileStream fs = null;
+            string graph = string.Format("{0}", user.Name);
 
+            try
+            {
+                fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                HSSFWorkbook workbook = new HSSFWorkbook(fs);
+
+                for (int i = 0; i < autographs.Count; i++)
+                {
+                    ISheet sheet = workbook.GetSheet(autographs[i].SheetName);
+
+                    if (sheet == null)
+                        continue;
+
+                    sheet.GetRow(autographs[i].RowIndex).GetCell(autographs[i].ColIndex)
+                        .SetCellValue(graph);
+                }
+
+                fs = new FileStream(filePath, FileMode.Open, FileAccess.Write);
+                workbook.Write(fs);
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Dispose();
+            }
         }
 
         public void SetPracticalProjectDone(int practicalID, int projectID)

@@ -32,7 +32,7 @@ namespace PracticalImportTools
             string text = string.Empty;
 
             for (int i = 0; i < autographs.Count; i++)
-                text += string.Format("{0}.{1}.{2},", autographs[i].SheetName, autographs[i].RowIndex, ToName(autographs[i].ColIndex));
+                text += string.Format("{0}.{1}.{2},", autographs[i].SheetName, autographs[i].RowIndex + 1, ToName(autographs[i].ColIndex));
 
             if (!string.IsNullOrEmpty(text))
                 text = text.Substring(0, text.Length - 1);
@@ -53,7 +53,7 @@ namespace PracticalImportTools
                 string[] tmp = texts[i].Trim().Split('.');
                 Autograph autograph = new Autograph();
                 autograph.SheetName = tmp[0];
-                autograph.RowIndex = System.Convert.ToInt32(tmp[1]);
+                autograph.RowIndex = System.Convert.ToInt32(tmp[1]) - 1;
                 autograph.ColIndex = ToIndex(tmp[2]);
                 autographs.Add(autograph);
             }
